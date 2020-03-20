@@ -1,12 +1,12 @@
 <?php 
 
+include_once(__DIR__ . "/Db.php");
+
+
     class User{
         private $email;
         private $fullName;
         private $password;
-
-        
-
 
 
         /**
@@ -80,4 +80,40 @@
 
             return $this;
         }
+
+
+        public function save(){
+
+            try {
+                $conn = Db::getConnection();
+                $statement = $conn->prepare('INSERT INTO users (email, fullName, password) VALUES (:email, :fullName, :password)');
+    
+                $email = $this->getEmail();
+                $fullName = $this->getFullName();
+                $password = $this->getPassword();
+            
+                $statement->bindValue(":email", $email);
+                $statement->bindValue(":fullName", $fullName);
+                $statement->bindValue(":password", $password);
+    
+                $result = $statement->execute();
+    
+                return $result;
+                    
+            } catch (PDOException $e) {
+                print "Error!: " . $e->getMessage() . "<br/>";
+                die();
+            }
+        }
+    
+        public static function getAll(){
+            $conn = DB::getConnection();
+    
+            $statement = $conn->prepare("select * from users");
+            $statement->execute();
+            $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $users;
+    
+        }
+    
     }

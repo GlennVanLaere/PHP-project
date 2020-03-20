@@ -1,3 +1,23 @@
+<?php
+    include_once(__DIR__."/classes/User.php");
+    
+    if(!empty($_POST)){
+
+        try {
+            $user = new User();
+            $user->setEmail($_POST['email']);
+            $user->setFullName($_POST['fullName']);
+            $user->setPassword($_POST['password']);
+            
+            $user->save(); 
+            $success = "user saved!";
+           
+        } catch (\Throwable $th) {
+            $error = $th->getMessage();
+        }
+        
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,19 +29,32 @@
 </head>
 <body>
 
-    <form>
+    <form action="" method="post">
+
+        <?php if(isset($error)): ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo $error ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if(isset($success)): ?>
+            <div class="alert alert-succes" role="alert">
+                <?php echo $success ?>
+            </div>
+        <?php endif; ?>
+        
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             <small id="emailHelp" class="form-text text-muted">Email must end in @student.thomasmore.be</small>
         </div>
         <div class="form-group">
             <label for="fullName">Full name</label>
-            <input class="form-control" type="text" placeholder="Full name" id="fullName">
+            <input class="form-control" name="fullName" type="text" placeholder="Full name" id="fullName">
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
