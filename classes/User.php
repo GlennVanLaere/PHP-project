@@ -22,6 +22,7 @@ include_once(__DIR__ . "/Db.php");
          *
          * @return  self
          */ 
+
         public function setEmail($email)
         {
 
@@ -88,7 +89,7 @@ include_once(__DIR__ . "/Db.php");
             if(empty($password)){
                 throw new Exception("password cannot be empty");
             }
-
+            $password = password_hash($password, PASSWORD_DEFAULT,["cost"=>16]);   
             $this->password = $password;
 
             return $this;
