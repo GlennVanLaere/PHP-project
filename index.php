@@ -10,7 +10,7 @@
             $user->setPassword($_POST['password']);
             
             $user->save(); 
-            $success = "user saved!";
+            $success = "User saved!";
            
         } catch (\Throwable $th) {
             $error = $th->getMessage();
@@ -38,7 +38,7 @@
         <?php endif; ?>
 
         <?php if(isset($success)): ?>
-            <div class="alert alert-succes" role="alert">
+            <div class="alert alert-success" role="alert">
                 <?php echo $success ?>
             </div>
         <?php endif; ?>

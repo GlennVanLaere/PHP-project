@@ -28,9 +28,14 @@ include_once(__DIR__ . "/Db.php");
                 throw new Exception("email cannot be empty");
             }
             
+            if(!preg_match('|@student.thomasmore.be$|', $email)){
+                throw new Exception("email must end with @student.thomasmore.be");
+            }
+                          
             $this->email = $email;
-
             return $this;
+            
+            
         }
 
         /**
