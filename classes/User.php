@@ -24,12 +24,20 @@ include_once(__DIR__ . "/Db.php");
          */ 
         public function setEmail($email)
         {
+
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email=? ");
+            $statement->execute([$email]); 
+            $users = $statement->fetch();
+
             if(empty($email)){
-                throw new Exception("email cannot be empty");
-            }
-            
+                throw new Exception("Email cannot be empty");
+            }else          
             if(!preg_match('|@student.thomasmore.be$|', $email)){
-                throw new Exception("email must end with @student.thomasmore.be");
+                throw new Exception("Email must end with @student.thomasmore.be");
+            }else
+            if ($users) {
+                throw new Exception("Email is already in use");
             }
                           
             $this->email = $email;
