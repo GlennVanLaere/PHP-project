@@ -6,6 +6,6 @@
             "password"  => "root",
             "host"      => "localhost",
             "port"      => 8889,
-            "dbname" => "phpProject"
+            "dbname" => "phpproject"
         ]
     ];
