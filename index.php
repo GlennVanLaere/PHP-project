@@ -26,7 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="./../../css/style.css" />
 </head>
 <body>
 
@@ -46,7 +46,7 @@
         
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="email" name="email" placeholder="Email address" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             <small id="emailHelp" class="form-text text-muted">Email must end in @student.thomasmore.be</small>
         </div>
         <div class="form-group">
@@ -59,7 +59,7 @@
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+            <input type="password" name="password" class="form-control" placeholder="Password" id="exampleInputPassword1">
             <small id="passwordHelp" class="form-text text-muted">Password must include at least 1 uppercase, 1 lowercase, 1 special character and must be at least 8 characters long</small>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
