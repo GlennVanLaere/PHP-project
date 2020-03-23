@@ -5,7 +5,8 @@ include_once(__DIR__ . "/Db.php");
 
     class User{
         private $email;
-        private $fullName;
+        private $firstName;
+        private $lastName;
         private $password;
 
 
@@ -47,30 +48,53 @@ include_once(__DIR__ . "/Db.php");
             
         }
 
-        /**
-         * Get the value of fullName
+          /**
+         * Get the value of firstName
          */ 
-        public function getFullName()
+        public function getFirstName()
         {
-            return $this->fullName;
+                return $this->firstName;
         }
 
         /**
-         * Set the value of fullName
+         * Set the value of firstName
          *
          * @return  self
          */ 
-        public function setFullName($fullName)
+        public function setFirstName($firstName)
         {
-            if(empty($fullName)){
-                throw new Exception("Full name cannot be empty");
+            if(empty($firstName)){
+                throw new Exception("First name cannot be empty");
             }
 
-            $this->fullName = $fullName;
+                $this->firstName = $firstName;
 
-            return $this;
+                return $this;
         }
 
+        /**
+         * Get the value of lastName
+         */ 
+        public function getLastName()
+        {
+                return $this->lastName;
+        }
+
+        /**
+         * Set the value of lastName
+         *
+         * @return  self
+         */ 
+        public function setLastName($lastName)
+        {
+            if(empty($lastName)){
+                throw new Exception("Last name cannot be empty");
+            }
+                $this->lastName = $lastName;
+
+                return $this;
+        }
+       
         /**
          * Get the value of password
          */ 
@@ -130,4 +154,6 @@ include_once(__DIR__ . "/Db.php");
     
         }
     
+
+      
     }
