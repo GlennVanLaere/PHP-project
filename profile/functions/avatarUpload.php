@@ -14,26 +14,26 @@ if(isset($_POST["submit"])){
 
     if(in_array($fileExtention, $allowedFiles)){
         if($fileError === 0){
-            if(filesize < 1000000){
-                $fileNameStorage = uniqid('', true).".".$fileExtention;
-                $fileDestination = 'documents/github/phpproject/uploads/'.$fileNameStorage;
-
+            if($fileSize < 1000000){
+                $fileNameNew = uniqid('', true).".".$fileExtention;
+                $fileDestination = '/Users/glennvanlaere/Documents/GitHub/PHP-project/uploads/'.$fileNameNew;
+                echo($fileTmpName);
                 move_uploaded_file($fileTmpName, $fileDestination);
-                $succes = "You have succesfully uploaded your picture";
+                header("Location: profile.php?succes");
             }
             else{
-                $error = "your filesize exceeds the limit";
+                $error = "your filesize is to big";
             }
         }
         else{
-            $error = "something went wrong please try again";
+            $error = "something went wrong";
         }
     }
     else{
         $error = "we do not support this image type. please 
         use jpg, jpeg or png";
     }
-    
+
     
 
 }
