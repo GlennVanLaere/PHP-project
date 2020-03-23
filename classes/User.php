@@ -67,6 +67,12 @@ include_once(__DIR__ . "/Db.php");
                 throw new Exception("First name cannot be empty");
             }
 
+            $number = preg_match('@[0-9]@', $firstName); // includes number?
+
+            if($number){
+                throw new Exception("First name cannot include numbers");
+            }
+
                 $this->firstName = $firstName;
 
                 return $this;
@@ -89,6 +95,12 @@ include_once(__DIR__ . "/Db.php");
         {
             if(empty($lastName)){
                 throw new Exception("Last name cannot be empty");
+            }
+
+            $number = preg_match('@[0-9]@', $lastName); // includes number?
+
+            if($number){
+                throw new Exception("last name cannot include numbers");
             }
                 $this->lastName = $lastName;
 
