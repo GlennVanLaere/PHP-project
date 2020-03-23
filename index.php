@@ -6,7 +6,8 @@
         try {
             $user = new User();
             $user->setEmail($_POST['email']);
-            $user->setFullName($_POST['fullName']);
+            $user->setFirstName($_POST['firstName']);
+            $user->setLastName($_POST['lastName']);
             $user->setPassword($_POST['password']);
             
             $user->save(); 
@@ -49,8 +50,12 @@
             <small id="emailHelp" class="form-text text-muted">Email must end in @student.thomasmore.be</small>
         </div>
         <div class="form-group">
-            <label for="fullName">Full name</label>
-            <input class="form-control" name="fullName" type="text" placeholder="Full name" id="fullName">
+            <label for="firstName">First name</label>
+            <input class="form-control" name="firstName" type="text" placeholder="First name" id="firstName">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input class="form-control" name="lastName" type="text" placeholder="Last name" id="lastName">
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
