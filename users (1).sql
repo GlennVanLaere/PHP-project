@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 20 mrt 2020 om 15:21
+-- Gegenereerd op: 23 mrt 2020 om 15:52
 -- Serverversie: 10.4.11-MariaDB
 -- PHP-versie: 7.4.2
 
@@ -31,7 +31,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `email` varchar(300) NOT NULL,
-  `fullName` varchar(300) NOT NULL,
+  `firstName` varchar(300) NOT NULL,
+  `lastName` varchar(300) NOT NULL,
   `password` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -39,9 +40,9 @@ CREATE TABLE `users` (
 -- Gegevens worden geëxporteerd voor tabel `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `fullName`, `password`) VALUES
-(10, 'Amber@student.thomasmore.be', 'Amber Waltens', 'test'),
-(11, 'amber.waltens@student.thomasmore.be', 'amber wal', '$2y$16$qkKJtOpoQphmodfup7dlh.4MIf8PXecG1.ZWDUi.v2rpLGPybySKu');
+INSERT INTO `users` (`id`, `email`, `firstName`, `lastName`, `password`) VALUES
+(12, 'amber.waltens@student.thomasmore.be', 'Amber', 'Waltens', '$2y$16$Yj5Zor0gjvvNoZ6JTGLnpeCXOTx8xmZwxQ79Jgc/Phcc3nrrVnxNC'),
+(13, 'r0696794@student.thomasmore.be', 'Mae-ly', 'Waltens', '$2y$16$21sY0VvpYLtEEO6v18EPJuQ1sQEI0o.3JNpak6lMML.r6H.nwBejy');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -61,7 +62,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
