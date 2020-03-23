@@ -46,7 +46,7 @@
         
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="email" name="email" placeholder="Email address" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             <small id="emailHelp" class="form-text text-muted">Email must end in @student.thomasmore.be</small>
         </div>
         <div class="form-group">
@@ -59,7 +59,7 @@
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+            <input type="password" name="password" class="form-control" placeholder="Password" id="exampleInputPassword1">
             <small id="passwordHelp" class="form-text text-muted">Password must include at least 1 uppercase, 1 lowercase, 1 special character and must be at least 8 characters long</small>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
