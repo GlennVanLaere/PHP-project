@@ -10,12 +10,19 @@ include_once(__DIR__."/functions/avatarUpload.php");
 //email adres wijzigen
 //Hoe kan je dit veilig toelaten? (wat als je even van je laptop weg bent en iemand je wachtwoord wijzigt?) Idem voor wachtwoord wijzigen.
 //Zorg dat je hier aantoont dat je hebt nagedacht over een veilige procedure 
+<<<<<<< Updated upstream
 ?>
+=======
+
+?>
+
+>>>>>>> Stashed changes
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< Updated upstream
     <title>Profile</title>
 </head>
 <body>
@@ -29,5 +36,11 @@ include_once(__DIR__."/functions/avatarUpload.php");
         <h1> <?php echo $error ?> </h1>
     
     </div>
+=======
+    <title>Uw profiel</title>
+</head>
+<body>
+    
+>>>>>>> Stashed changes
 </body>
 </html>
