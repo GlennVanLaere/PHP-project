@@ -124,14 +124,16 @@ include_once(__DIR__ . "/Db.php");
 
             try {
                 $conn = Db::getConnection();
-                $statement = $conn->prepare('INSERT INTO users (email, fullName, password) VALUES (:email, :fullName, :password)');
+                $statement = $conn->prepare('INSERT INTO users (email, firstName, lastName, password) VALUES (:email, :firstName, :lastName, :password)');
     
                 $email = $this->getEmail();
-                $fullName = $this->getFullName();
+                $firstName = $this->getFirstName();
+                $lastName = $this->getLastName();
                 $password = $this->getPassword();
             
                 $statement->bindValue(":email", $email);
-                $statement->bindValue(":fullName", $fullName);
+                $statement->bindValue(":firstName", $firstName);
+                $statement->bindValue(":lastName", $lastName);
                 $statement->bindValue(":password", $password);
     
                 $result = $statement->execute();
