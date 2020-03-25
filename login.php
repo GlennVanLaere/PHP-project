@@ -1,5 +1,17 @@
 <?php
   include_once(__DIR__."/classes/CurrentUser.php");
+
+  if (!empty($_POST)) {
+    try {
+      $currentUser = new CurrentUser();
+      $currentUser->setCurrentEmail($_POST["email"]);
+      $currentUser->setCurrentPassword($_POST["password"]);
+
+      
+    } catch (\Throwable $th) {
+      $error = $th->getMessage();
+    }
+  }
 ?>
 
 <!doctype html>

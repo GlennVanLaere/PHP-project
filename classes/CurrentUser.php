@@ -1,7 +1,7 @@
 <?php
     include_once(__DIR__ . "/Db.php");
 
-    class currentUser {
+    class CurrentUser {
         private $currentEmail;
         private $currentFirstName;
         private $currentLastName;
