@@ -7,7 +7,8 @@
       $currentUser = new CurrentUser();
       $currentUser->setCurrentEmail($_POST["email"]);
       $currentUser->setCurrentPassword($_POST["password"]);
-      $currentUser->canLogin();
+      $canLogin = $currentUser->canLogin();
+      var_dump($canLogin);
 
     } catch (\Throwable $th) {
       $error = $th->getMessage();

@@ -99,10 +99,16 @@
             $currentEmail = $this->getCurrentEmail();
             $currentPassword = $this->getCurrentPassword();
             $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT * FROM users WHERE email = ':currentEmail'");
+            $statement = $conn->prepare("SELECT * FROM users WHERE email = :currentEmail");
             $statement->bindValue(":currentEmail", $currentEmail);
             $statement->execute();
-            $user = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+            if (password_verify($currentPassword, $user["password"])) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 ?>
