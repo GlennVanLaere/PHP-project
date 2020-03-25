@@ -17,7 +17,6 @@
 
     } catch (\Throwable $th) {
       $error = $th->getMessage();
-      var_dump($error);
     }
   }
 ?>
@@ -31,6 +30,13 @@
     <title>Login</title>
   </head>
   <body>
+
+    <?php if(isset($error)): ?>
+      <div class="alert alert-danger" role="alert">
+        <?php echo $error ?>
+      </div>
+    <?php endif; ?>
+
     <form action="" method="post">
       <div class="form-group">
         <label for="email">Email</label>
