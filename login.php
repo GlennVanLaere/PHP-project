@@ -7,7 +7,6 @@
       $currentUser->setCurrentEmail($_POST["email"]);
       $currentUser->setCurrentPassword($_POST["password"]);
 
-      
     } catch (\Throwable $th) {
       $error = $th->getMessage();
     }

@@ -22,6 +22,10 @@
          */ 
         public function setCurrentEmail($currentEmail)
         {
+                if(empty($currentEmail)){
+                    throw new Exception("Email cannot be empty");
+                }
+
                 $this->currentEmail = $currentEmail;
 
                 return $this;
@@ -82,6 +86,10 @@
          */ 
         public function setCurrentPassword($currentPassword)
         {
+                if(empty($currentPassword)){
+                    throw new Exception("Password cannot be empty");
+                }
+
                 $this->currentPassword = $currentPassword;
 
                 return $this;
