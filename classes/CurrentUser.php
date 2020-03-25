@@ -110,5 +110,11 @@
                 return false;
             }
         }
+
+        public function login() {
+            session_start();
+            $_SESSION["user"] = $this->getCurrentEmail();
+            header("Location: HelloWord.php");
+        }
     }
 ?>

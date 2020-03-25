@@ -8,7 +8,12 @@
       $currentUser->setCurrentEmail($_POST["email"]);
       $currentUser->setCurrentPassword($_POST["password"]);
       $canLogin = $currentUser->canLogin();
-      var_dump($canLogin);
+
+      if ($canLogin) {
+        $currentUser->login();
+      } else {
+        $error = "We couldn't log you in";
+      }
 
     } catch (\Throwable $th) {
       $error = $th->getMessage();
