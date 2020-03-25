@@ -46,11 +46,6 @@
         <label for="password">Password</label>
         <input type="password" placeholder="Password" name="password" id="password" class="form-control">
       </div>
-
-      <div class="form-check">
-        <input type="checkbox" id="rememberMe" class="form-check-input">
-        <label for="rememberMe" class="form-check-label">Remember me</label>
-      </div>
       
       <input type="submit" value="Sign in" class="btn btn-primary">
     </form>
