@@ -94,5 +94,15 @@
 
                 return $this;
         }
+
+        public function canLogin() {
+            $currentEmail = $this->getCurrentEmail();
+            $currentPassword = $this->getCurrentPassword();
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email = ':currentEmail'");
+            $statement->bindValue(":currentEmail", $currentEmail);
+            $statement->execute();
+            $user = $statement->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
 ?>
