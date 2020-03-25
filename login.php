@@ -1,3 +1,7 @@
+<?php
+  include_once(__DIR__."/classes/CurrentUser.php");
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
