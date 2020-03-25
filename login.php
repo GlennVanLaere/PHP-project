@@ -25,7 +25,7 @@
     <form action="" method="post">
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="text" placeholder="Enter email" name="email" id="email" class="form-control">
+        <input type="email" placeholder="Enter email" name="email" id="email" class="form-control">
       </div>
       <div class="form-group">
         <label for="password">Password</label>
