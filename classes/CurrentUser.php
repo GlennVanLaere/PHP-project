@@ -119,12 +119,14 @@
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $nummer = array_count_values($result);
-            if(isset($nummer['maak een keuze'])){
-                if($nummer['maak een keuze'] > 4){
+            if(isset($nummer['Maak een keuze'])){
+                if($nummer['Maak een keuze'] > 4){
                     return false;
                 } else {
                     return true;
                 }
+            } else {
+                return true;
             }
         }
         public function login($complete) {
