@@ -8,9 +8,9 @@
       $currentUser->setCurrentEmail($_POST["email"]);
       $currentUser->setCurrentPassword($_POST["password"]);
       $canLogin = $currentUser->canLogin();
-
+      $complete = $currentUser->checkComplete();
       if ($canLogin) {
-        $currentUser->login();
+        $currentUser->login($complete);
       } else {
         $error = "We couldn't log you in";
       }

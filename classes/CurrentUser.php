@@ -111,10 +111,30 @@
             }
         }
 
-        public function login() {
+        function checkComplete(){
+
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM `users` WHERE `id` = 27 ");
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $nummer = array_count_values($result);
+            if(isset($nummer['maak een keuze'])){
+                if($nummer['maak een keuze'] < 4){
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+        public function login($complete) {
             session_start();
             $_SESSION["user"] = $this->getCurrentEmail();
-            header("Location: HelloWord.php");
+            if($complete){
+                header("Location: index.php");
+                
+            } else {
+                header("Location: kenmerken.php");
+            }
         }
     }
 ?>
