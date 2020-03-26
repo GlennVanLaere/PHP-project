@@ -1,5 +1,6 @@
 <?php 
 include_once(__DIR__."/functions/settings.php");
+include_once(__DIR__ . "/Db.php");
 
 if(isset($_POST["submit"])){
     $file = $_FILES["avatar"];
@@ -21,7 +22,9 @@ if(isset($_POST["submit"])){
                 $fileDestination = '/Users/glennvanlaere/Documents/GitHub/PHP-project/uploads/'.$fileNameNew;
                 echo($fileTmpName);
                 move_uploaded_file($fileTmpName, $fileDestination);
+
                 header("Location: profile.php?succes");
+                return $fileNameNew;
             }
             else{
                 $error = "your filesize is to big";
@@ -39,3 +42,5 @@ if(isset($_POST["submit"])){
     
 
 }
+
+

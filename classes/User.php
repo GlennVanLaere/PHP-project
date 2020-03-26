@@ -1,14 +1,22 @@
 <?php 
 
 include_once(__DIR__ . "/Db.php");
+include_once(__DIR__ . "/avatarUpload.php");
+include_once(__DIR__ . "/Profile.php");
+include_once(__DIR__ . "/UploadFile.php");
 
 
-    class User{
+    class User {
+        private $id;
         private $email;
         private $firstName;
         private $lastName;
         private $password;
 
+        //feature 3 gedeelte
+        private $profile;
+        // private $description;
+        // private $profilePicture;
 
         /**
          * Get the value of email
@@ -157,6 +165,10 @@ include_once(__DIR__ . "/Db.php");
 
             return $this;
         }
+               
+    
+  
+
 
 
         public function save(){
@@ -164,16 +176,23 @@ include_once(__DIR__ . "/Db.php");
             try {
                 $conn = Db::getConnection();
                 $statement = $conn->prepare('INSERT INTO users (email, firstName, lastName, password) VALUES (:email, :firstName, :lastName, :password)');
-    
+                
+                
+
                 $email = $this->getEmail();
                 $firstName = $this->getFirstName();
                 $lastName = $this->getLastName();
                 $password = $this->getPassword();
+
+            
+                
             
                 $statement->bindValue(":email", $email);
                 $statement->bindValue(":firstName", $firstName);
                 $statement->bindValue(":lastName", $lastName);
                 $statement->bindValue(":password", $password);
+
+
     
                 $result = $statement->execute();
     
@@ -194,7 +213,60 @@ include_once(__DIR__ . "/Db.php");
             return $users;
     
         }
-    
 
-      
+        public static function getSingleUser($userId) {
+            $conn = DB::getConnection();
+    
+            $statement = $conn->prepare("select * from users where id=" . $userId);
+            $statement->execute();
+            $user = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            // private $firstName;
+            // private $lastName;
+            // private $password;
+    
+            // //feature 3 gedeelte
+            // private $description;
+
+            $userObject = new User($user->id, $user->email, $user->firstName, $user->lastName);
+            return $users;
+        }
+
+
+ 
+
+
+ 
+
+        /**
+         * Get the value of fileNameNew
+         */ 
+        public function getFileNameNew()
+        {
+                return $this->fileNameNew;
+        }
+
+        /**
+         * Set the value of fileNameNew
+         *
+         * @return  self
+         */ 
+        public function setFileNameNew($fileNameNew)
+        {
+                $this->fileNameNew = $fileNameNew;
+
+                return $this;
+        }
+
+        public function fetchUserProfile() {
+            $this->profile = Profile::findProfileForUser($this->id);
+        }
+
+        public function setDescription($newDescription) {
+            $this->profile->setDescription($newDescription);
+        }
+
+        public function saveProfile() {
+            $this->profile->save();
+        }
     }
