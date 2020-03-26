@@ -1,34 +1,30 @@
 <?php
     session_start();
     include_once(__DIR__ . "/classes/CurrentUser.php");
-    $email = $_SESSION["user"];
-    
-    if(!empty($_POST)){
-        $muziek = $_POST['muziek'];
-        $films = $_POST['films'];
-        $games = $_POST['games'];
-        $boeken = $_POST['boeken'];
-        $tvprogrammas = $_POST['tvprogrammas'];
+    include_once(__DIR__ . "/classes/Kenmerken.php");
+    if(isset($_SESSION['user'])){
 
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE `users` SET `muziek`= :muziek,`films`= :films,`games`= :games,`boeken`= :boeken,`tvprogrammas`= :tvprogrammas WHERE `email` = :email");
-        $statement->bindValue('email', $email);
-        $statement->bindValue(':muziek', htmlspecialchars($muziek));
-        $statement->bindValue(':films', htmlspecialchars($films));
-        $statement->bindValue(':games', htmlspecialchars($games));
-        $statement->bindValue(':boeken', htmlspecialchars($boeken));
-        $statement->bindValue(':tvprogrammas', htmlspecialchars($tvprogrammas));
-        $statement->execute();
-        header("Location: index.php");
+        $email = $_SESSION["user"];
+        
+        if(!empty($_POST)){
+            $update = new currentKenmerken;
+            $update->setMuziek($_POST['muziek']);
+            $update->setFilms($_POST['films']);
+            $update->setGames($_POST['games']);
+            $update->setBoeken($_POST['boeken']);
+            $update->setTvprogrammas($_POST['tvprogrammas']);
+            $update->updateKenmerken($email);
+        }
+        
+        $kenmerk = new currentKenmerken;
+        $kenmerk->setKenmerk($kenmerk, $email);
+        $kenmerk = $kenmerk->getKenmerk();
+    } else {
+        session_destroy();
+        header("Location: login.php");
     }
-
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT * FROM `users` WHERE `email` = :email");
-        $statement->bindValue('email', $email);
-        $statement->execute();
-        $kenmerk = $statement->fetch(PDO::FETCH_ASSOC);
-
-?><!DOCTYPE html>
+        
+        ?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
