@@ -112,9 +112,10 @@
         }
 
         function checkComplete(){
-
+            $email = $this->getCurrentEmail();
             $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT * FROM `users` WHERE `id` = 27 ");
+            $statement = $conn->prepare("SELECT * FROM `users` WHERE `email` = :email ");
+            $statement->bindValue(':email', $email);
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $nummer = array_count_values($result);

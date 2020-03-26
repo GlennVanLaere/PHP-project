@@ -1,7 +1,7 @@
 <?php
     session_start();
     include_once(__DIR__ . "/classes/CurrentUser.php");
-    
+    $email = $_SESSION["user"];
     
     if(!empty($_POST)){
         $muziek = $_POST['muziek'];
@@ -11,7 +11,8 @@
         $tvprogrammas = $_POST['tvprogrammas'];
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("UPDATE `users` SET `muziek`=:muziek,`films`=:films,`games`=:games,`boeken`=:boeken,`tvprogrammas`=:tvprogrammas WHERE id = 27");
+        $statement = $conn->prepare("UPDATE `users` SET `muziek`= :muziek,`films`= :films,`games`= :games,`boeken`= :boeken,`tvprogrammas`= :tvprogrammas WHERE `email` = :email");
+        $statement->bindValue('email', $email);
         $statement->bindValue(':muziek', htmlspecialchars($muziek));
         $statement->bindValue(':films', htmlspecialchars($films));
         $statement->bindValue(':games', htmlspecialchars($games));
@@ -22,7 +23,8 @@
     }
 
         $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT * FROM `users` WHERE `id` = 27");
+        $statement = $conn->prepare("SELECT * FROM `users` WHERE `email` = :email");
+        $statement->bindValue('email', $email);
         $statement->execute();
         $kenmerk = $statement->fetch(PDO::FETCH_ASSOC);
 
