@@ -3,19 +3,22 @@
     //include_once(__DIR__ . "/classes/CurrentUser.php");
     include_once(__DIR__ . "/classes/Kenmerken.php");
     if(isset($_SESSION['user'])){
-
+        
         $email = $_SESSION["user"];
-        
-        if(!empty($_POST)){
-            $update = new currentKenmerken;
-            $update->setMuziek($_POST['muziek']);
-            $update->setFilms($_POST['films']);
-            $update->setGames($_POST['games']);
-            $update->setBoeken($_POST['boeken']);
-            $update->setTvprogrammas($_POST['tvprogrammas']);
-            $update->updateKenmerken($email);
+        try{
+            if(!empty($_POST)){
+                $update = new currentKenmerken;
+                $update->setMuziek($_POST['muziek']);
+                $update->setFilms($_POST['films']);
+                $update->setGames($_POST['games']);
+                $update->setBoeken($_POST['boeken']);
+                $update->setTvprogrammas($_POST['tvprogrammas']);
+                $update->setBuddy($_POST['buddy']);
+                $update->updateKenmerken($email);
+            }
+        } catch (\Throwable $t) {
+            $error = $t->getMessage();
         }
-        
         $kenmerk = new currentKenmerken;
         $kenmerk->setKenmerk($kenmerk, $email);
         $kenmerk = $kenmerk->getKenmerk();
@@ -33,10 +36,23 @@
     <title>Profiel</title>
 </head>
 <body>
+    <?php if(isset($error)): ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $error ?>
+        </div>
+    <?php endif; ?>
     <form action="" method="POST">
     <div class="form-group">
+        <label for="buddy">Buddy</label>
+        <select name="buddy">
+            <option><?php echo $kenmerk['buddy'] ?></option>
+            <option>Ik wil een buddy die mij helpt</option>
+            <option>Ik wil een buddy helpen</option>
+        </select>
+    </div>
+    <div class="form-group">
         <label for="muziek">Muziek</label>
-        <select value="b" name="muziek">
+        <select name="muziek">
             <option><?php echo $kenmerk['muziek'] ?></option>
             <option>Electronisch</option>
             <option>Hiphop</option>
