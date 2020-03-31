@@ -1,24 +1,26 @@
 <?php
     session_start();
-    //include_once(__DIR__ . "/classes/CurrentUser.php");
-    include_once(__DIR__ . "/classes/Kenmerken.php");
+    include_once(__DIR__ . "/classes/User.php");
     if(isset($_SESSION['user'])){
-
+        
         $email = $_SESSION["user"];
-        
-        if(!empty($_POST)){
-            $update = new currentKenmerken;
-            $update->setMuziek($_POST['muziek']);
-            $update->setFilms($_POST['films']);
-            $update->setGames($_POST['games']);
-            $update->setBoeken($_POST['boeken']);
-            $update->setTvprogrammas($_POST['tvprogrammas']);
-            $update->updateKenmerken($email);
+        try{
+            if(!empty($_POST)){
+                $update = new User;
+                $update->setMuziek($_POST['muziek']);
+                $update->setFilms($_POST['films']);
+                $update->setGames($_POST['games']);
+                $update->setBoeken($_POST['boeken']);
+                $update->setTvprogrammas($_POST['tvprogrammas']);
+                $update->setBuddy($_POST['buddy']);
+                $update->updateTags($email);
+            }
+        } catch (\Throwable $t) {
+            $error = $t->getMessage();
         }
-        
-        $kenmerk = new currentKenmerken;
-        $kenmerk->setKenmerk($kenmerk, $email);
-        $kenmerk = $kenmerk->getKenmerk();
+        $tags = new User;
+        $tags->setTags($tags, $email);
+        $tags = $tags->getTags();
     } else {
         session_destroy();
         header("Location: login.php");
@@ -33,11 +35,24 @@
     <title>Profiel</title>
 </head>
 <body>
+    <?php if(isset($error)): ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $error ?>
+        </div>
+    <?php endif; ?>
     <form action="" method="POST">
     <div class="form-group">
+        <label for="buddy">Buddy</label>
+        <select name="buddy">
+            <option><?php echo $tags['buddy'] ?></option>
+            <option>Ik wil een buddy die mij helpt</option>
+            <option>Ik wil een buddy helpen</option>
+        </select>
+    </div>
+    <div class="form-group">
         <label for="muziek">Muziek</label>
-        <select value="b" name="muziek">
-            <option><?php echo $kenmerk['muziek'] ?></option>
+        <select name="muziek">
+            <option><?php echo $tags['muziek'] ?></option>
             <option>Electronisch</option>
             <option>Hiphop</option>
             <option>Jazz</option>
@@ -50,7 +65,7 @@
     <div class="form-group">
         <label for="films">Films</label>
         <select name="films">
-            <option><?php echo $kenmerk['films'] ?></option>
+            <option><?php echo $tags['films'] ?></option>
             <option>Actie</option>
             <option>Animatiefilm</option>
             <option>Avonturenfilm</option>
@@ -67,7 +82,7 @@
     <div class="form-group">
     <label for="boeken">Boeken</label>
         <select name="boeken">
-            <option><?php echo $kenmerk['boeken'] ?></option>
+            <option><?php echo $tags['boeken'] ?></option>
             <option>Actie</option>
             <option>Detectieve</option>
             <option>Drama</option>
@@ -80,7 +95,7 @@
     <div class="form-group">
     <label for="games">Games</label>
         <select name="games">
-            <option><?php echo $kenmerk['games'] ?></option>
+            <option><?php echo $tags['games'] ?></option>
             <option>Actie</option>
             <option>Avonturen</option>
             <option>First-person</option>
@@ -97,7 +112,7 @@
     <div class="form-group">
     <label for="tvprogrammas">Tv-programma's</label>
         <select name="tvprogrammas">
-            <option><?php echo $kenmerk['tvprogrammas'] ?></option>
+            <option><?php echo $tags['tvprogrammas'] ?></option>
             <option>Amerikaanse series</option>
             <option>Nieuws</option>
             <option>Quiz</option>
