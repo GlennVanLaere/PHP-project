@@ -1,16 +1,16 @@
 <?php
-  include_once(__DIR__."/classes/CurrentUser.php");
+  include_once(__DIR__."/classes/User.php");
 
   if (!empty($_POST)) {
 
     try {
-      $currentUser = new CurrentUser();
-      $currentUser->setCurrentEmail($_POST["email"]);
-      $currentUser->setCurrentPassword($_POST["password"]);
-      $canLogin = $currentUser->canLogin();
-      $complete = $currentUser->checkComplete();
+      $user = new User();
+      $user->setCurrentEmail($_POST["email"]);
+      $user->setCurrentPassword($_POST["password"]);
+      $canLogin = $user->canLogin();
+      $complete = $user->checkComplete();
       if ($canLogin) {
-        $currentUser->login($complete);
+        $user->login($complete);
       } else {
         $error = "We couldn't log you in";
       }
