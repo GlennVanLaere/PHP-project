@@ -41,17 +41,17 @@
         </div>
     <?php endif; ?>
     <form action="" method="POST">
-    <div class="form-group">
-        <label for="buddy">Buddy</label>
-        <select name="buddy">
+    <div class="dropdown">
+    <label for="buddy">Buddy:</label></br>
+        <select name="buddy" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <option><?php echo $tags['buddy'] ?></option>
             <option>I am searching a buddy</option>
             <option>I want to be a buddy</option>>
         </select>
     </div>
-    <div class="form-group">
-        <label for="music">Music</label>
-        <select name="music">
+    <div class="dropdown">
+    <label for="music">Music:</label></br>
+        <select name="music" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <option><?php echo $tags['music'] ?></option>
             <option>Electro</option>
             <option>Hiphop</option>
@@ -63,9 +63,9 @@
             <option>Other</option>
         </select>
     </div>
-    <div class="form-group">
-        <label for="movies">Movies</label>
-        <select name="movies">
+    <div class="dropdown">
+    <label for="movies">Movies:</label></br>
+        <select name="movies" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <option><?php echo $tags['movies'] ?></option>
             <option>Action</option>
             <option>Adventure</option>
@@ -81,9 +81,9 @@
             <option>Other</option>
         </select>
     </div>
-    <div class="form-group">
-    <label for="books">Books</label>
-        <select name="books">
+    <div class="dropdown">
+    <label for="books">Books:</label></br>
+        <select name="books" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <option><?php echo $tags['books'] ?></option>
             <option>Action</option>
             <option>Comedy</option>
@@ -96,9 +96,9 @@
             <option>Other</option>
         </select>
     </div>
-    <div class="form-group">
-    <label for="games">Games</label>
-        <select name="games">
+    <div class="dropdown">
+    <label for="games">Games:</label></br>
+        <select name="games" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <option><?php echo $tags['games'] ?></option>
             <option>Action</option>
             <option>Adventure</option>
@@ -113,9 +113,9 @@
             <option>Other</option>
         </select>
     </div>
-    <div class="form-group">
-    <label for="tvShows">Tv-Shows</label>
-        <select name="tvShows">
+<div class="dropdown">
+    <label for="tvShows">Tv-Shows:</label></br>
+        <select name="tvShows" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <option><?php echo $tags['tvShows'] ?></option>
             <option>American series</option>
             <option>Dutch series</option>
@@ -124,7 +124,7 @@
             <option>Sport</option>
             <option>Other</option>
         </select>
-    </div>
+</div>
     <div>
         <input type="submit" value="Submit" class="btn btn-primary">	
     </div>
