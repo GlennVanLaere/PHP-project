@@ -7,11 +7,11 @@
         try{
             if(!empty($_POST)){
                 $update = new User;
-                $update->setMuziek($_POST['muziek']);
-                $update->setFilms($_POST['films']);
+                $update->setmusic($_POST['music']);
+                $update->setmovies($_POST['movies']);
                 $update->setGames($_POST['games']);
-                $update->setBoeken($_POST['boeken']);
-                $update->setTvprogrammas($_POST['tvprogrammas']);
+                $update->setBooks($_POST['books']);
+                $update->setTvShows($_POST['tvShows']);
                 $update->setBuddy($_POST['buddy']);
                 $update->updateTags($email);
             }
@@ -32,7 +32,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Profiel</title>
+    <title>Profile</title>
 </head>
 <body>
     <?php if(isset($error)): ?>
@@ -45,79 +45,84 @@
         <label for="buddy">Buddy</label>
         <select name="buddy">
             <option><?php echo $tags['buddy'] ?></option>
-            <option>Ik wil een buddy die mij helpt</option>
-            <option>Ik wil een buddy helpen</option>
+            <option>I am searching a buddy</option>
+            <option>I want to be a buddy</option>>
         </select>
     </div>
     <div class="form-group">
-        <label for="muziek">Muziek</label>
-        <select name="muziek">
-            <option><?php echo $tags['muziek'] ?></option>
-            <option>Electronisch</option>
+        <label for="music">Music</label>
+        <select name="music">
+            <option><?php echo $tags['music'] ?></option>
+            <option>Electro</option>
             <option>Hiphop</option>
             <option>Jazz</option>
-            <option>Klassieke</option>
+            <option>Classic</option>
             <option>K-pop</option>
-            <option>Popmuziek</option>
+            <option>Popmusic</option>
             <option>Rock</option>
+            <option>Other</option>
         </select>
     </div>
     <div class="form-group">
-        <label for="films">Films</label>
-        <select name="films">
-            <option><?php echo $tags['films'] ?></option>
-            <option>Actie</option>
-            <option>Animatiefilm</option>
-            <option>Avonturenfilm</option>
+        <label for="movies">Movies</label>
+        <select name="movies">
+            <option><?php echo $tags['movies'] ?></option>
+            <option>Action</option>
+            <option>Adventure</option>
+            <option>Animation</option>
+            <option>Comedy</option>
+            <option>Crime</option>
             <option>Drama</option>
-            <option>horror</option>
-            <option>Komedie</option>
-            <option>Misdaadfilm</option>
-            <option>Romantiek</option>
-            <option>Superheldenfilm</option>
+            <option>Horror</option>
+            <option>Romantic</option>
+            <option>Superhero</option>
             <option>Thriller</option>
             <option>Western</option>
+            <option>Other</option>
         </select>
     </div>
     <div class="form-group">
-    <label for="boeken">Boeken</label>
-        <select name="boeken">
-            <option><?php echo $tags['boeken'] ?></option>
-            <option>Actie</option>
-            <option>Detectieve</option>
+    <label for="books">Books</label>
+        <select name="books">
+            <option><?php echo $tags['books'] ?></option>
+            <option>Action</option>
+            <option>Comedy</option>
+            <option>Comics</option>
+            <option>Detective</option>
             <option>Drama</option>
-            <option>horror</option>
-            <option>Komedie</option>
-            <option>Romantiek</option>
+            <option>Horror</option>
+            <option>Romantic</option>
             <option>Thriller</option>
+            <option>Other</option>
         </select>
     </div>
     <div class="form-group">
     <label for="games">Games</label>
         <select name="games">
             <option><?php echo $tags['games'] ?></option>
-            <option>Actie</option>
-            <option>Avonturen</option>
+            <option>Action</option>
+            <option>Adventure</option>
+            <option>Comedy</option>
             <option>First-person</option>
-            <option>horror</option>
-            <option>Komedie</option>
+            <option>Horror</option>
             <option>Party-games</option>
             <option>Puzzle</option>
             <option>Race</option>
             <option>Sandbox</option>
             <option>Sport</option>
-            <option>Superheldenfilm</option>
+            <option>Other</option>
         </select>
     </div>
     <div class="form-group">
-    <label for="tvprogrammas">Tv-programma's</label>
-        <select name="tvprogrammas">
-            <option><?php echo $tags['tvprogrammas'] ?></option>
-            <option>Amerikaanse series</option>
-            <option>Nieuws</option>
+    <label for="tvShows">Tv-Shows</label>
+        <select name="tvShows">
+            <option><?php echo $tags['tvShows'] ?></option>
+            <option>American series</option>
+            <option>Dutch series</option>
+            <option>News</option>
             <option>Quiz</option>
             <option>Sport</option>
-            <option>Vlaamse series</option>
+            <option>Other</option>
         </select>
     </div>
     <div>

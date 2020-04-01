@@ -13,10 +13,10 @@ include_once(__DIR__ . "/Db.php");
         private $currentLastName;
         private $currentPassword;
         private $tags;
-        private $muziek;
-        private $films;
+        private $music;
+        private $movies;
         private $games;
-        private $boeken;
+        private $books;
         private $tvprogrammas;
         private $buddy;
 
@@ -283,41 +283,41 @@ include_once(__DIR__ . "/Db.php");
                 return $this;
         }
         /**
-         * Get the value of muziek
+         * Get the value of music
          */ 
-        public function getMuziek()
+        public function getmusic()
         {
-                return $this->muziek;
+                return $this->music;
         }
 
         /**
-         * Set the value of muziek
+         * Set the value of music
          *
          * @return  self
          */ 
-        public function setMuziek($muziek)
+        public function setmusic($music)
         {
-                $this->muziek = $muziek;
+                $this->music = $music;
 
                 return $this;
         }
 
         /**
-         * Get the value of films
+         * Get the value of movies
          */ 
-        public function getFilms()
+        public function getmovies()
         {
-                return $this->films;
+                return $this->movies;
         }
 
         /**
-         * Set the value of films
+         * Set the value of movies
          *
          * @return  self
          */ 
-        public function setFilms($films)
+        public function setmovies($movies)
         {
-                $this->films = $films;
+                $this->movies = $movies;
 
                 return $this;
         }
@@ -343,31 +343,31 @@ include_once(__DIR__ . "/Db.php");
         }
 
         /**
-         * Get the value of boeken
+         * Get the value of books
          */ 
-        public function getBoeken()
+        public function getBooks()
         {
-                return $this->boeken;
+                return $this->books;
         }
 
         /**
-         * Set the value of boeken
+         * Set the value of books
          *
          * @return  self
          */ 
-        public function setBoeken($boeken)
+        public function setBooks($books)
         {
-                $this->boeken = $boeken;
+                $this->books = $books;
 
                 return $this;
         }
 
         /**
-         * Get the value of tvprogrammas
+         * Get the value of tvShows
          */ 
-        public function getTvprogrammas()
+        public function getTvShows()
         {
-                return $this->tvprogrammas;
+                return $this->tvShows;
         }
 
         /**
@@ -375,9 +375,9 @@ include_once(__DIR__ . "/Db.php");
          *
          * @return  self
          */ 
-        public function setTvprogrammas($tvprogrammas)
+        public function setTvShows($tvShows)
         {
-                $this->tvprogrammas = $tvprogrammas;
+                $this->tvShows = $tvShows;
 
                 return $this;
         }
@@ -397,8 +397,8 @@ include_once(__DIR__ . "/Db.php");
          */ 
         public function setBuddy($buddy)
         {
-                if($buddy == 'Maak een keuze'){
-                        throw new Exception("Kies wat voor buddy je wilt zijn");
+                if($buddy == 'Make a choice'){
+                        throw new Exception("Choose what kind of buddy you want to be");
                 }
                 $this->buddy = $buddy;
 
@@ -464,9 +464,9 @@ include_once(__DIR__ . "/Db.php");
             $statement->bindValue(':email', $email);
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
-            $nummer = array_count_values($result);
-            if(isset($nummer['Maak een keuze'])){
-                if($nummer['Maak een keuze'] > 4){
+            $number = array_count_values($result);
+            if(isset($number['Make a choice'])){
+                if($number['Make a choice'] > 4){
                     return false;
                 } else {
                     return true;
@@ -488,20 +488,20 @@ include_once(__DIR__ . "/Db.php");
         public function updateTags($email)
         {    
             try{       
-                $muziek = $this->getMuziek();
-                $films = $this->getFilms();
+                $music = $this->getMusic();
+                $movies = $this->getMovies();
                 $games = $this->getGames();
-                $boeken = $this->getBoeken();
-                $tvprogrammas = $this->getTvprogrammas();
+                $books = $this->getBooks();
+                $tvShows = $this->getTvShows();
                 $buddy = $this->getBuddy();
                 $conn = Db::getConnection();
-                $statement = $conn->prepare("UPDATE `users` SET `muziek`= :muziek,`films`= :films,`games`= :games,`boeken`= :boeken,`tvprogrammas`= :tvprogrammas, `buddy` = :buddy WHERE `email` = :email");
+                $statement = $conn->prepare("UPDATE `users` SET `music`= :music,`movies`= :movies,`games`= :games,`books`= :books,`tvShows`= :tvShows, `buddy` = :buddy WHERE `email` = :email");
                 $statement->bindValue('email', $email);
-                $statement->bindValue(':muziek', htmlspecialchars($muziek));
-                $statement->bindValue(':films', htmlspecialchars($films));
+                $statement->bindValue(':music', htmlspecialchars($music));
+                $statement->bindValue(':movies', htmlspecialchars($movies));
                 $statement->bindValue(':games', htmlspecialchars($games));
-                $statement->bindValue(':boeken', htmlspecialchars($boeken));
-                $statement->bindValue(':tvprogrammas', htmlspecialchars($tvprogrammas));
+                $statement->bindValue(':books', htmlspecialchars($books));
+                $statement->bindValue(':tvShows', htmlspecialchars($tvShows));
                 $statement->bindValue(':buddy', htmlspecialchars($buddy));
                 $statement->execute();
                 header("Location: index.php");
