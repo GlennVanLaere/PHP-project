@@ -7,8 +7,8 @@
         try{
             if(!empty($_POST)){
                 $update = new User;
-                $update->setmusic($_POST['music']);
-                $update->setmovies($_POST['movies']);
+                $update->setMusic($_POST['music']);
+                $update->setMovies($_POST['movies']);
                 $update->setGames($_POST['games']);
                 $update->setBooks($_POST['books']);
                 $update->setTvShows($_POST['tvShows']);

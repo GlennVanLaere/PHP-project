@@ -17,7 +17,7 @@ include_once(__DIR__ . "/Db.php");
         private $movies;
         private $games;
         private $books;
-        private $tvprogrammas;
+        private $tvShows;
         private $buddy;
 
 
@@ -285,7 +285,7 @@ include_once(__DIR__ . "/Db.php");
         /**
          * Get the value of music
          */ 
-        public function getmusic()
+        public function getMusic()
         {
                 return $this->music;
         }
@@ -295,7 +295,7 @@ include_once(__DIR__ . "/Db.php");
          *
          * @return  self
          */ 
-        public function setmusic($music)
+        public function setMusic($music)
         {
                 $this->music = $music;
 
@@ -305,7 +305,7 @@ include_once(__DIR__ . "/Db.php");
         /**
          * Get the value of movies
          */ 
-        public function getmovies()
+        public function getMovies()
         {
                 return $this->movies;
         }
@@ -315,7 +315,7 @@ include_once(__DIR__ . "/Db.php");
          *
          * @return  self
          */ 
-        public function setmovies($movies)
+        public function setMovies($movies)
         {
                 $this->movies = $movies;
 
@@ -371,7 +371,7 @@ include_once(__DIR__ . "/Db.php");
         }
 
         /**
-         * Set the value of tvprogrammas
+         * Set the value of tvShows
          *
          * @return  self
          */ 
