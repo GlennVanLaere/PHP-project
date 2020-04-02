@@ -479,7 +479,7 @@ include_once(__DIR__ . "/Db.php");
             session_start();
             $_SESSION["user"] = $this->getCurrentEmail();
             if($complete){
-                header("Location: index.php");
+                header("Location: match.php");
                 
             } else {
                 header("Location: tags.php");
@@ -504,10 +504,24 @@ include_once(__DIR__ . "/Db.php");
                 $statement->bindValue(':tvShows', htmlspecialchars($tvShows));
                 $statement->bindValue(':buddy', htmlspecialchars($buddy));
                 $statement->execute();
-                header("Location: index.php");
+                header("Location: match.php");
             } catch (PDOException $e) {
                 print "Error!: " . $e->getMessage() . "<br/>";
                 die();
             }
         }
+
+        public function currentUser(){
+            $currentEmail = $this->getCurrentEmail();
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email = :currentEmail");
+            $statement->bindValue(":currentEmail", $currentEmail);
+            $statement->execute();
+            $currentUser = $statement->fetch(PDO::FETCH_ASSOC);
+
+            return $currentUser;
+        }
+
+        
+
     }
