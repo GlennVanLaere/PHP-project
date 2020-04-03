@@ -1,29 +1,14 @@
 <?php
-    /*
-        zoeken op naam
-        zoeken op tags
-
-        zorg voor een zoekfunctie om een buddy te vinden
-            Zoeken of filteren kan op basis
-                - Naam
-                - Interesses die je in feature 4 hebt gedefinieerd 
-    */
     session_start();
     include_once(__DIR__ . "/classes/Lists.php");
 if(isset($_SESSION['user'])){
 
     if(!empty($_POST)){
-    /*
-        $email = $_SESSION['user'];
-        $searchTerm = $_POST['searchTerm'];
-        $category = $_POST['category'];
-    */
-        
+
         $search = new User;
-        $search->setEmail($_SESSION['user']);
+        $search->setCurrentEmail($_SESSION['user']);
         $search->setCategory($_POST['category']);
         $search->setSearchTerm($_POST['searchTerm']);
-        //$result = $search->search($email, $category, $searchTerm);
         $result = $search->search();
     }
 
@@ -62,7 +47,7 @@ if(isset($_SESSION['user'])){
     <?php if(!empty($_POST)){ ?>
         <?php foreach($result as $r): ?>
             <div>
-                
+                <img alt="<?php echo $r['profileImage']; ?>">
                 <h2><?php echo $r['firstName'] . ' ' . $r['lastName']; ?></h2>
             </div>    
         <?php endforeach; ?>

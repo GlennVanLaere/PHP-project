@@ -2,18 +2,18 @@
     include_once(__DIR__ . "/Db.php");
     
     class User{
-        private $email;
+        private $currentEmail;
         private $category;
         private $searchTerm;
 
         public function search() {
-            $email = $this->getEmail();
+            $currentEmail = $this->getCurrentEmail();
             $searchTerm = $this->getSearchTerm();
             $category = $this->getCategory();
 
             $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT * FROM `users` WHERE `email` != :email && `$category` = :searchTerm");
-            $statement->bindValue(':email', $email);
+            $statement = $conn->prepare("SELECT * FROM `users` WHERE `email` != :currentEmail && `$category` = :searchTerm");
+            $statement->bindValue(':currentEmail', $currentEmail);
             $statement->bindValue(':searchTerm', $searchTerm);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -21,21 +21,21 @@
         }        
 
         /**
-         * Get the value of email
+         * Get the value of currentEmail
          */ 
-        public function getEmail()
+        public function getCurrentEmail()
         {
-                return $this->email;
+                return $this->currentEmail;
         }
 
         /**
-         * Set the value of email
+         * Set the value of currentEmail
          *
          * @return  self
          */ 
-        public function setEmail($email)
+        public function setCurrentEmail($currentEmail)
         {
-                $this->email = $email;
+                $this->currentEmail = $currentEmail;
 
                 return $this;
         }
