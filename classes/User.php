@@ -20,7 +20,6 @@ include_once(__DIR__ . "/Db.php");
         private $tvShows;
         private $buddy;
 
-
         /**
          * Get the value of email
          */ 
@@ -511,17 +510,14 @@ include_once(__DIR__ . "/Db.php");
             }
         }
 
-        public function currentUser(){
-            $currentEmail = $this->getCurrentEmail();
+        public function findOthers($email){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT * FROM users WHERE email = :currentEmail");
-            $statement->bindValue(":currentEmail", $currentEmail);
+            $statement = $conn->prepare("SELECT * FROM users where email != :email");
+            $statement->bindValue(":email", $email);
             $statement->execute();
-            $currentUser = $statement->fetch(PDO::FETCH_ASSOC);
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-            return $currentUser;
+            return $result;
         }
-
-        
 
     }

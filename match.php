@@ -1,14 +1,20 @@
 <?php
+
+include_once(__DIR__."/classes/User.php");
+
  session_start();
  if( isset($_SESSION['user']) ) {
-   $user = $_SESSION['user'];
-   $currentUser = $user;
- }
+   $email = $_SESSION['user'];
+   $otherPerson = new User;
+   $otherInfo = $otherPerson->findOthers($email);
+  }
  else {
    header("Location: login.php");
  }
 
- include_once(__DIR__."/classes/User.php");
+ 
+
+ 
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +26,16 @@
 </head>
 <body>
     <p>current user:</p>
-    <?php  echo $currentUser ?>
+    <?php  echo $email ?>
+
+
+
+
+    <p>other users:</p>
+    <?php foreach ($otherInfo as $other): ?>
+    <p>Email: <?php echo $other['email']; ?> Name: <?php echo $other['firstName'] . " " . $other['lastName']; ?></p>
+    <p></p>
+    <?php endforeach; ?>
+
 </body>
 </html>
