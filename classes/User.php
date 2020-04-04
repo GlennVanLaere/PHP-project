@@ -559,15 +559,15 @@ include_once(__DIR__ . "/Db.php");
             return $musicMatch;
         }
 
-        public function findMovieMatch($info){
+        public function findMoviesMatch($info){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT * FROM users WHERE email != :email && buddy != :buddy && movie = :movie");
+            $statement = $conn->prepare("SELECT * FROM users WHERE email != :email && buddy != :buddy && movies = :movies");
             $statement->bindValue(":email", $info["email"]);
             $statement->bindValue(":buddy", $info["buddy"]);
-            $statement->bindValue(":movie", $info["movie"]);
+            $statement->bindValue(":movies", $info["movies"]);
             $statement->execute();
-            $movieMatch = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $moviesMatch = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-            return $movieMatch;
+            return $moviesMatch;
         }
     }
