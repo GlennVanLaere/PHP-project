@@ -546,4 +546,16 @@ include_once(__DIR__ . "/Db.php");
 
             return $buddyMatch;
         }
+
+        public function findMusicMatch($info){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email != :email && buddy != :buddy && music = :music");
+            $statement->bindValue(":email", $info["email"]);
+            $statement->bindValue(":buddy", $info["buddy"]);
+            $statement->bindValue(":music", $info["music"]);
+            $statement->execute();
+            $musicMatch = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $musicMatch;
+        }
     }

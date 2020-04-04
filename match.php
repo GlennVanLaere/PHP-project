@@ -10,6 +10,7 @@ include_once(__DIR__."/classes/User.php");
 
    $perfectMatch = $person->findPerfectMatch($info);
    $buddyMatch = $person->findBuddyMatch($info);
+   $musicMatch = $person->findMusicMatch($info);
 
   }
  else {
@@ -53,8 +54,15 @@ include_once(__DIR__."/classes/User.php");
 <p>Buddy Matches:</p>
     <?php foreach ($buddyMatch as $bm): ?>
     <p>Name: <?php echo $bm['firstName'] . " " . $bm['lastName']; ?></p>
-    <p></p>
     <?php endforeach; ?>
 
+<p>Music Matches:</p>
+    <?php foreach ($musicMatch as $mum): ?>
+    <p>Name: <?php echo $mum['firstName'] . " " . $mum['lastName']; ?></p>
+    <p></p>
+    <?php endforeach; ?>
+    <?php if($musicMatch ===NULL){ 
+              echo '<p> no perfect matches found based on music, search based on another tag </p>'; 
+    } ?>
 </body>
 </html>
