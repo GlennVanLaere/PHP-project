@@ -41,6 +41,8 @@
         <?php if(isset($success)): ?>
             <div class="alert alert-success" role="alert">
                 <?php echo $success ?>
+                <p>You can now log in!</p>
+                <a href="login.php" class="btn btn-primary btn-xs">Go to log In</a>
             </div>
         <?php endif; ?>
         
@@ -64,7 +66,8 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
+    <p>Already have an account?</p>
+    <a href="login.php" class="btn btn-primary btn-xs">Log In</a>
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
