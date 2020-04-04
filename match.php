@@ -7,6 +7,8 @@ include_once(__DIR__."/classes/User.php");
    $email = $_SESSION['user'];
    $person = new User;
    $info = $person->findCurrentUser($email);
+
+   $perfectMatch = $person->findPerfectMatch($info);
   }
  else {
    header("Location: login.php");
@@ -31,9 +33,15 @@ include_once(__DIR__."/classes/User.php");
 
 
 
-    <p>other users:</p>
-    <?php foreach ($otherInfo as $other): ?>
-    <p>Email: <?php echo $other['email']; ?> Name: <?php echo $other['firstName'] . " " . $other['lastName']; ?></p>
+    <p>Perfect Match:</p>
+    <?php foreach ($perfectMatch as $pm): ?>
+    <p>Name: <?php echo $pm['firstName'] . " " . $pm['lastName']; ?></p>
+    <p>Also listens to: <?php echo $pm['music'] . " music" ; ?></p>
+    <p>Also wachtes: <?php echo $pm['movies'] . " movies" ; ?></p>
+    <p>Also plays: <?php echo $pm['games'] . " games" ; ?></p>
+    <p>Also reads: <?php echo $pm['books'] . " books" ; ?></p>
+    <p>Also watches: <?php echo $pm['tvShows'] . " tvShows" ; ?></p>
+    <p>Conclusion: 100% the perfect match!</p>
     <p></p>
     <?php endforeach; ?>
 

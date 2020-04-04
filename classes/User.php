@@ -520,4 +520,21 @@ include_once(__DIR__ . "/Db.php");
             return $result;
         }
 
+        public function findPerfectMatch($info){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email != :email && buddy != :buddy && music = :music && movies = :movies && games = :games && books = :books && tvShows = :tvShows");
+            $statement->bindValue(":email", $info["email"]);
+            $statement->bindValue(":buddy", $info["buddy"]);
+            $statement->bindValue(":music", $info["music"]);
+            $statement->bindValue(":movies", $info["movies"]);
+            $statement->bindValue(":games", $info["games"]);
+            $statement->bindValue(":books", $info["books"]);
+            $statement->bindValue(":tvShows", $info["tvShows"]);
+            $statement->execute();
+            $perfectMatch = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $perfectMatch;
+        }
+
+    
     }
