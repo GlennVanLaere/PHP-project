@@ -570,4 +570,16 @@ include_once(__DIR__ . "/Db.php");
 
             return $moviesMatch;
         }
+
+        public function findGamesMatch($info){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email != :email && buddy != :buddy && games = :games");
+            $statement->bindValue(":email", $info["email"]);
+            $statement->bindValue(":buddy", $info["buddy"]);
+            $statement->bindValue(":games", $info["games"]);
+            $statement->execute();
+            $gamesMatch = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $gamesMatch;
+        }
     }

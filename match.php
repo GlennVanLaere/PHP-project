@@ -12,6 +12,7 @@ include_once(__DIR__."/classes/User.php");
    $buddyMatch = $person->findBuddyMatch($info);
    $musicMatch = $person->findMusicMatch($info);
    $moviesMatch = $person->findMoviesMatch($info);
+   $gamesMatch = $person->findGamesMatch($info);
 
   }
  else {
@@ -39,7 +40,7 @@ include_once(__DIR__."/classes/User.php");
 
     <p>Perfect Match:</p>
     <?php foreach ($perfectMatch as $pm): ?>
-    <p>Name: <?php echo $pm['firstName'] . " " . $pm['lastName']; ?></p>
+    <p><?php echo $pm['firstName'] . " " . $pm['lastName']; ?></p>
     <p>Also listens to: <?php echo $pm['music'] . " music" ; ?></p>
     <p>Also wachtes: <?php echo $pm['movies'] . " movies" ; ?></p>
     <p>Also plays: <?php echo $pm['games'] . " games" ; ?></p>
@@ -54,12 +55,12 @@ include_once(__DIR__."/classes/User.php");
 
 <p>Buddy Matches:</p>
     <?php foreach ($buddyMatch as $bm): ?>
-    <p>Name: <?php echo $bm['firstName'] . " " . $bm['lastName']; ?></p>
+    <p><?php echo $bm['firstName'] . " " . $bm['lastName']; ?></p>
     <?php endforeach; ?>
 
 <p>Music Matches:</p>
     <?php foreach ($musicMatch as $mum): ?>
-    <p>Name: <?php echo $mum['firstName'] . " " . $mum['lastName']; ?></p>
+    <p><?php echo $mum['firstName'] . " " . $mum['lastName']; ?></p>
     <p></p>
     <?php endforeach; ?>
     <?php if($musicMatch ===NULL){ 
@@ -68,11 +69,20 @@ include_once(__DIR__."/classes/User.php");
 
 <p>Movies Matches:</p>
     <?php foreach ($moviesMatch as $mom): ?>
-    <p>Name: <?php echo $mom['firstName'] . " " . $mom['lastName']; ?></p>
+    <p><?php echo $mom['firstName'] . " " . $mom['lastName']; ?></p>
     <p></p>
     <?php endforeach; ?>
     <?php if($moviesMatch ===NULL){ 
               echo '<p> no perfect matches found based on movies, search based on another tag </p>'; 
+    } ?>
+
+<p>Games Matches:</p>
+    <?php foreach ($gamesMatch as $gm): ?>
+    <p><?php echo $gm['firstName'] . " " . $gm['lastName']; ?></p>
+    <p></p>
+    <?php endforeach; ?>
+    <?php if($gamesMatch ===NULL){ 
+              echo '<p> no perfect matches found based on gamess, search based on another tag </p>'; 
     } ?>
 </body>
 </html>
