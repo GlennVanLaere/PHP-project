@@ -15,17 +15,11 @@ include_once(__DIR__."/classes/User.php");
    $gamesMatch = $person->findGamesMatch($info);
    $booksMatch = $person->findBooksMatch($info);
    $tvShowsMatch = $person->findTvShowsMatch($info);
-
-  }
- else {
+  }else {
    header("Location: login.php");
  }
 
- 
-
- 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,13 +28,10 @@ include_once(__DIR__."/classes/User.php");
     <title>Match</title>
 </head>
 <body>
-    <p>current user:</p>
-    <?php  echo $email ?>
-
-
-
-
-    <p>Perfect Match:</p>
+   
+    <?php  echo '<h1> Hi, '.$info['firstName'].'  '. $info['lastName'].'!</h1>'; ?>
+    <h2>Here You can find all your matches, based on various criteria.</h2>
+    <h3>Perfect Match:</h3>
     <?php foreach ($perfectMatch as $pm): ?>
     <p><?php echo $pm['firstName'] . " " . $pm['lastName']; ?></p>
     <p>Also listens to: <?php echo $pm['music'] . " music" ; ?></p>
@@ -48,61 +39,45 @@ include_once(__DIR__."/classes/User.php");
     <p>Also plays: <?php echo $pm['games'] . " games" ; ?></p>
     <p>Also reads: <?php echo $pm['books'] . " books" ; ?></p>
     <p>Also watches: <?php echo $pm['tvShows'] . " tvShows" ; ?></p>
-    <p>Conclusion: 100% the perfect match!</p>
-    <p></p>
+    <h4>Conclusion: 100% the perfect match!</h4>
     <?php endforeach; ?>
-    <?php if($perfectMatch ===NULL){ 
-              echo '<p> no perfect matches found, search based on a tag </p>'; 
-    } ?>
+    <?php if($perfectMatch ===NULL){ echo '<p>No perfect matches found.</p>'; } ?>
 
-<p>Buddy Matches:</p>
+<h3>Buddy Matches:</h3>
     <?php foreach ($buddyMatch as $bm): ?>
     <p><?php echo $bm['firstName'] . " " . $bm['lastName']; ?></p>
     <?php endforeach; ?>
 
-<p>Music Matches:</p>
+<h3>Music Matches:</h3>
     <?php foreach ($musicMatch as $mum): ?>
     <p><?php echo $mum['firstName'] . " " . $mum['lastName']; ?></p>
-    <p></p>
     <?php endforeach; ?>
-    <?php if($musicMatch ===NULL){ 
-              echo '<p> no perfect matches found based on music, search based on another tag </p>'; 
-    } ?>
+    <?php if($musicMatch ===NULL){ echo '<p>No perfect matches found based on music.</p>'; } ?>
 
-<p>Movies Matches:</p>
+<h3>Movies Matches:</h3>
     <?php foreach ($moviesMatch as $mom): ?>
     <p><?php echo $mom['firstName'] . " " . $mom['lastName']; ?></p>
-    <p></p>
     <?php endforeach; ?>
-    <?php if($moviesMatch ===NULL){ 
-              echo '<p> no perfect matches found based on movies, search based on another tag </p>'; 
-    } ?>
+    <?php if($moviesMatch ===NULL){ echo '<p>No perfect matches found based on movies.</p>'; } ?>
 
-<p>Games Matches:</p>
+<h3>Games Matches:</h3>
     <?php foreach ($gamesMatch as $gm): ?>
     <p><?php echo $gm['firstName'] . " " . $gm['lastName']; ?></p>
-    <p></p>
     <?php endforeach; ?>
-    <?php if($gamesMatch ===NULL){ 
-              echo '<p> no perfect matches found based on games, search based on another tag </p>'; 
-    } ?>
+    <?php if($gamesMatch ===NULL){ echo '<p>No perfect matches found based on games.</p>'; } ?>
 
-<p>Books Matches:</p>
+<h3>Books Matches:</h3>
     <?php foreach ($booksMatch as $bm): ?>
     <p><?php echo $bm['firstName'] . " " . $bm['lastName']; ?></p>
-    <p></p>
     <?php endforeach; ?>
-    <?php if($booksMatch ===NULL){ 
-              echo '<p> no perfect matches found based on books, search based on another tag </p>'; 
-    } ?>
+    <?php if($booksMatch ===NULL){ echo '<p> no perfect matches found based on books, search based on another tag </p>'; } ?>
 
-<p>TvShows Matches:</p>
+<h3>TvShows Matches:</h3>
     <?php foreach ($tvShowsMatch as $tm): ?>
     <p><?php echo $tm['firstName'] . " " . $tm['lastName']; ?></p>
-    <p></p>
     <?php endforeach; ?>
-    <?php if($tvShowsMatch ===NULL){ 
-              echo '<p> no perfect matches found based on tv-shows, search based on another tag </p>'; 
-    } ?>
+    <?php if($tvShowsMatch ===NULL){ echo '<p> no perfect matches found based on tv-shows, search based on another tag </p>'; } ?>
+
+    <a href="logout.php">logout</a>
 </body>
 </html>
