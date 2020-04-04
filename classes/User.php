@@ -582,4 +582,16 @@ include_once(__DIR__ . "/Db.php");
 
             return $gamesMatch;
         }
+
+        public function findBooksMatch($info){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email != :email && buddy != :buddy && books = :books");
+            $statement->bindValue(":email", $info["email"]);
+            $statement->bindValue(":buddy", $info["buddy"]);
+            $statement->bindValue(":books", $info["books"]);
+            $statement->execute();
+            $booksMatch = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $booksMatch;
+        }
     }

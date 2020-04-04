@@ -13,6 +13,7 @@ include_once(__DIR__."/classes/User.php");
    $musicMatch = $person->findMusicMatch($info);
    $moviesMatch = $person->findMoviesMatch($info);
    $gamesMatch = $person->findGamesMatch($info);
+   $booksMatch = $person->findBooksMatch($info);
 
   }
  else {
@@ -82,7 +83,16 @@ include_once(__DIR__."/classes/User.php");
     <p></p>
     <?php endforeach; ?>
     <?php if($gamesMatch ===NULL){ 
-              echo '<p> no perfect matches found based on gamess, search based on another tag </p>'; 
+              echo '<p> no perfect matches found based on games, search based on another tag </p>'; 
+    } ?>
+
+<p>Books Matches:</p>
+    <?php foreach ($booksMatch as $bm): ?>
+    <p><?php echo $bm['firstName'] . " " . $bm['lastName']; ?></p>
+    <p></p>
+    <?php endforeach; ?>
+    <?php if($booksMatch ===NULL){ 
+              echo '<p> no perfect matches found based on books, search based on another tag </p>'; 
     } ?>
 </body>
 </html>
