@@ -594,4 +594,16 @@ include_once(__DIR__ . "/Db.php");
 
             return $booksMatch;
         }
+
+        public function findTvShowsMatch($info){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email != :email && buddy != :buddy && tvShows = :tvShows");
+            $statement->bindValue(":email", $info["email"]);
+            $statement->bindValue(":buddy", $info["buddy"]);
+            $statement->bindValue(":tvShows", $info["tvShows"]);
+            $statement->execute();
+            $tvShowsMatch = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $tvShowsMatch;
+        }
     }
