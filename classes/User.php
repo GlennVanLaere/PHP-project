@@ -510,12 +510,12 @@ include_once(__DIR__ . "/Db.php");
             }
         }
 
-        public function findOthers($email){
+        public function findCurrentUser($email){
             $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT * FROM users where email != :email");
+            $statement = $conn->prepare("SELECT * FROM users where email = :email");
             $statement->bindValue(":email", $email);
             $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
 
             return $result;
         }
