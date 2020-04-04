@@ -1,14 +1,12 @@
 <?php 
-include_once(__DIR__."/functions/settings.php");
-include_once(__DIR__ . "/Db.php");
+
 
 if(isset($_POST["submit"])){
     $file = $_FILES["avatar"];
     $fileName = $_FILES["avatar"]["name"];
     $fileError = $_FILES["avatar"]["error"];
     $fileType = $_FILES["avatar"]["error"];
-    $fileTmpName = $_FILES["avatar"]["tmp_name"];
-    $fileSize = $_FILES["avatar"]["size"];
+    $fieSize = $_FILES["avatar"]["size"];
 
     $fileExt = explode(".", $fileName);
     $fileExtention = strtolower(end($fileExt));
@@ -38,9 +36,4 @@ if(isset($_POST["submit"])){
         $error = "we do not support this image type. please 
         use jpg, jpeg or png";
     }
- 
-    
-
 }
-
-

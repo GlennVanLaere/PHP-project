@@ -14,8 +14,10 @@ include_once(__DIR__ . "/UploadFile.php");
         private $password;
 
         //feature 3 gedeelte
-        private $profile;
-        // private $description;
+        
+        private $description;
+
+
         // private $profilePicture;
 
         /**
@@ -165,7 +167,16 @@ include_once(__DIR__ . "/UploadFile.php");
 
             return $this;
         }
-               
+        
+        public function getDescription(){
+            return $this->description;
+        }
+
+        public function setDescription($description){
+            $this->description = $description;
+
+            return $this;
+        }
     
   
 
@@ -214,59 +225,63 @@ include_once(__DIR__ . "/UploadFile.php");
     
         }
 
-        public static function getSingleUser($userId) {
-            $conn = DB::getConnection();
-    
-            $statement = $conn->prepare("select * from users where id=" . $userId);
+        public function viewEmail(){
+
+           try {
+            $userId = 12;
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT email FROM users WHERE id=".$userId);
             $statement->execute();
-            $user = $statement->fetchAll(PDO::FETCH_ASSOC);
+            while($row = $statement->fetch()){
+                $activeEmail = $row['email'];
+                return $activeEmail;
+            }
 
-            // private $firstName;
-            // private $lastName;
-            // private $password;
+           } 
+           catch (PDOException $e) {
+                print "Error: ".$e->getMessage()."<br>";
+           }
+        }
+        public function viewDescription(){
+              try {
+             $userId = 12;
+             $conn = Db::getConnection();
+             $statement = $conn->prepare("SELECT description FROM users WHERE id=".$userId);
+             $statement->execute();
+             while($row = $statement->fetch()){
+                 $activeDescription = $row['description'];
+                 return $activeDescription;
+             }
+ 
+            } 
+            catch (PDOException $e) {
+                 print "Error: ".$e->getMessage()."<br>";
+            }
+         }
+         public function editDescription(){
+
+            try {
+                $userId = 12;
+                $conn = Db::getConnection();
+                $updateDesStmt = $conn->prepare("UPDATE users SET description=:description WHERE id=".$userId);
+                $description = $this->getDescription();
     
-            // //feature 3 gedeelte
-            // private $description;
+                $updateDesStmt->bindValue(":description", $description);
 
-            $userObject = new User($user->id, $user->email, $user->firstName, $user->lastName);
-            return $users;
-        }
-
-
- 
-
-
- 
-
-        /**
-         * Get the value of fileNameNew
-         */ 
-        public function getFileNameNew()
-        {
-                return $this->fileNameNew;
-        }
-
-        /**
-         * Set the value of fileNameNew
-         *
-         * @return  self
-         */ 
-        public function setFileNameNew($fileNameNew)
-        {
-                $this->fileNameNew = $fileNameNew;
-
-                return $this;
-        }
-
-        public function fetchUserProfile() {
-            $this->profile = Profile::findProfileForUser($this->id);
-        }
-
-        public function setDescription($newDescription) {
-            $this->profile->setDescription($newDescription);
-        }
-
-        public function saveProfile() {
-            $this->profile->save();
-        }
+                $descrResult = $updateDesStmt->execute();
+                return $descrResult;
+            }
+             
+            
+            catch (PDOException $e) {
+                print "Error: ".$e->getMessage()."<br>";
+           }
+         }
+        
     }
+
+
+        
+
+
+ 

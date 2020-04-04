@@ -3,9 +3,8 @@
     const SETTINGS = [
         "db"=>[
             "user"      => "root",
-            "password"  => "root",
+            "password"  => "",
             "host"      => "localhost",
-            "port"      => 8889,
             "dbname" => "phpproject"
         ]
     ];
