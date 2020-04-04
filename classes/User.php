@@ -536,5 +536,14 @@ include_once(__DIR__ . "/Db.php");
             return $perfectMatch;
         }
 
-    
+        public function findBuddyMatch($info){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email != :email && buddy != :buddy");
+            $statement->bindValue(":email", $info["email"]);
+            $statement->bindValue(":buddy", $info["buddy"]);
+            $statement->execute();
+            $buddyMatch = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $buddyMatch;
+        }
     }
