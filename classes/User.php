@@ -442,7 +442,6 @@ include_once(__DIR__ . "/Db.php");
          */ 
         public function setSearchTerm($searchTerm)
         {
-                $searchTerm = ucfirst($searchTerm);
                 $this->searchTerm = $searchTerm;
 
                 return $this;

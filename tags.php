@@ -43,7 +43,7 @@
     <form action="" method="POST">
     <div class="dropdown">
     <label for="buddy">Buddy:</label></br>
-        <select name="buddy" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <select name="buddy" class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <option><?php echo $tags['buddy'] ?></option>
             <option>I am searching a buddy</option>
             <option>I want to be a buddy</option>>
@@ -51,7 +51,7 @@
     </div>
     <div class="dropdown">
     <label for="music">Music:</label></br>
-        <select name="music" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <select name="music" class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <option><?php echo $tags['music'] ?></option>
             <option>Electro</option>
             <option>Hiphop</option>
@@ -65,7 +65,7 @@
     </div>
     <div class="dropdown">
     <label for="movies">Movies:</label></br>
-        <select name="movies" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <select name="movies" class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <option><?php echo $tags['movies'] ?></option>
             <option>Action</option>
             <option>Adventure</option>
@@ -83,7 +83,7 @@
     </div>
     <div class="dropdown">
     <label for="books">Books:</label></br>
-        <select name="books" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <select name="books" class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <option><?php echo $tags['books'] ?></option>
             <option>Action</option>
             <option>Comedy</option>
@@ -98,7 +98,7 @@
     </div>
     <div class="dropdown">
     <label for="games">Games:</label></br>
-        <select name="games" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <select name="games" class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <option><?php echo $tags['games'] ?></option>
             <option>Action</option>
             <option>Adventure</option>
@@ -115,7 +115,7 @@
     </div>
 <div class="dropdown">
     <label for="tvShows">Tv-Shows:</label></br>
-        <select name="tvShows" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <select name="tvShows" class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <option><?php echo $tags['tvShows'] ?></option>
             <option>American series</option>
             <option>Dutch series</option>

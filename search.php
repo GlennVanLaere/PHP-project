@@ -26,8 +26,8 @@ if(isset($_SESSION['user'])){
 </head>
 <body>
     <form action="" method="post">
-        <div class="form-group">
-            <select name="category" required>
+        <div class="dropdown" >
+            <select name="category" required class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <option value="">Choose a category</option>
                 <option value="email">Email</option>
                 <option value="firstName">Firstname</option>
@@ -38,10 +38,12 @@ if(isset($_SESSION['user'])){
                 <option value="books">Books</option>
                 <option value="tvShows">Tv shows</option>
             </select>
-
+        </div>
+        <div class="form-group">
             <input type="text" name="searchTerm" class="form-control" placeholder="Search">
-            
-            <input type="submit" name="search" value="search">
+        </div>
+        <div class="form-group">
+            <input type="submit" name="search" value="search" class="btn btn-primary">
         </div>
     </form>
     <?php if(!empty($_POST)){ ?>
@@ -54,6 +56,7 @@ if(isset($_SESSION['user'])){
                 <p>Also plays: <?php echo $r['games']; ?></p>
                 <p>Also reads: <?php echo $r['books']; ?></p>
                 <p>Also watches: <?php echo $r['tvShows']; ?></p>
+                <p><?php echo $r['buddy']; ?></p>
             </div>    
         <?php endforeach; ?>
         <?php else: ?>
