@@ -20,7 +20,6 @@ include_once(__DIR__ . "/Db.php");
         private $tvShows;
         private $buddy;
 
-
         /**
          * Get the value of email
          */ 
@@ -479,7 +478,7 @@ include_once(__DIR__ . "/Db.php");
             session_start();
             $_SESSION["user"] = $this->getCurrentEmail();
             if($complete){
-                header("Location: index.php");
+                header("Location: match.php");
                 
             } else {
                 header("Location: tags.php");
@@ -504,10 +503,107 @@ include_once(__DIR__ . "/Db.php");
                 $statement->bindValue(':tvShows', htmlspecialchars($tvShows));
                 $statement->bindValue(':buddy', htmlspecialchars($buddy));
                 $statement->execute();
-                header("Location: index.php");
+                header("Location: match.php");
             } catch (PDOException $e) {
                 print "Error!: " . $e->getMessage() . "<br/>";
                 die();
             }
+        }
+
+        public function findCurrentUser($email){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users where email = :email");
+            $statement->bindValue(":email", $email);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+            return $result;
+        }
+
+        public function findPerfectMatch($info){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email != :email && buddy != :buddy && music = :music && movies = :movies && games = :games && books = :books && tvShows = :tvShows");
+            $statement->bindValue(":email", $info["email"]);
+            $statement->bindValue(":buddy", $info["buddy"]);
+            $statement->bindValue(":music", $info["music"]);
+            $statement->bindValue(":movies", $info["movies"]);
+            $statement->bindValue(":games", $info["games"]);
+            $statement->bindValue(":books", $info["books"]);
+            $statement->bindValue(":tvShows", $info["tvShows"]);
+            $statement->execute();
+            $perfectMatch = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $perfectMatch;
+        }
+
+        public function findBuddyMatch($info){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email != :email && buddy != :buddy");
+            $statement->bindValue(":email", $info["email"]);
+            $statement->bindValue(":buddy", $info["buddy"]);
+            $statement->execute();
+            $buddyMatch = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $buddyMatch;
+        }
+
+        public function findMusicMatch($info){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email != :email && buddy != :buddy && music = :music");
+            $statement->bindValue(":email", $info["email"]);
+            $statement->bindValue(":buddy", $info["buddy"]);
+            $statement->bindValue(":music", $info["music"]);
+            $statement->execute();
+            $musicMatch = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $musicMatch;
+        }
+
+        public function findMoviesMatch($info){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email != :email && buddy != :buddy && movies = :movies");
+            $statement->bindValue(":email", $info["email"]);
+            $statement->bindValue(":buddy", $info["buddy"]);
+            $statement->bindValue(":movies", $info["movies"]);
+            $statement->execute();
+            $moviesMatch = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $moviesMatch;
+        }
+
+        public function findGamesMatch($info){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email != :email && buddy != :buddy && games = :games");
+            $statement->bindValue(":email", $info["email"]);
+            $statement->bindValue(":buddy", $info["buddy"]);
+            $statement->bindValue(":games", $info["games"]);
+            $statement->execute();
+            $gamesMatch = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $gamesMatch;
+        }
+
+        public function findBooksMatch($info){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email != :email && buddy != :buddy && books = :books");
+            $statement->bindValue(":email", $info["email"]);
+            $statement->bindValue(":buddy", $info["buddy"]);
+            $statement->bindValue(":books", $info["books"]);
+            $statement->execute();
+            $booksMatch = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $booksMatch;
+        }
+
+        public function findTvShowsMatch($info){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email != :email && buddy != :buddy && tvShows = :tvShows");
+            $statement->bindValue(":email", $info["email"]);
+            $statement->bindValue(":buddy", $info["buddy"]);
+            $statement->bindValue(":tvShows", $info["tvShows"]);
+            $statement->execute();
+            $tvShowsMatch = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $tvShowsMatch;
         }
     }
