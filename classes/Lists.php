@@ -75,6 +75,7 @@
          */ 
         public function setSearchTerm($searchTerm)
         {
+                $searchTerm = ucfirst($searchTerm);
                 $this->searchTerm = $searchTerm;
 
                 return $this;

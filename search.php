@@ -45,12 +45,20 @@ if(isset($_SESSION['user'])){
         </div>
     </form>
     <?php if(!empty($_POST)){ ?>
+        <?php if(!empty($result)): ?>
         <?php foreach($result as $r): ?>
             <div>
-                <img alt="<?php echo $r['profileImage']; ?>">
                 <h2><?php echo $r['firstName'] . ' ' . $r['lastName']; ?></h2>
+                <p>Also listens to: <?php echo $r['music']; ?></p>
+                <p>Also wachtes: <?php echo $r['movies']; ?></p>
+                <p>Also plays: <?php echo $r['games']; ?></p>
+                <p>Also reads: <?php echo $r['books']; ?></p>
+                <p>Also watches: <?php echo $r['tvShows']; ?></p>
             </div>    
         <?php endforeach; ?>
+        <?php else: ?>
+            <?php echo "<h1>Niets gevonden :( </h1>" ?>
+        <?php endif; ?>
     <?php }; ?>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
