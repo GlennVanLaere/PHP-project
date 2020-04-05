@@ -28,7 +28,7 @@ include_once(__DIR__."/classes/User.php");
     <title>Match</title>
 </head>
 <body>
-   
+<?php include("includes/nav.inc.php") ?>
     <?php  echo '<h1> Hi, '.$info['firstName'].'  '. $info['lastName'].'!</h1>'; ?>
     <h2>Here You can find all your matches, based on various criteria.</h2>
     <h3>Perfect Match:</h3>
@@ -78,6 +78,6 @@ include_once(__DIR__."/classes/User.php");
     <?php endforeach; ?>
     <?php if($tvShowsMatch ===NULL){ echo '<p> no perfect matches found based on tv-shows, search based on another tag </p>'; } ?>
 
-    <a href="logout.php">logout</a>
+    
 </body>
 </html>
