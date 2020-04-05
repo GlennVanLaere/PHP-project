@@ -1,11 +1,49 @@
 <?php
+session_start();
 include_once(__DIR__."/classes/User.php");
-include_once(__DIR__."/classes/UploadFile.php");
+
+if(isset($_SESSION['user'])){
+    $email = $_SESSION['user'];
+
+    try {
+        $user = new User;
+        $showEmail = $user->viewEmail($email);
+        $showDescription = $user->viewDescription($email);
+        $viewAvatar = $user->showAvatar($email);
+        
+        
+        if(!empty($_POST)){
+            try {
+
+                $file = $_FILES["avatar"];
+                $fileName = $_FILES["avatar"]["name"];
+                //$fileError = $_FILES["avatar"]["error"];
+                $fileSize = $_FILES["avatar"]["size"];
+                $fileTmpName = $_FILES["avatar"]["tmp_name"];
+                
+                $user->changeAvatar($email, $fileName, $fileSize, $fileTmpName,$file);
+                
+
+                // $user->setAvatarUpload($_POST["avatar"]);
+                
+                
+            }
+            catch (\Throwable $th) {
+                $error = $th->getMessage();
+            }
+        }
+        
 
 
-$newEmail = new User;
-$showEmail = $newEmail->viewEmail();
-$showDescription = $newEmail->viewDescription();
+    } catch (\Throwable $t) {
+        $error = $t->getMessage();
+    }
+}
+    
+
+
+
+
 
 
 
@@ -37,7 +75,12 @@ $showDescription = $newEmail->viewDescription();
         <div class="profilePicture">
         <h1>your profile</h1>
         <h2>profile picture</h2>
-        <!-- <img src="#" alt="#"> -->
+        <h2></h2>
+        <img src="<?php echo $viewAvatar ?>" alt="#">
+        <form action="" method="post" enctype="multipart/form-data">
+            <input type="file" name="avatar">
+            <button type="submit" name="submitAvatar">Upload profile picture</button>
+        </form>
         <h2>description</h2>
         <p> <?php echo $showDescription ?> </p>
         <a href="updateDescription.php"> change your description here</a>
@@ -45,6 +88,8 @@ $showDescription = $newEmail->viewDescription();
         <h2>Email adress</h2>
         <p> <?php echo $showEmail ?> </p>
         <a href="updateEmail.php"> change your email adress here</a>
+
+        <a href="updatePassword.php"> change your password here</a>
     
     </div>
     <title>Uw profiel</title>
