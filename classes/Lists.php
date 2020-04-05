@@ -55,6 +55,8 @@
          */ 
         public function setCategory($category)
         {
+                $category = preg_replace("/[^a-z-A-Z]/", "", $category);
+                print_r($category);
                 $this->category = $category;
 
                 return $this;
