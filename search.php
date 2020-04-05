@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include_once(__DIR__ . "/classes/Lists.php");
+    include_once(__DIR__ . "/classes/User.php");
 if(isset($_SESSION['user'])){
 
     if(!empty($_POST)){
