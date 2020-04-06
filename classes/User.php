@@ -21,6 +21,9 @@ include_once(__DIR__ . "/Db.php");
         private $buddy;
         private $category;
         private $searchTerm;
+        private $userId;
+        private $buddyId;
+        private $messageText;
 
         /**
          * Get the value of email
@@ -209,6 +212,15 @@ include_once(__DIR__ . "/Db.php");
          */ 
         public function setCurrentFirstName($currentFirstName)
         {
+            try {
+                $conn = Db::getConnection();
+                $statement = $conn->prepare("SELECT * FROM users WHERE id = :id");
+                $statement->bindValue(":id", $currentFirstName);
+                $statement->execute();
+                $currentFirstName = $statement->fetch(PDO::FETCH_ASSOC);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
                 $this->currentFirstName = $currentFirstName;
 
                 return $this;
@@ -443,6 +455,51 @@ include_once(__DIR__ . "/Db.php");
         public function setSearchTerm($searchTerm)
         {
                 $this->searchTerm = $searchTerm;
+         * Get the value of userId
+         */ 
+        public function getUserId()
+        {
+                return $this->userId;
+        }
+
+        /**
+         * Set the value of userId
+         *
+         * @return  self
+         */ 
+        public function setUserId()
+        {
+            try {
+                $conn = Db::getConnection();
+                $statement = $conn->prepare("SELECT id FROM users WHERE email = :email");
+                $statement->bindValue(":email", $_SESSION['user']);
+                $statement->execute();
+                $user = $statement->fetch(PDO::FETCH_ASSOC);
+                
+                $this->userId = $user['id'];
+
+                return $this;
+            } catch (\Throwable $th) {
+                $error = $th->getMessage();
+            }
+        }
+
+        /**
+         * Get the value of buddyId
+         */ 
+        public function getBuddyId()
+        {
+                return $this->buddyId;
+        }
+
+        /**
+         * Set the value of buddyId
+         *
+         * @return  self
+         */ 
+        public function setBuddyId($buddyId)
+        {
+                $this->buddyId = $buddyId;
 
                 return $this;
         }
@@ -663,4 +720,149 @@ include_once(__DIR__ . "/Db.php");
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;
         }  
+        
+        public function hasBuddy($id) {
+            try {
+                $conn = Db::getConnection();
+                $statement = $conn->prepare("SELECT id, buddyId FROM users WHERE email = :email AND buddyId = :buddyId");
+                $statement->bindValue(":email", $_SESSION['user']);
+                $statement->bindValue(":buddyId", $id);
+                $statement->execute();
+                $buddy = $statement->fetch(PDO::FETCH_ASSOC);
+                return $buddy;
+            } catch (\Throwable $th) {
+                $error = $th->getMessage();
+            }
+
+        }
+
+        public function sentRequest($userId, $id) {
+            try {
+                $conn = Db::getConnection();
+                $statement = $conn->prepare("SELECT sender, receiver FROM requests WHERE sender = :sender AND receiver = :receiver");
+                $statement->bindValue(":sender", $userId);
+                $statement->bindValue(":receiver", $id);
+                $statement->execute();
+                $request = $statement->fetch(PDO::FETCH_ASSOC);
+                return $request;
+                
+            } catch (\Throwable $th) {
+                $error = $th->getMessage();
+
+            }
+        }
+
+        public function receivedRequest($userId, $id) {
+            try {
+                $conn = Db::getConnection();
+                $statement = $conn->prepare("SELECT sender, receiver FROM requests WHERE sender = :sender AND receiver = :receiver");
+                $statement->bindValue(":sender", $id);
+                $statement->bindValue(":receiver", $userId);
+                $statement->execute();
+                $request = $statement->fetch(PDO::FETCH_ASSOC);
+                return $request;
+            } catch (\Throwable $th) {
+                $error = $th->getMessage();
+            }       
+        }
+
+        public function saveMessage() {
+            try {
+                $conn = Db::getConnection();
+                $statement = $conn->prepare("INSERT INTO chat (sender, receiver, message) values (:sender, :receiver, :message)");
+
+                $sender = $this->getUserId();
+                $receiver = $this->getBuddyId();
+                $message = $this->getMessageText();
+
+                $statement->bindValue(":sender", $sender);
+                $statement->bindValue(":receiver", $receiver);
+                $statement->bindValue(":message", $message);
+
+                $result = $statement->execute();
+                return $result;
+            } catch (\Throwable $th) {
+                $error = $th->getMessage();
+            }
+        }
+
+        public static function getAllMessages($sender, $receiver) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM chat WHERE (sender = :sender AND receiver = :receiver) OR (sender = :receiver AND receiver = :sender) ORDER BY timestamp");
+            $statement->bindValue(":sender", $sender);
+            $statement->bindValue(":receiver", $receiver);
+            $result = $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        /**
+         * Get the value of messageText
+         */ 
+        public function getMessageText()
+        {
+                return $this->messageText;
+        }
+
+        /**
+         * Set the value of messageText
+         *
+         * @return  self
+         */ 
+        public function setMessageText($messageText)
+        {
+                $this->messageText = $messageText;
+
+                return $this;
+        }
+
+        public function messageRead($receiver) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM chat WHERE receiver = :receiver AND `read` = 0");
+            $statement->bindValue(":receiver", $receiver);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function userReadMessage() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("UPDATE chat SET `read` = 1 WHERE receiver = :receiver AND sender = :sender");
+            
+            $statement->bindValue(":receiver", $this->getUserId());
+            $statement->bindValue(":sender", $_GET['messageid']);
+            $result = $statement->execute();
+            return $result;
+        }
+
+        public function matchType($info) {
+            $musicMatch = $this->findMusicMatch($info);
+            foreach ($musicMatch as $m) {
+                if ($m['id'] === $_GET['messageid']) {
+                    return $matchType = "You match with ". $m['firstName'] . " because you have a similar taste in music";
+                }
+            } 
+            $moviesMatch = $this->findMoviesMatch($info);
+            foreach ($moviesMatch as $m) {
+                if ($m['id'] === $_GET['messageid']) {
+                    return $matchType = "You match with ". $m['firstName'] . " because you have a similar movie taste";
+                }
+            } 
+            $gamesMatch = $this->findGamesMatch($info);
+                foreach ($gamesMatch as $m) {
+                if ($m['id'] === $_GET['messageid']) {
+                    return $matchType = "You match with ". $m['firstName'] . " because you like similar games";
+                }
+            } 
+            $booksMatch = $this->findBooksMatch($info);
+            foreach ($booksMatch as $m) {
+                if ($m['id'] === $_GET['messageid']) {
+                    return $matchType = "You match ". $m['firstName'] . " because you like similar books";
+                }
+            } 
+            $tvShowsMatch = $this->findTvShowsMatch($info);
+            foreach ($tvShowsMatch as $m) {
+                if ($m['id'] === $_GET['messageid']) {
+                    return $matchType = "You matched ". $m['firstName'] . " because you like similar TV shows";
+                }
+            }
+        }
     }
