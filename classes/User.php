@@ -3,7 +3,10 @@
 include_once(__DIR__ . "/Db.php");
 
 
-    class User{
+
+
+    class User {
+        private $id;
         private $email;
         private $firstName;
         private $lastName;
@@ -24,6 +27,21 @@ include_once(__DIR__ . "/Db.php");
         private $userId;
         private $buddyId;
         private $messageText;
+
+        //feature 3 gedeelte
+        
+        private $description;
+        private $oldEmail;
+        private $newEmail;
+        private $newEmailCheck;
+        private $newPassword;
+        private $oldPassword;
+        private $passwordCheck;
+        private $avatarUpload;
+
+
+        private $fileName;
+        // private $profilePicture;
 
         /**
          * Get the value of email
@@ -172,6 +190,19 @@ include_once(__DIR__ . "/Db.php");
 
             return $this;
         }
+        
+        public function getDescription(){
+            return $this->description;
+        }
+
+        public function setDescription($description){
+            $this->description = $description;
+
+            return $this;
+        }
+    
+  
+
 
         /**
          * Get the value of currentEmail
@@ -292,7 +323,6 @@ include_once(__DIR__ . "/Db.php");
             $statement->execute();
             $tags = $statement->fetch(PDO::FETCH_ASSOC);
                 $this->tags = $tags;
-
                 return $this;
         }
         /**
@@ -417,6 +447,68 @@ include_once(__DIR__ . "/Db.php");
 
                 return $this;
         }
+        public function getOldEmail(){
+            return $this->oldEmail;
+        }
+        public function setOldEmail($oldEmail){
+            $this->oldEmail = $oldEmail;
+            return $this;
+        }
+
+        public function getNewEmail(){
+            return $this->newEmail;
+        }
+        public function setNewEmail($newEmail){
+            $this->newEmail = $newEmail;
+            return $this;
+        }
+
+        public function getNewEmailCheck(){
+            return $this->newEmailCheck;
+        }
+        public function setNewEmailCheck($newEmailCheck){
+            $this->newEmailCheck = $newEmailCheck;
+            return $this;
+        }
+
+        public function getNewPassword(){
+            return $this->newPassword;
+        }
+        public function setNewPassword($newPassword){
+            $this->newPassword = $newPassword;
+            return $this;
+        }
+        public function getOldPassword(){
+            return $this->oldPassword;
+        }
+        public function setOldPassword($oldPassword){
+            $this->oldPassword = $oldPassword;
+            return $this;
+        }
+        public function getPasswordCheck(){
+            return $this->passwordCheck;
+        }
+        public function setPasswordcheck($passwordCheck){
+            $this->passwordCheck = $passwordCheck;
+            return $this;
+        }
+
+        public function getAvatarUpload(){
+            return $this->avatarUpload;
+        }
+        public function setAvatarUpload($avatarUpload){
+            $this->avatarUpload = $avatarUpload;
+            return $this;
+        }
+
+        public function setFileName(){
+            return $this->fileName;
+        }
+        public function getFileName($fileName){
+            $this->fileName = $fileName;
+            return $this;
+        }
+
 
         /**
          * Get the value of category
@@ -510,17 +602,28 @@ include_once(__DIR__ . "/Db.php");
 
             try {
                 $conn = Db::getConnection();
-                $statement = $conn->prepare('INSERT INTO users (email, firstName, lastName, password) VALUES (:email, :firstName, :lastName, :password)');
-    
+                $statement = $conn->prepare('INSERT INTO users (email, firstName, lastName, password, description, avatar) VALUES (:email, :firstName, :lastName, :password, :description, :avatar)');
+                
+                
+
                 $email = $this->getEmail();
                 $firstName = $this->getFirstName();
                 $lastName = $this->getLastName();
                 $password = $this->getPassword();
+                $description = "here comes your description";
+                $avatar = "uploads/standard.png";
+
+            
+                
             
                 $statement->bindValue(":email", $email);
                 $statement->bindValue(":firstName", $firstName);
                 $statement->bindValue(":lastName", $lastName);
                 $statement->bindValue(":password", $password);
+                $statement->bindValue(":description", $description);
+                $statement->bindValue(":avatar", $avatar);
+
+
     
                 $result = $statement->execute();
     
@@ -541,6 +644,217 @@ include_once(__DIR__ . "/Db.php");
             return $users;
     
         }
+
+        public function viewEmail($email){
+
+           try {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT email FROM users WHERE email = :yourEmail");
+            $statement->bindValue("yourEmail", $email);
+            $statement->execute();
+            while($row = $statement->fetch()){
+                $activeEmail = $row['email'];
+                return $activeEmail;
+            }
+
+           } 
+           catch (PDOException $e) {
+                print "Error: ".$e->getMessage()."<br>";
+           }
+        }
+        public function viewDescription($email){
+              try {
+           
+             $conn = Db::getConnection();
+             $statement = $conn->prepare("SELECT description FROM users WHERE email = :currentEmail");
+             $statement->bindValue(":currentEmail", $email);
+             $statement->execute();
+             while($row = $statement->fetch()){
+                 $activeDescription = $row['description'];
+                 return $activeDescription;
+             }
+ 
+            } 
+            catch (PDOException $e) {
+                 print "Error: ".$e->getMessage()."<br>";
+            }
+         }
+         public function editDescription($email){
+
+            try {
+               
+                $conn = Db::getConnection();
+                $updateDesStmt = $conn->prepare("UPDATE users SET description=:description WHERE email = :email");
+                $description = $this->getDescription();
+    
+                $updateDesStmt->bindValue(":description", $description);
+                $updateDesStmt->bindValue(":email", $email);
+
+                $descrResult = $updateDesStmt->execute();
+                return $descrResult;
+            }
+             
+            
+            catch (PDOException $e) {
+                print "Error: ".$e->getMessage()."<br>";
+           }
+
+
+           }
+           public function editEmail($email){
+            try{
+                $conn = Db::getConnection();
+                $mailUpdateStmt = $conn->prepare("UPDATE users SET email=:newEmail WHERE email=:email");
+                $oldEmail = $this->getOldEmail();
+                $newEmail = $this->getNewEmail();
+                $newEmailCheck = $this->getNewEmailCheck();
+
+
+            if($email === $oldEmail){
+
+                if($newEmail === $newEmailCheck){
+
+                    if(preg_match('|@student.thomasmore.be$|', $newEmail)){
+                        $mailUpdateStmt->bindValue(":newEmail", $newEmail);
+                        $mailUpdateStmt->bindValue(":email", $email);
+                        $updateEmailRes = $mailUpdateStmt->execute();
+                        $_SESSION["user"] = $newEmail;
+                        return $updateEmailRes;
+                       
+
+                    }
+                    else{
+                        throw new Exception("Email must end with @student.thomasmore.be");
+                    }
+
+                }
+                else{
+                    throw new Exception("you did not repeat the correct email adress");
+                }
+
+            }
+            else{
+                throw new Exception("this email does not exist in our database");
+            }
+
+
+            }
+            catch(PDOException $e){
+             print "Error: ".$e->getMessage()."<br>";
+
+            }
+         }
+
+         public function changePassword($email){
+             //get old password
+             $conn = Db::getConnection();
+                $selectPassword = $conn->prepare("SELECT password FROM users WHERE email=:email");
+                $selectPassword->bindValue(":email", $email);
+                $selectPassword->execute();
+             while($row = $selectPassword->fetch()){
+                 $dbPassword = $row['password'];
+
+                
+                 $newPassword = $this->getNewPassword();
+                 $passwordCheck = $this->getPasswordCheck();
+
+                 $updatePassword = $conn->prepare("UPDATE users SET password=:password WHERE email=:email");
+
+                 if($newPassword === $passwordCheck){
+                    $upper = preg_match('@[A-Z]@', $newPassword); // includes uppercase?
+                    $lower = preg_match('@[a-z]@', $newPassword); // includes lowercase?
+                    $number = preg_match('@[0-9]@', $newPassword); // includes number?
+                    $special = preg_match('@[^\w]@', $newPassword); // includes special characters?
+
+                    if($upper){
+                        if($lower){
+                            if($number){
+                                if($special){
+                                   if(strlen($newPassword) > 8 ){
+
+                                        $oldPassword = $this->getOldPassword();
+                                        if(password_verify($oldPassword, $dbPassword)){
+                                            $newpasswordHash = password_hash($newPassword, PASSWORD_DEFAULT, ["cost"=>16]);
+                                            $updatePassword->bindvalue(":password", $newpasswordHash);
+                                            $updatePassword->bindValue(":email", $email);
+                                            $passresult = $updatePassword->execute();
+                                            return $passresult;
+                                        }
+                                        else{
+                                            throw new Exception("wrong password");
+                                        }
+                                   } 
+                                   else{
+                                    throw new Exception("password must be at least 8 characters long");
+                                   }
+
+                                }
+                                else{
+                                    throw new Exception("password must include a special character (for example: @ & / - )");
+                                }
+
+                            }
+                            else{
+                                throw new Exception("password must include a number");
+                            }
+
+                        }
+                        else{
+                            throw new Exception("password must include a lowercase");
+                        }
+                    }
+                    else{
+                        throw new Exception("password must include an uppercase");
+                    }
+                 }
+             }
+             
+
+         }
+         public function changeAvatar($email, $fileName, $fileSize, $fileTmpName, $file){
+            $conn = Db::getConnection();
+            $profileStatement = $conn->prepare("UPDATE users SET avatar=:avatar WHERE email=:email");
+            $fileName = $fileName;
+            $fileSize = $fileSize;
+            $fileTmpName = $fileTmpName;
+            $file = $file;
+            
+            $fileExt = explode(".", $fileName);
+            $fileExtention = strtolower(end($fileExt));
+            
+
+            $allowedFiles = array('jpg', 'jpeg', 'png');
+
+            if(in_array($fileExtention, $allowedFiles)){
+               if($fileSize < 1000000){
+                $fileNewName = uniqid('', true).".".$fileExtention;
+                $fileDestination = "uploads/".$fileNewName;
+                move_uploaded_file($fileTmpName, $fileDestination);
+                $profileStatement->bindValue(":avatar", $fileDestination);
+                $profileStatement->bindValue(":email", $email);
+                $profileStatement->execute();
+               }
+               else{
+                throw new Exception("filesize is to big!");
+               }
+            }
+            else{
+                throw new Exception("this image type is not supported by Buddy");
+            }
+
+         }
+        
+         public function showAvatar($email){
+            $conn = Db::getConnection();
+            $avatarstmt = $conn->prepare("SELECT avatar FROM users WHERE email=:email");
+            $avatarstmt->bindValue(":email", $email);
+            $avatarstmt->execute();
+            while($row = $avatarstmt->fetch()){
+                $showAvatar = $row['avatar'];
+                return $showAvatar;
+         }
+        }
+
 
         public function canLogin() {
             $currentEmail = $this->getCurrentEmail();
@@ -868,3 +1182,4 @@ include_once(__DIR__ . "/Db.php");
             }
         }
     }
+    
