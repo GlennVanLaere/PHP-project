@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 05 apr 2020 om 17:25
+-- Gegenereerd op: 06 apr 2020 om 20:57
 -- Serverversie: 10.1.38-MariaDB
 -- PHP-versie: 7.3.2
 
@@ -21,6 +21,39 @@ SET time_zone = "+00:00";
 --
 -- Database: `phpproject`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `chat`
+--
+
+CREATE TABLE `chat` (
+  `id` int(11) NOT NULL,
+  `sender` int(11) NOT NULL,
+  `receiver` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `read` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `chat`
+--
+
+INSERT INTO `chat` (`id`, `sender`, `receiver`, `message`, `timestamp`, `read`) VALUES
+(1, 33, 12, 'hello', '2020-04-06 14:32:13', 0),
+(2, 33, 34, 'wat is je naam?', '2020-04-06 14:52:06', 0),
+(3, 33, 34, 'hello', '2020-04-06 15:01:15', 0),
+(4, 33, 34, 'banaan', '2020-04-06 15:04:07', 0),
+(5, 34, 33, 'jaaaaa!', '2020-04-06 15:19:32', 1),
+(6, 33, 34, 'hello', '2020-04-06 15:40:05', 0),
+(7, 33, 34, 'myy', '2020-04-06 15:40:11', 0),
+(8, 33, 34, 'ddffd', '2020-04-06 15:52:34', 0),
+(9, 33, 34, 'walrus', '2020-04-06 15:58:18', 0),
+(10, 33, 34, 'ffddfsdf', '2020-04-06 16:02:50', 0),
+(11, 33, 34, 'hello', '2020-04-06 16:06:32', 0),
+(12, 33, 34, 'how', '2020-04-06 16:06:37', 0);
 
 -- --------------------------------------------------------
 
@@ -82,6 +115,12 @@ INSERT INTO `users` (`id`, `email`, `firstName`, `lastName`, `password`, `music`
 --
 
 --
+-- Indexen voor tabel `chat`
+--
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexen voor tabel `requests`
 --
 ALTER TABLE `requests`
@@ -96,6 +135,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT voor geëxporteerde tabellen
 --
+
+--
+-- AUTO_INCREMENT voor een tabel `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT voor een tabel `requests`
