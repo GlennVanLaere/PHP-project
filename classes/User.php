@@ -21,6 +21,7 @@ include_once(__DIR__ . "/Db.php");
         private $buddy;
         private $userId;
         private $buddyId;
+        private $messageText;
 
         /**
          * Get the value of email
@@ -702,5 +703,45 @@ include_once(__DIR__ . "/Db.php");
             } catch (\Throwable $th) {
                 $error = $th->getMessage();
             }       
+        }
+
+        public function saveMessage() {
+            try {
+                $conn = Db::getConnection();
+                $statement = $conn->prepare("INSERT INTO chat (sender, receiver, message) values (:sender, :receiver, :message)");
+
+                $sender = $this->getUserId();
+                $receiver = $this->getBuddyId();
+                $message = $this->getMessageText();
+
+                $statement->bindValue(":sender", $sender);
+                $statement->bindValue(":receiver", $receiver);
+                $statement->bindValue(":message", $message);
+
+                $result = $statement->execute();
+                return $result;
+            } catch (\Throwable $th) {
+                $error = $th->getMessage();
+            }
+        }
+
+        /**
+         * Get the value of messageText
+         */ 
+        public function getMessageText()
+        {
+                return $this->messageText;
+        }
+
+        /**
+         * Set the value of messageText
+         *
+         * @return  self
+         */ 
+        public function setMessageText($messageText)
+        {
+                $this->messageText = $messageText;
+
+                return $this;
         }
     }
