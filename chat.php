@@ -5,6 +5,7 @@ if (isset($_SESSION['user'])) {
     $user = new User;
     $user->setUserId();
     $allMessages = User::getAllMessages($user->getUserId(), $_GET['messageid']);
+    $user->userReadMessage();
 } else {
     header("Location: logout.php");
 }

@@ -762,4 +762,22 @@ include_once(__DIR__ . "/Db.php");
 
                 return $this;
         }
+
+        public function messageRead($receiver) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM chat WHERE receiver = :receiver AND `read` = 0");
+            $statement->bindValue(":receiver", $receiver);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function userReadMessage() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("UPDATE chat SET `read` = 1 WHERE receiver = :receiver AND sender = :sender");
+            
+            $statement->bindValue(":receiver", $this->getUserId());
+            $statement->bindValue(":sender", $_GET['messageid']);
+            $result = $statement->execute();
+            return $result;
+        }
     }

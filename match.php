@@ -18,6 +18,8 @@ include_once(__DIR__."/classes/User.php");
    
    $person->setUserId();
    $userId = $person->getUserId();
+
+   $messageRead = $person->messageRead($userId); 
   }else {
    header("Location: login.php");
  }
@@ -32,6 +34,9 @@ include_once(__DIR__."/classes/User.php");
     <title>Match</title>
 </head>
 <body>
+    <?php if ($messageRead): ?>
+    <p>🔔 There are new messages</p>
+    <?php endif; ?>
    
     <?php  echo '<h1> Hi, '.$info['firstName'].'  '. $info['lastName'].'!</h1>'; ?>
     <h2>Here You can find all your matches, based on various criteria.</h2>
