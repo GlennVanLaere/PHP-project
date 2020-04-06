@@ -210,6 +210,15 @@ include_once(__DIR__ . "/Db.php");
          */ 
         public function setCurrentFirstName($currentFirstName)
         {
+            try {
+                $conn = Db::getConnection();
+                $statement = $conn->prepare("SELECT * FROM users WHERE id = :id");
+                $statement->bindValue(":id", $currentFirstName);
+                $statement->execute();
+                $currentFirstName = $statement->fetch(PDO::FETCH_ASSOC);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
                 $this->currentFirstName = $currentFirstName;
 
                 return $this;
@@ -723,6 +732,15 @@ include_once(__DIR__ . "/Db.php");
             } catch (\Throwable $th) {
                 $error = $th->getMessage();
             }
+        }
+
+        public static function getAllMessages($sender, $receiver) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM chat WHERE (sender = :sender AND receiver = :receiver) OR (sender = :receiver AND receiver = :sender) ORDER BY timestamp");
+            $statement->bindValue(":sender", $sender);
+            $statement->bindValue(":receiver", $receiver);
+            $result = $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
         }
 
         /**
