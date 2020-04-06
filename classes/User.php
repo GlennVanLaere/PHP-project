@@ -19,6 +19,8 @@ include_once(__DIR__ . "/Db.php");
         private $books;
         private $tvShows;
         private $buddy;
+        private $userId;
+        private $buddyId;
 
         /**
          * Get the value of email
@@ -404,6 +406,56 @@ include_once(__DIR__ . "/Db.php");
                 return $this;
         }
 
+        /**
+         * Get the value of userId
+         */ 
+        public function getUserId()
+        {
+                return $this->userId;
+        }
+
+        /**
+         * Set the value of userId
+         *
+         * @return  self
+         */ 
+        public function setUserId()
+        {
+            try {
+                $conn = Db::getConnection();
+                $statement = $conn->prepare("SELECT id FROM users WHERE email = :email");
+                $statement->bindValue(":email", $_SESSION['user']);
+                $statement->execute();
+                $user = $statement->fetch(PDO::FETCH_ASSOC);
+                
+                $this->userId = $user['id'];
+
+                return $this;
+            } catch (\Throwable $th) {
+                $error = $th->getMessage();
+            }
+        }
+
+        /**
+         * Get the value of buddyId
+         */ 
+        public function getBuddyId()
+        {
+                return $this->buddyId;
+        }
+
+        /**
+         * Set the value of buddyId
+         *
+         * @return  self
+         */ 
+        public function setBuddyId($buddyId)
+        {
+                $this->buddyId = $buddyId;
+
+                return $this;
+        }
+
         public function save(){
 
             try {
@@ -606,13 +658,6 @@ include_once(__DIR__ . "/Db.php");
 
             return $tvShowsMatch;
         }
-
-        // check if user is buddy
-            // if true button remove buddy + button open chat
-            // if false check for request
-                // if true button accept/ignore the request
-                    // if request is send you can cancel
-                // if false button "send request"
         
         public function hasBuddy($id) {
             try {
@@ -622,26 +667,14 @@ include_once(__DIR__ . "/Db.php");
                 $statement->bindValue(":buddyId", $id);
                 $statement->execute();
                 $buddy = $statement->fetch(PDO::FETCH_ASSOC);
-                if ($buddy) {
-                    $button = '<a href="#" class="btn btn-danger">Remove buddy</a>
-                               <a href="#" class="btn btn-info">Open chat</a>';
-                    return $button;
-                } else {
-                    $conn = Db::getConnection();
-                    $statement = $conn->prepare("SELECT id FROM users WHERE email = :email");
-                    $statement->bindValue(":email", $_SESSION['user']);
-                    $statement->execute();
-                    $buddy = $statement->fetch(PDO::FETCH_ASSOC);
-                    $userId = $buddy['id'];
-                    return $this->hasRequest($userId, $id);
-                }
+                return $buddy;
             } catch (\Throwable $th) {
                 $error = $th->getMessage();
             }
 
         }
 
-        public function hasRequest($userId, $id) {
+        public function sentRequest($userId, $id) {
             try {
                 $conn = Db::getConnection();
                 $statement = $conn->prepare("SELECT sender, receiver FROM requests WHERE sender = :sender AND receiver = :receiver");
@@ -649,30 +682,25 @@ include_once(__DIR__ . "/Db.php");
                 $statement->bindValue(":receiver", $id);
                 $statement->execute();
                 $request = $statement->fetch(PDO::FETCH_ASSOC);
-                if ($request) {
-                    $button = '<a href="#" class="btn btn-danger">Cancel Request</a>';
-                    return $button;
-                } else {
-                    $conn = Db::getConnection();
-                    $statement = $conn->prepare("SELECT sender, receiver FROM requests WHERE sender = :sender AND receiver = :receiver");
-                    $statement->bindValue(":sender", $id);
-                    $statement->bindValue(":receiver", $userId);
-                    $statement->execute();
-                    $request = $statement->fetch(PDO::FETCH_ASSOC);
-                    if ($request) {
-                        $button = '<a href="#" class="btn btn-danger">Ignore</a>
-                                   <a href="#" class="btn btn-info">Accept</a>';
-                        return $button;
-                    } else {
-                        $button = '<a href="#" class="btn btn-danger">Send Request</a>';
-                        return $button;
-                    }
-                    
-                }
+                return $request;
                 
             } catch (\Throwable $th) {
                 $error = $th->getMessage();
 
             }
+        }
+
+        public function receivedRequest($userId, $id) {
+            try {
+                $conn = Db::getConnection();
+                $statement = $conn->prepare("SELECT sender, receiver FROM requests WHERE sender = :sender AND receiver = :receiver");
+                $statement->bindValue(":sender", $id);
+                $statement->bindValue(":receiver", $userId);
+                $statement->execute();
+                $request = $statement->fetch(PDO::FETCH_ASSOC);
+                return $request;
+            } catch (\Throwable $th) {
+                $error = $th->getMessage();
+            }       
         }
     }
