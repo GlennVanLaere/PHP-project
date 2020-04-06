@@ -780,4 +780,37 @@ include_once(__DIR__ . "/Db.php");
             $result = $statement->execute();
             return $result;
         }
+
+        public function matchType($info) {
+            $musicMatch = $this->findMusicMatch($info);
+            foreach ($musicMatch as $m) {
+                if ($m['id'] === $_GET['messageid']) {
+                    return $matchType = "You match with ". $m['firstName'] . " because you have a similar taste in music";
+                }
+            } 
+            $moviesMatch = $this->findMoviesMatch($info);
+            foreach ($moviesMatch as $m) {
+                if ($m['id'] === $_GET['messageid']) {
+                    return $matchType = "You match with ". $m['firstName'] . " because you have a similar movie taste";
+                }
+            } 
+            $gamesMatch = $this->findGamesMatch($info);
+                foreach ($gamesMatch as $m) {
+                if ($m['id'] === $_GET['messageid']) {
+                    return $matchType = "You match with ". $m['firstName'] . " because you like similar games";
+                }
+            } 
+            $booksMatch = $this->findBooksMatch($info);
+            foreach ($booksMatch as $m) {
+                if ($m['id'] === $_GET['messageid']) {
+                    return $matchType = "You match ". $m['firstName'] . " because you like similar books";
+                }
+            } 
+            $tvShowsMatch = $this->findTvShowsMatch($info);
+            foreach ($tvShowsMatch as $m) {
+                if ($m['id'] === $_GET['messageid']) {
+                    return $matchType = "You matched ". $m['firstName'] . " because you like similar TV shows";
+                }
+            }
+        }
     }
