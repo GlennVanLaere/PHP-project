@@ -1,3 +1,10 @@
+<?php
+include_once(__DIR__."/classes/User.php");
+session_start();
+if (!isset($_SESSION['user'])) {
+    header("Location: logout.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

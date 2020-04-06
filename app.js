@@ -9,5 +9,23 @@ document.querySelector("#inputMessage").addEventListener("keypress", (e) => {
 });
 
 function sendMessage() {
-    let text = document.querySelector("#inputMessage").value;
+    let message = document.querySelector("#inputMessage").value;
+    let params = new URLSearchParams(location.search);
+    let receiver = params.get('messageid');
+    let formData = new FormData();
+
+    formData.append('message', message);
+    formData.append('receiver', receiver);
+
+fetch('ajax/saveMessage.php', {
+  method: 'POST',
+  body: formData
+})
+.then((response) => response.json())
+.then((result) => {
+  console.log('Success:', result);
+})
+.catch((error) => {
+  console.error('Error:', error);
+});
 }

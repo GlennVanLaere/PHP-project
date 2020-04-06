@@ -1,4 +1,4 @@
-<a href="chat.php" class="btn btn-success">Open chat</a>
+<a href="chat.php?messageid=<?php echo $person->getBuddyId(); ?>" class="btn btn-success">Open chat</a>
 <?php if ($person->hasBuddy($person->getBuddyId())): ?>
 <a href="#" class="btn btn-danger">Remove buddy</a>
 <?php elseif ($person->sentRequest($userId, $person->getBuddyId())): ?>
