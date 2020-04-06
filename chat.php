@@ -21,6 +21,7 @@ if (isset($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>chat</title>
 </head>
+    <?php include("includes/nav.inc.php") ?>
     <p><?php if(isset($matchType)){echo $matchType;} ?></p>
     <div id="messages">
     <?php foreach($allMessages as $m): ?>
