@@ -455,6 +455,8 @@ include_once(__DIR__ . "/Db.php");
         public function setSearchTerm($searchTerm)
         {
                 $this->searchTerm = $searchTerm;
+        }
+        /**
          * Get the value of userId
          */ 
         public function getUserId()
