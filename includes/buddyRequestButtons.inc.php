@@ -7,5 +7,5 @@
 <a href="#" class="btn btn-danger">Ignore</a>
 <a href="#" class="btn btn-info">Accept</a>
 <?php else: ?>
-<a href="#" class="btn btn-danger">Send Request</a>
+<a href="#" id="btnSendRequest" data-buddy="<?php echo $person->getBuddyId(); ?>" class="btn btn-danger">Send Request</a>
 <?php endif; ?>
