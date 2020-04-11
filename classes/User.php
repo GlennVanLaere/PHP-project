@@ -1181,5 +1181,43 @@ include_once(__DIR__ . "/Db.php");
                 }
             }
         }
+
+        public function sendRequest() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT sender FROM requests WHERE sender = :sender");
+
+            $sender = $this->getUserId();
+
+            $statement->bindValue(":sender", $sender);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        public function sendRequestFalse() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("INSERT INTO requests (sender, receiver) VALUES (:sender, :receiver)");
+
+            $sender = $this->getUserId();
+            $receiver = $this->getBuddyId();
+
+            $statement->bindValue(":sender", $sender);
+            $statement->bindValue(":receiver", $receiver);
+            $result = $statement->execute();
+            return $result;
+        }
+
+        public function sendRequestTrue() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("UPDATE requests SET receiver = :receiver WHERE sender = :sender");
+
+            $sender = $this->getUserId();
+            $receiver = $this->getBuddyId();
+
+            $statement->bindValue(":sender", $sender);
+            $statement->bindValue(":receiver", $receiver);
+            $result = $statement->execute();
+            return $result;
+        }
     }
     

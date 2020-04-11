@@ -8,5 +8,19 @@ for (let i = 0; i < buttons.length; i++) {
 }
 
 function sendRequest(buddy) {
-    console.log(buddy);
+    let formData = new FormData();
+
+    formData.append('receiver', buddy);
+
+    fetch('ajax/sendRequest.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then((response) => response.json())
+    .then((result) => {
+        location.reload();
+    })
+    .catch((error) => {
+    console.error('Error:', error);
+    });
 }
