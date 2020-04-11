@@ -2,7 +2,7 @@
 <?php if ($person->hasBuddy($person->getBuddyId())): ?>
 <a href="#" class="btn btn-danger">Remove buddy</a>
 <?php elseif ($person->sentRequest($userId, $person->getBuddyId())): ?>
-<a href="#" class="btn btn-danger">Cancel Request</a>
+<a href="#"  id="btnCancelRequest" class="btn btn-danger">Cancel Request</a>
 <?php elseif ($person->receivedRequest($userId, $person->getBuddyId())): ?>
 <a href="#" class="btn btn-danger">Ignore</a>
 <a href="#" class="btn btn-info">Accept</a>

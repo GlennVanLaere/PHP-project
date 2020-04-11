@@ -1219,5 +1219,16 @@ include_once(__DIR__ . "/Db.php");
             $result = $statement->execute();
             return $result;
         }
+
+        public function cancelRequest() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("DELETE FROM requests WHERE sender = :sender");
+
+            $sender = $this->getUserId();
+
+            $statement->bindValue(":sender", $sender);
+            $result = $statement->execute();
+            return $result;
+        }
     }
     
