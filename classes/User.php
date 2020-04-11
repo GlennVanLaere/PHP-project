@@ -1241,5 +1241,18 @@ include_once(__DIR__ . "/Db.php");
             $result = $statement->execute();
             return $result;
         }
+
+        public function acceptRequest() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("UPDATE users SET buddyId = :buddyId WHERE id = :id");
+
+            $id = $this->getUserId();
+            $buddyId = $this->getBuddyId();
+
+            $statement->bindValue(":id", $id);
+            $statement->bindValue(":buddyId", $buddyId);
+            $result = $statement->execute();
+            return $result;
+        }
     }
     

@@ -53,7 +53,6 @@ let removeButton = document.querySelector("#btnRemoveBuddy");
 
 if(removeButton){
     removeButton.addEventListener("click", () => {
-        console.log("hello");
         removeBuddy();
     });
 }
@@ -62,6 +61,33 @@ function removeBuddy() {
     let formData = new FormData();
 
     fetch('ajax/removeBuddy.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then((response) => response.json())
+    .then((result) => {
+        location.reload();
+    })
+    .catch((error) => {
+    console.error('Error:', error);
+    });
+}
+
+let acceptButton = document.querySelector("#btnAcceptRequest");
+
+if(acceptButton){
+    acceptButton.addEventListener("click", () => {
+        let buddy =   acceptButton.dataset.buddy;
+        acceptRequest(buddy);
+    });
+}
+
+function acceptRequest(buddy) {
+    let formData = new FormData();
+
+    formData.append('receiver', buddy);
+
+    fetch('ajax/acceptRequest.php', {
         method: 'POST',
         body: formData
     })
