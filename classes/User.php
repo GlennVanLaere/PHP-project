@@ -1230,5 +1230,16 @@ include_once(__DIR__ . "/Db.php");
             $result = $statement->execute();
             return $result;
         }
+
+        public function removeBuddy() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("UPDATE users SET buddyId = 0 WHERE id = :id");
+
+            $id = $this->getUserId();
+
+            $statement->bindValue(":id", $id);
+            $result = $statement->execute();
+            return $result;
+        }
     }
     
