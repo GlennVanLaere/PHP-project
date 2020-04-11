@@ -66,6 +66,7 @@ function removeBuddy() {
     })
     .then((response) => response.json())
     .then((result) => {
+        ignoreRequest();
         location.reload();
     })
     .catch((error) => {
