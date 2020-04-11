@@ -27,6 +27,7 @@ include_once(__DIR__ . "/Db.php");
         private $userId;
         private $buddyId;
         private $messageText;
+        private $reason;
 
         //feature 3 gedeelte
         
@@ -1251,6 +1252,39 @@ include_once(__DIR__ . "/Db.php");
 
             $statement->bindValue(":id", $id);
             $statement->bindValue(":buddyId", $buddyId);
+            $result = $statement->execute();
+            return $result;
+        }
+
+        /**
+         * Get the value of reason
+         */ 
+        public function getReason()
+        {
+                return $this->reason;
+        }
+
+        /**
+         * Set the value of reason
+         *
+         * @return  self
+         */ 
+        public function setReason($reason)
+        {
+                $this->reason = $reason;
+
+                return $this;
+        }
+
+        public function ignoreRequest() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("UPDATE requests SET receiver = 0, reason = :reason WHERE sender = :sender");
+
+            $sender = $this->getBuddyId();
+            $reason = $this->getReason();
+
+            $statement->bindValue(":sender", $sender);
+            $statement->bindValue(":reason", $reason);
             $result = $statement->execute();
             return $result;
         }

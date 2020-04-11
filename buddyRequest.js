@@ -99,3 +99,36 @@ function acceptRequest(buddy) {
     console.error('Error:', error);
     });
 }
+
+let ignoreButton = document.querySelectorAll("#btnIgnoreRequest");
+
+for (let i = 0; i <  ignoreButton.length; i++) {
+    ignoreButton[i].addEventListener("click", () => {
+        let buddy =  ignoreButton[i].dataset.buddy;
+        let textareas = document.querySelectorAll("#textIgnoreRequest");
+        for (let i = 0; i <  textareas.length; i++) {
+            let text = textareas[i].value;
+            ignoreRequest(buddy, text);
+        }
+  });
+}
+
+function ignoreRequest(buddy, text) {
+    let formData = new FormData();
+
+    formData.append('text', text);
+    formData.append('sender', buddy);
+
+    fetch('ajax/ignoreRequest.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then((response) => response.json())
+    .then((result) => {
+        console.log("heelko");
+        location.reload();
+    })
+    .catch((error) => {
+    console.error('Error:', error);
+    });
+}
