@@ -4,7 +4,7 @@
 <?php elseif ($person->sentRequest($userId, $person->getBuddyId())): ?>
 <a href="#"  id="btnCancelRequest" class="btn btn-danger">Cancel Request</a>
 <?php elseif ($person->receivedRequest($userId, $person->getBuddyId())): ?>
-<a href="#" class="btn btn-danger">Ignore</a>
+<a href="#" id="btnIgnoreRequest" data-buddy="<?php echo $person->getBuddyId(); ?>"class="btn btn-danger">Ignore</a>
 <a href="#" id="btnAcceptRequest" data-buddy="<?php echo $person->getBuddyId(); ?>" class="btn btn-info">Accept</a>
 <?php else: ?>
 <a href="#" id="btnSendRequest" data-buddy="<?php echo $person->getBuddyId(); ?>" class="btn btn-danger">Send Request</a>

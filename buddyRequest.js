@@ -73,13 +73,13 @@ function removeBuddy() {
     });
 }
 
-let acceptButton = document.querySelector("#btnAcceptRequest");
+let acceptButton = document.querySelectorAll("#btnAcceptRequest");
 
-if(acceptButton){
-    acceptButton.addEventListener("click", () => {
-        let buddy =   acceptButton.dataset.buddy;
+for (let i = 0; i <  acceptButton.length; i++) {
+    acceptButton[i].addEventListener("click", () => {
+        let buddy =  acceptButton[i].dataset.buddy;
         acceptRequest(buddy);
-    });
+  });
 }
 
 function acceptRequest(buddy) {
