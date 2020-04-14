@@ -102,6 +102,6 @@ include_once(__DIR__."/classes/User.php");
     <?php endforeach; ?>
     <?php if($tvShowsMatch ===NULL){ echo '<p> no perfect matches found based on tv-shows, search based on another tag </p>'; } ?>
 
-    <script src="buddyRequest.js"></script>
+    <script src="js/buddyRequest.js"></script>
 </body>
 </html>
