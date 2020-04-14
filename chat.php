@@ -32,6 +32,6 @@ if (isset($_SESSION['user'])) {
     <input type="text" placeholder="type a message" id="inputMessage">
     <a href="#" id="btnSendMessage">Send</a>
 <body>
-    <script src="app.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
