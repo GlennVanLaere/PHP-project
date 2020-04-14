@@ -1140,6 +1140,15 @@ include_once(__DIR__ . "/Db.php");
             return $statement->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        public function messageSenders($receiver, $sender) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT receiver FROM chat WHERE receiver = :receiver AND `read` = 0 AND sender = :sender");
+            $statement->bindValue(":receiver", $receiver);
+            $statement->bindValue(":sender", $sender);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        }
+
         public function userReadMessage() {
             $conn = Db::getConnection();
             $statement = $conn->prepare("UPDATE chat SET `read` = 1 WHERE receiver = :receiver AND sender = :sender");
