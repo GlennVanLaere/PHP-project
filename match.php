@@ -23,6 +23,9 @@ include_once(__DIR__."/classes/User.php");
    
    $register = $person->getAll();
    $totalRegister = count($register);
+
+   $numberAccept = $person->getNumberAccept();
+   $totalAccept = count($numberAccept);
   }else {
    header("Location: login.php");
  }
@@ -39,6 +42,7 @@ include_once(__DIR__."/classes/User.php");
 <body>
 <?php include("includes/nav.inc.php") ?>
 <p><?php echo "There are a total of " . $totalRegister . " students registered to the website!!" ?></p>
+<p><?php echo "A total of " . $totalAccept . " students found their buddy!!" ?></p>
     <?php if ($messageRead): ?>
     <p>🔔 There are new messages</p>
     <?php endif; ?>
