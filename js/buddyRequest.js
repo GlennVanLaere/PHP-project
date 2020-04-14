@@ -66,7 +66,6 @@ function removeBuddy() {
     })
     .then((response) => response.json())
     .then((result) => {
-        ignoreRequest();
         location.reload();
     })
     .catch((error) => {
@@ -94,6 +93,7 @@ function acceptRequest(buddy) {
     })
     .then((response) => response.json())
     .then((result) => {
+        ignoreRequest(buddy, "");
         location.reload();
     })
     .catch((error) => {
@@ -126,7 +126,6 @@ function ignoreRequest(buddy, text) {
     })
     .then((response) => response.json())
     .then((result) => {
-        console.log("heelko");
         location.reload();
     })
     .catch((error) => {
