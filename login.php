@@ -8,8 +8,8 @@
       $user->setCurrentEmail($_POST["email"]);
       $user->setCurrentPassword($_POST["password"]);
       $canLogin = $user->canLogin();
-      $complete = $user->checkComplete();
       if ($canLogin) {
+        $complete = $user->checkComplete();
         $user->login($complete);
       } else {
         $error = "We couldn't log you in";

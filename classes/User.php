@@ -27,6 +27,7 @@ include_once(__DIR__ . "/Db.php");
         private $userId;
         private $buddyId;
         private $messageText;
+        private $reason;
 
         //feature 3 gedeelte
         
@@ -1139,6 +1140,15 @@ include_once(__DIR__ . "/Db.php");
             return $statement->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        public function messageSenders($receiver, $sender) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT receiver FROM chat WHERE receiver = :receiver AND `read` = 0 AND sender = :sender");
+            $statement->bindValue(":receiver", $receiver);
+            $statement->bindValue(":sender", $sender);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        }
+
         public function userReadMessage() {
             $conn = Db::getConnection();
             $statement = $conn->prepare("UPDATE chat SET `read` = 1 WHERE receiver = :receiver AND sender = :sender");
@@ -1180,6 +1190,112 @@ include_once(__DIR__ . "/Db.php");
                     return $matchType = "You matched ". $m['firstName'] . " because you like similar TV shows";
                 }
             }
+        }
+
+        public function sendRequest() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT sender FROM requests WHERE sender = :sender");
+
+            $sender = $this->getUserId();
+
+            $statement->bindValue(":sender", $sender);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        public function sendRequestFalse() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("INSERT INTO requests (sender, receiver) VALUES (:sender, :receiver)");
+
+            $sender = $this->getUserId();
+            $receiver = $this->getBuddyId();
+
+            $statement->bindValue(":sender", $sender);
+            $statement->bindValue(":receiver", $receiver);
+            $result = $statement->execute();
+            return $result;
+        }
+
+        public function sendRequestTrue() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("UPDATE requests SET receiver = :receiver WHERE sender = :sender");
+
+            $sender = $this->getUserId();
+            $receiver = $this->getBuddyId();
+
+            $statement->bindValue(":sender", $sender);
+            $statement->bindValue(":receiver", $receiver);
+            $result = $statement->execute();
+            return $result;
+        }
+
+        public function cancelRequest() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("DELETE FROM requests WHERE sender = :sender");
+
+            $sender = $this->getUserId();
+
+            $statement->bindValue(":sender", $sender);
+            $result = $statement->execute();
+            return $result;
+        }
+
+        public function removeBuddy() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("UPDATE users SET buddyId = 0 WHERE id = :id");
+
+            $id = $this->getUserId();
+
+            $statement->bindValue(":id", $id);
+            $result = $statement->execute();
+            return $result;
+        }
+
+        public function acceptRequest() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("UPDATE users SET buddyId = :buddyId WHERE id = :id");
+
+            $id = $this->getUserId();
+            $buddyId = $this->getBuddyId();
+
+            $statement->bindValue(":id", $id);
+            $statement->bindValue(":buddyId", $buddyId);
+            $result = $statement->execute();
+            return $result;
+        }
+
+        /**
+         * Get the value of reason
+         */ 
+        public function getReason()
+        {
+                return $this->reason;
+        }
+
+        /**
+         * Set the value of reason
+         *
+         * @return  self
+         */ 
+        public function setReason($reason)
+        {
+                $this->reason = $reason;
+
+                return $this;
+        }
+
+        public function ignoreRequest() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("UPDATE requests SET receiver = 0, reason = :reason WHERE sender = :sender");
+
+            $sender = $this->getBuddyId();
+            $reason = $this->getReason();
+
+            $statement->bindValue(":sender", $sender);
+            $statement->bindValue(":reason", $reason);
+            $result = $statement->execute();
+            return $result;
         }
     }
     
