@@ -38,6 +38,7 @@ if(isset ($_SESSION["user"])){
     <title>Change your password</title>
 </head>
 <body>
+<?php include("includes/nav.inc.php") ?>
 <h1>Change your password here</h1>
     <form action="" method="post">
     

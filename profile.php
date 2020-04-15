@@ -71,6 +71,7 @@ if(isset($_SESSION['user'])){
     <title>Profile</title>
 </head>
 <body>
+<?php include("includes/nav.inc.php") ?>
     <div class="content">
         <div class="profilePicture">
         <h1>your profile</h1>
