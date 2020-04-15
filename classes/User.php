@@ -1297,5 +1297,15 @@ include_once(__DIR__ . "/Db.php");
             $result = $statement->execute();
             return $result;
         }
+
+        public function showBuddy(){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE id = :buddyId");
+
+            $statement->bindValue(":buddyId", $buddyId );
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
     }
     
