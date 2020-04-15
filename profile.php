@@ -11,7 +11,7 @@ if(isset($_SESSION['user'])){
         $showDescription = $user->viewDescription($email);
         $viewAvatar = $user->showAvatar($email);
         $buddyId = $user->findBuddyId($email);
-        $showBuddy = $user->showBuddy($buddyId);
+        $showBuddy = $user->showBuddy($email);
         
         if(!empty($_POST)){
             try {
