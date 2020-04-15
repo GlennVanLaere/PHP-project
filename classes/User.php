@@ -594,9 +594,19 @@ include_once(__DIR__ . "/Db.php");
          */ 
         public function setBuddyId($buddyId)
         {
-                $this->buddyId = $buddyId;
+            try {
+                $conn = Db::getConnection();
+                $statement = $conn->prepare("SELECT buddyId FROM users WHERE email = :email");
+                $statement->bindValue(":email", $_SESSION['user']);
+                $statement->execute();
+                $user = $statement->fetch(PDO::FETCH_ASSOC);
+                
+                $this->buddyId = $user['buddyId'];
 
                 return $this;
+            } catch (\Throwable $th) {
+                $error = $th->getMessage();
+            }
         }
 
         public function save(){
@@ -1298,7 +1308,17 @@ include_once(__DIR__ . "/Db.php");
             return $result;
         }
 
-        public function showBuddy(){
+        public function findBuddyId($email){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT buddyId FROM users where email = :email");
+            $statement->bindValue(":email", $email);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+            return $result;
+        }
+
+        public function showBuddy($buddyId){
             $conn = Db::getConnection();
             $statement = $conn->prepare("SELECT * FROM users WHERE id = :buddyId");
 

@@ -10,7 +10,8 @@ if(isset($_SESSION['user'])){
         $showEmail = $user->viewEmail($email);
         $showDescription = $user->viewDescription($email);
         $viewAvatar = $user->showAvatar($email);
-        
+        $buddyId = $user->findBuddyId($email);
+        $showBuddy = $user->showBuddy($buddyId);
         
         if(!empty($_POST)){
             try {
@@ -21,34 +22,16 @@ if(isset($_SESSION['user'])){
                 $fileSize = $_FILES["avatar"]["size"];
                 $fileTmpName = $_FILES["avatar"]["tmp_name"];
                 
-                $user->changeAvatar($email, $fileName, $fileSize, $fileTmpName,$file);
-                
-
-                // $user->setAvatarUpload($_POST["avatar"]);
-                
-                
+                $user->changeAvatar($email, $fileName, $fileSize, $fileTmpName,$file);  
             }
             catch (\Throwable $th) {
                 $error = $th->getMessage();
             }
         }
-        
-
-
     } catch (\Throwable $t) {
         $error = $t->getMessage();
     }
 }
-    
-
-
-
-
-
-
-
-
-
 //pofiel aanpassen is mogelijk
 //opladen van foto / avatar
 //Beperk de bestandstypes en bestandsgrootte
@@ -93,7 +76,13 @@ if(isset($_SESSION['user'])){
         <a href="updatePassword.php"> change your password here</a>
     
     </div>
-    <title>Uw profiel</title>
+    <div class="buddy">
+            <h2>Your buddy:</h2>
+            <p> <?php var_dump($buddyId) ; ?> </p>
+            <p> <?php var_dump($showBuddy) ; ?> </p>
+            <img src="<?php echo $showBuddy['avatar']; ?>" alt="">
+            <?php echo $showBuddy['firstname']." ".$showBuddy['lastname']; ?>
+    </div>
 </head>
 <body>
     
