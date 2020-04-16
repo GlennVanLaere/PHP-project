@@ -9,4 +9,8 @@
 <textarea id="textIgnoreRequest" class="form-control" rows="4" placeholder="Reason"></textarea>
 <?php else: ?>
 <a href="#" id="btnSendRequest" data-buddy="<?php echo $person->getBuddyId(); ?>" class="btn btn-danger">Send Request</a>
+<?php if ($person->isReasonSet($person->getBuddyId())): ?>
+<p>Reason:</p>
+<p><?php echo $person->getReason(); ?></p>
+<?php endif; ?>
 <?php endif; ?>
