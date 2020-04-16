@@ -1315,5 +1315,15 @@ include_once(__DIR__ . "/Db.php");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;
         }
+
+        public function findReceiverEmail($receiver){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT email FROM users INNER JOIN requests ON users.id = requests.receiver WHERE requests.receiver = :receiver");
+            $receiver = $this->getBuddyId();
+            $statement->bindValue(":receiver", (int)$receiver );
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
     }
     

@@ -20,9 +20,12 @@ include_once(__DIR__."/classes/User.php");
    $userId = $person->getUserId();
 
    $messageRead = $person->messageRead($userId); 
-  }else {
-   header("Location: login.php");
- }
+
+   // Import the Postmark Client Class:
+   
+    }else {
+    header("Location: login.php");
+    }
 
 ?>
 <!DOCTYPE html>
