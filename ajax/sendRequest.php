@@ -8,6 +8,12 @@
         $user->setBuddyId($_POST['receiver']);
         $receiver = $_POST['receiver'];
 
+        if ($user->sendRequest()) {
+            $user->sendRequestTrue();
+        } else {
+            $user->sendRequestFalse();
+        }
+
         require_once('../vendor/autoload.php');
         $receiverEmail = $user->findReceiverEmail($receiver);
       
@@ -20,12 +26,6 @@
         "Buddy Request",
         "Hi! you got a buddy request, go to your profile and check it out!"
         );
-
-        if ($user->sendRequest()) {
-            $user->sendRequestTrue();
-        } else {
-            $user->sendRequestFalse();
-        }
 
         $response = [
             'sender' => $user->getUserId(),

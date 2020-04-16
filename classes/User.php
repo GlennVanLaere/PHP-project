@@ -1323,7 +1323,7 @@ include_once(__DIR__ . "/Db.php");
             $statement->bindValue(":receiver", (int)$receiver );
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $result;
+            return $result['email'];
         }
     }
     
