@@ -28,6 +28,7 @@ if(!empty($_POST)){
     <title>Change your description</title>
 </head>
 <body>
+<?php include("includes/nav.inc.php") ?>
     <form action="" method="post">
         <label for="dscrptn" style="display:block"> your description</label>
         <textarea name="description" id="description" cols="30" rows="10" style="display:block"> <?php echo $showDescription ?> </textarea>
