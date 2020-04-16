@@ -11,7 +11,7 @@ if(isset($_SESSION['user'])){
         $showDescription = $user->viewDescription($email);
         $viewAvatar = $user->showAvatar($email);
         $buddyId = $user->findBuddyId($email);
-        $showBuddy = $user->showBuddy($email);
+        $showBuddy = $user->showBuddy($buddyId);
         
         if(!empty($_POST)){
             try {
@@ -78,10 +78,8 @@ if(isset($_SESSION['user'])){
     </div>
     <div class="buddy">
             <h2>Your buddy:</h2>
-            <p> <?php var_dump($buddyId) ; ?> </p>
-            <p> <?php var_dump($showBuddy) ; ?> </p>
-            <img src="<?php echo $showBuddy['avatar']; ?>" alt="">
-            <?php echo $showBuddy['firstname']." ".$showBuddy['lastname']; ?>
+            <img src="<?php echo $showBuddy[0]['avatar']; ?>" alt="">
+            <?php echo $showBuddy[0]['firstName']." ".$showBuddy[0]['lastName']; ?>
     </div>
 </head>
 <body>

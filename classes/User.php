@@ -1313,16 +1313,15 @@ include_once(__DIR__ . "/Db.php");
             $statement = $conn->prepare("SELECT buddyId FROM users where email = :email");
             $statement->bindValue(":email", $email);
             $statement->execute();
-            (int)$result = $statement->fetch(PDO::FETCH_ASSOC);
-
-            return $result;
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $buddyId = $result['buddyId'];
+            return $buddyId;
         }
 
-        public function showBuddy($email){
+        public function showBuddy($buddyId){
             $conn = Db::getConnection();
             $statement = $conn->prepare("SELECT * FROM users WHERE id = :buddyId");
-            $buddyId = $user->findBuddyId($email);
-            $statement->bindValue(":buddyId", $buddyId );
+            $statement->bindValue(":buddyId", (int)$buddyId );
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;
