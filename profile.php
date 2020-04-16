@@ -77,9 +77,13 @@ if(isset($_SESSION['user'])){
     
     </div>
     <div class="buddy">
-            <h2>Your buddy:</h2>
+    <h2>Your buddy:</h2>
+    <?php if($buddyId != false): ?>
             <img src="<?php echo $showBuddy['avatar']; ?>" alt="">
             <?php echo $showBuddy['firstName']." ".$showBuddy['lastName']; ?>
+    <?php else: ?>
+    <a href="match.php">You don't have a buddy yet, go find one</a>
+    <?php endif; ?>
     </div>
 </head>
 <body>
