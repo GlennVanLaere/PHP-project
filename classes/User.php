@@ -1243,18 +1243,20 @@ include_once(__DIR__ . "/Db.php");
 
         public function removeBuddy() {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("UPDATE users SET buddyId = 0 WHERE id = :id");
+            $statement = $conn->prepare("UPDATE users SET buddyId = CASE WHEN id = :id THEN 0 WHEN id = :buddyId THEN 0 ELSE buddyId END");
 
             $id = $this->getUserId();
+            $buddyId = $this->getBuddyId();
 
             $statement->bindValue(":id", $id);
+            $statement->bindValue(":buddyId", $buddyId);
             $result = $statement->execute();
             return $result;
         }
 
         public function acceptRequest() {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("UPDATE users SET buddyId = :buddyId WHERE id = :id");
+            $statement = $conn->prepare("UPDATE users SET buddyId = CASE WHEN id = :id THEN :buddyId WHEN id = :buddyId THEN :id ELSE buddyId END");
 
             $id = $this->getUserId();
             $buddyId = $this->getBuddyId();
