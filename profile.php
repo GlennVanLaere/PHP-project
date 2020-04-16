@@ -78,8 +78,8 @@ if(isset($_SESSION['user'])){
     </div>
     <div class="buddy">
             <h2>Your buddy:</h2>
-            <img src="<?php echo $showBuddy[0]['avatar']; ?>" alt="">
-            <?php echo $showBuddy[0]['firstName']." ".$showBuddy[0]['lastName']; ?>
+            <img src="<?php echo $showBuddy['avatar']; ?>" alt="">
+            <?php echo $showBuddy['firstName']." ".$showBuddy['lastName']; ?>
     </div>
 </head>
 <body>

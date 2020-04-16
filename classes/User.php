@@ -1323,7 +1323,7 @@ include_once(__DIR__ . "/Db.php");
             $statement = $conn->prepare("SELECT * FROM users WHERE id = :buddyId");
             $statement->bindValue(":buddyId", (int)$buddyId );
             $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;
         }
     }
