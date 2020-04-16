@@ -594,19 +594,8 @@ include_once(__DIR__ . "/Db.php");
          */ 
         public function setBuddyId($buddyId)
         {
-            try {
-                $conn = Db::getConnection();
-                $statement = $conn->prepare("SELECT buddyId FROM users WHERE email = :email");
-                $statement->bindValue(":email", $_SESSION['user']);
-                $statement->execute();
-                $user = $statement->fetch(PDO::FETCH_ASSOC);
-                
-                $this->buddyId = $user['buddyId'];
-
-                return $this;
-            } catch (\Throwable $th) {
-                $error = $th->getMessage();
-            }
+            $this->buddyId = $buddyId;
+            return $this;
         }
 
         public function save(){
