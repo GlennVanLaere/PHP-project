@@ -1297,6 +1297,19 @@ include_once(__DIR__ . "/Db.php");
             $result = $statement->execute();
             return $result;
         }
+        public function test(){
+            $var1 = 5;
+            $var2 = 7;
+
+            $result = $var1 + $var2;
+            return $result;
+        }
+        
+        public function output($result){
+            $var3 = 2;
+            $output = $result * $var3;
+            return $output;
+        }
 
         // public function viewBuddies(){
         //     $conn = Db::getConnection();
@@ -1322,19 +1335,20 @@ include_once(__DIR__ . "/Db.php");
         //         }
         //     }
 
-        public function viewBuddies(){
-            $conn = Db::getconnection();
+        //public function viewBuddies(){
+           // $conn = Db::getconnection();
             //get all users with filled buddy field
+           // $getAllStmt = $conn->prepare("SELECT firstName, LastName, budd")
             //get all buddyId's from those fields
             //get names of people where buddyfield != empty
             //get names of people 
         }
-            
+       
             
             // $getBuddyNameStmt = $conn->prepare("SELECT firstname FROM users WHERE id")
 
-            return $result;
-        }
+        
+        
         // public function viewOtherBuddies(){
         //     $conn = Db::getConnection();
         //     $buddyStatement = $conn->prepare("SELECT buddyId FROM users WHERE id=:id");
@@ -1344,5 +1358,5 @@ include_once(__DIR__ . "/Db.php");
         //     // echo $signal["buddyId"];
         //     var_dump($signal);
         // }
-    }
+    
     

@@ -2,13 +2,15 @@
 include_once(__DIR__."/classes/User.php");
 
 $user = new User;
-$viewNames = $user->viewBuddies();
-$var = [$viewNames[0][0]["firstName"]];
-var_dump($viewNames);
-foreach ($var as $key){
-    echo $key;
-    echo $viewNames[1];
-}
+// $viewNames = $user->viewBuddies();
+// $var = [$viewNames[0][0]["firstName"]];
+// var_dump($viewNames);
+// foreach ($var as $key){
+//     echo $key;
+//     echo $viewNames[1];
+// }
+$test = $user->output();
+echo $test;
 
 
 
