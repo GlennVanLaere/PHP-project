@@ -21,6 +21,12 @@ include_once(__DIR__."/classes/User.php");
 
    $messageRead = $person->messageRead($userId); 
 
+   $register = $person->getAll();
+   $totalRegister = count($register);
+
+   $numberAccept = $person->getNumberAccept();
+   $totalAccept = count($numberAccept);
+
    // Import the Postmark Client Class:
    
     }else {
@@ -38,6 +44,8 @@ include_once(__DIR__."/classes/User.php");
 </head>
 <body>
 <?php include("includes/nav.inc.php") ?>
+<p><?php echo "There are a total of " . $totalRegister . " students registered to the website!!" ?></p>
+<p><?php echo "A total of " . $totalAccept . " students found their match!!" ?></p>
     <?php if ($messageRead): ?>
     <p>🔔 There are new messages</p>
     <?php endif; ?>

@@ -1343,5 +1343,15 @@ include_once(__DIR__ . "/Db.php");
             }
             return $result;
         }
+
+        public static function getNumberAccept(){
+            $conn = DB::getConnection();
+    
+            $statement = $conn->prepare("SELECT * FROM `users` WHERE `buddyId` != 0");
+            $statement->execute();
+            $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $users;
+    
+        }
     }
     
