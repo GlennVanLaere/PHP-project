@@ -39,7 +39,7 @@ if(isset($_SESSION["user"])){
     <title>Change your email here</title>
 </head>
 <body>
-<h1><?php ?></h1>
+<?php include("includes/nav.inc.php") ?>
     <h1>Change your email here</h1>
     <form action="" method="post">
     

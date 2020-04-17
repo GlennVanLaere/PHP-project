@@ -49,16 +49,19 @@ function cancelRequest() {
     });
 }
 
-let removeButton = document.querySelector("#btnRemoveBuddy");
+let removeButton = document.querySelectorAll("#btnRemoveBuddy");
 
-if(removeButton){
-    removeButton.addEventListener("click", () => {
-        removeBuddy();
-    });
+for (let i = 0; i <  removeButton.length; i++) {
+    removeButton[i].addEventListener("click", () => {
+        let buddy =  removeButton[i].dataset.buddy;
+        removeBuddy(buddy);
+  });
 }
 
-function removeBuddy() {
+function removeBuddy(buddy) {
     let formData = new FormData();
+
+    formData.append('receiver', buddy);
 
     fetch('ajax/removeBuddy.php', {
         method: 'POST',
