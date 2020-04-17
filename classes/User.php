@@ -1055,7 +1055,7 @@ include_once(__DIR__ . "/Db.php");
         public function sentRequest($userId, $id) {
             try {
                 $conn = Db::getConnection();
-                $statement = $conn->prepare("SELECT sender, receiver FROM requests WHERE sender = :sender AND receiver = :receiver");
+                $statement = $conn->prepare("SELECT sender, receiver FROM requests WHERE sender = :sender AND receiver = :receiver AND active = 1");
                 $statement->bindValue(":sender", $userId);
                 $statement->bindValue(":receiver", $id);
                 $statement->execute();
@@ -1071,7 +1071,7 @@ include_once(__DIR__ . "/Db.php");
         public function receivedRequest($userId, $id) {
             try {
                 $conn = Db::getConnection();
-                $statement = $conn->prepare("SELECT sender, receiver FROM requests WHERE sender = :sender AND receiver = :receiver");
+                $statement = $conn->prepare("SELECT sender, receiver FROM requests WHERE sender = :sender AND receiver = :receiver AND active = 1");
                 $statement->bindValue(":sender", $id);
                 $statement->bindValue(":receiver", $userId);
                 $statement->execute();
@@ -1218,7 +1218,7 @@ include_once(__DIR__ . "/Db.php");
 
         public function sendRequestTrue() {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("UPDATE requests SET receiver = :receiver WHERE sender = :sender");
+            $statement = $conn->prepare("UPDATE requests SET receiver = :receiver, active = 1 WHERE sender = :sender");
 
             $sender = $this->getUserId();
             $receiver = $this->getBuddyId();
@@ -1242,18 +1242,20 @@ include_once(__DIR__ . "/Db.php");
 
         public function removeBuddy() {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("UPDATE users SET buddyId = 0 WHERE id = :id");
+            $statement = $conn->prepare("UPDATE users SET buddyId = CASE WHEN id = :id THEN 0 WHEN id = :buddyId THEN 0 ELSE buddyId END");
 
             $id = $this->getUserId();
+            $buddyId = $this->getBuddyId();
 
             $statement->bindValue(":id", $id);
+            $statement->bindValue(":buddyId", $buddyId);
             $result = $statement->execute();
             return $result;
         }
 
         public function acceptRequest() {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("UPDATE users SET buddyId = :buddyId WHERE id = :id");
+            $statement = $conn->prepare("UPDATE users SET buddyId = CASE WHEN id = :id THEN :buddyId WHEN id = :buddyId THEN :id ELSE buddyId END");
 
             $id = $this->getUserId();
             $buddyId = $this->getBuddyId();
@@ -1286,7 +1288,7 @@ include_once(__DIR__ . "/Db.php");
 
         public function ignoreRequest() {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("UPDATE requests SET receiver = 0, reason = :reason WHERE sender = :sender");
+            $statement = $conn->prepare("UPDATE requests SET active = 0, reason = :reason WHERE sender = :sender");
 
             $sender = $this->getBuddyId();
             $reason = $this->getReason();
@@ -1324,6 +1326,22 @@ include_once(__DIR__ . "/Db.php");
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result['email'];
+        }
+        
+        public function isReasonSet($receiver) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM requests WHERE receiver = :receiver AND reason != '' AND sender = :sender AND active = 0");
+
+            $sender = $this->getUserId();
+
+            $statement->bindValue(":sender", $sender);
+            $statement->bindValue(":receiver", $receiver);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            if($result) {
+                $this->setReason($result['reason']);
+            }
+            return $result;
         }
     }
     

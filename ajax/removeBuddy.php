@@ -3,10 +3,12 @@
     session_start();
         $user = new User();
         $user->setUserId();
+        $user->setBuddyId($_POST['receiver']);
 
         $user->removeBuddy();
 
         $response = [
+            'id' => $user->getUserId(),
             'buddyId' => $user->getBuddyId()
         ];
 
