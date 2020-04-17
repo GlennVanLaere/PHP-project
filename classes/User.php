@@ -646,16 +646,6 @@ include_once(__DIR__ . "/Db.php");
     
         }
 
-        public static function getNumberAccept(){
-            $conn = DB::getConnection();
-    
-            $statement = $conn->prepare("SELECT * FROM `requests` WHERE `reason` = '' && `receiver` != 0");
-            $statement->execute();
-            $users = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $users;
-    
-        }
-
         public function viewEmail($email){
 
            try {
