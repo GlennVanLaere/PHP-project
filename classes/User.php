@@ -1353,5 +1353,21 @@ include_once(__DIR__ . "/Db.php");
             return $users;
     
         }
+
+        public function getAllQuestions($pin){
+            $pin = $pin;
+            $conn = DB::getConnection();
+            $statement = $conn->prepare("SELECT * FROM `questions` WHERE `pinned` = :pin");
+            $statement->bindValue(':pin', $pin);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        public function askQuestion($question){
+            $conn = DB::getConnection();
+            $statement = $conn->prepare("INSERT INTO 'questions' (question) VALUE (:question)");
+            $statement->bindValue(":question", $question);
+        }
     }
     
