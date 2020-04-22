@@ -1366,8 +1366,18 @@ include_once(__DIR__ . "/Db.php");
 
         public function askQuestion($question){
             $conn = DB::getConnection();
-            $statement = $conn->prepare("INSERT INTO 'questions' (question) VALUE (:question)");
+            $statement = $conn->prepare("INSERT INTO `questions`(`question`, `pinned`) VALUES (:question, 0)");
             $statement->bindValue(":question", $question);
+            $result = $statement->execute();
+            return $result;
+        }
+
+        public function moderator($email){
+            $conn = DB::getConnection();
+            $statement = $conn->prepare("SELECT `moderator` FROM `users` WHERE `email` = :email");
+            $statement->bindValue(':email', $email);
+            $result = $statement->execute();
+            return $result;
         }
     }
     

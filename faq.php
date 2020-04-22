@@ -2,15 +2,17 @@
     session_start();
     include_once(__DIR__ . "/classes/User.php");
     if(isset($_SESSION['user'])){
-        $question = new user;
-        $noPin = $question->getAllQuestions(0);
-        $pinned = $question->getAllQuestions(1);      
+        $list = new user;
+        $noPin = $list->getAllQuestions(0);
+        $pinned = $list->getAllQuestions(1);      
 
+        $email = $_SESSION['user'];
+        $moderator = $list->moderator($email);
+        
         if(!empty($_POST['question'])){
-            $question = $_POST['ask'];
-            $email = $_SESSION['user'];
-            $ask = new user;
-            $ask->askQuestion($question);
+            $question = $_POST['question'];
+            $list->askQuestion($question);
+            header('Location: faq.php');
         }
 
     } else {
@@ -29,10 +31,11 @@
     <form action="" method="post">
         <div class="form-group">
             <input type="text" name="question" class="form-control" placeholder="Ask a question">
-            <input type="submit" name="ask" value="ask" class="btn btn-primary">
+            <input type="submit" name="ask" value="Ask" class="btn btn-primary">
         </div>
     </form>
     <div>
+    <h2>Pinned questions</h2>
         <?php if(!empty($pinned)): ?>
             <?php foreach($pinned as $p): ?>
                 <p><?php echo $p['question'] ?></p>
@@ -43,9 +46,13 @@
     </div>
 
     <div>
+    <h2>Nonpinned questions</h2>
         <?php if(!empty($noPin)): ?>
             <?php foreach($noPin as $np): ?>
                 <p><?php echo $np['question'] ?></p>
+                <?php if($moderator == 1): ?>
+                    <?php echo 'buttons' ?>
+                <?php endif; ?>
             <?php endforeach; ?>
         <?php else: ?>
             <?php echo '<h3>Be the first to ask a question!</h3>' ?>
