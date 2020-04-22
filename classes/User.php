@@ -72,10 +72,7 @@ include_once(__DIR__ . "/Db.php");
             if(!preg_match('|@student.thomasmore.be$|', $email)){
                 throw new Exception("Email must end with @student.thomasmore.be");
             }else
-            if ($users) {
-                throw new Exception("Email is already in use");
-            }
-                          
+                         
             $this->email = $email;
             return $this;
             
