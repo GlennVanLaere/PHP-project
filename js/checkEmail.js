@@ -2,6 +2,7 @@ let emailInput = document.querySelector("#exampleInputEmail1");
 
 if(emailInput){
     emailInput.addEventListener("blur", () => {
+        console.log("blur");
         checkEmail();
     });
 }
