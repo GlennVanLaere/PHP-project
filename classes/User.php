@@ -1350,5 +1350,24 @@ include_once(__DIR__ . "/Db.php");
             return $users;
     
         }
+
+        public function checkEmail($email)
+        {
+
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email= :email");
+
+            $email = $this->getEmail();
+
+            $statement->bindValue(":email", $email);
+
+            $statement->execute(); 
+            $users = $statement->fetch();
+                         
+            $this->email = $email;
+            return $this;
+            
+            
+        }
     }
     
