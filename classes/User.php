@@ -912,12 +912,12 @@ include_once(__DIR__ . "/Db.php");
                 $conn = Db::getConnection();
                 $statement = $conn->prepare("UPDATE `users` SET `music`= :music,`movies`= :movies,`games`= :games,`books`= :books,`tvShows`= :tvShows, `buddy` = :buddy WHERE `email` = :email");
                 $statement->bindValue('email', $email);
-                $statement->bindValue(':music', htmlspecialchars($music));
-                $statement->bindValue(':movies', htmlspecialchars($movies));
-                $statement->bindValue(':games', htmlspecialchars($games));
-                $statement->bindValue(':books', htmlspecialchars($books));
-                $statement->bindValue(':tvShows', htmlspecialchars($tvShows));
-                $statement->bindValue(':buddy', htmlspecialchars($buddy));
+                $statement->bindValue(':music', $music);
+                $statement->bindValue(':movies', $movies);
+                $statement->bindValue(':games', $games);
+                $statement->bindValue(':books', $books);
+                $statement->bindValue(':tvShows', $tvShows);
+                $statement->bindValue(':buddy', $buddy);
                 $statement->execute();
                 header("Location: match.php");
             } catch (PDOException $e) {
@@ -1374,8 +1374,25 @@ include_once(__DIR__ . "/Db.php");
 
         public function moderator($email){
             $conn = DB::getConnection();
-            $statement = $conn->prepare("SELECT `moderator` FROM `users` WHERE `email` = :email");
+            $statement = $conn->prepare("SELECT * FROM `users` WHERE `email` = :email");
             $statement->bindValue(':email', $email);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        public function pinQuestion($id){
+            $conn = DB::getConnection();
+            $statement = $conn->prepare("UPDATE `questions` SET `pinned`= 1 WHERE `id` = $id");
+            $statement->bindValue('id', $id);
+            $result = $statement->execute();
+            return $result;
+        }
+
+        public function unPinQuestion($id){
+            $conn = DB::getConnection();
+            $statement = $conn->prepare("UPDATE `questions` SET `pinned`= 0 WHERE `id` = $id");
+            $statement->bindValue('id', $id);
             $result = $statement->execute();
             return $result;
         }

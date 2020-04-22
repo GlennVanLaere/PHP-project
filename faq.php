@@ -8,10 +8,23 @@
 
         $email = $_SESSION['user'];
         $moderator = $list->moderator($email);
+        $moderator = $moderator['moderator'];
         
         if(!empty($_POST['question'])){
             $question = $_POST['question'];
             $list->askQuestion($question);
+            header('Location: faq.php');
+        }
+
+        if(isset($_POST['pin'])){
+            $id = 14;
+            $list->pinQuestion($id);
+            header('Location: faq.php');
+        }
+
+        if(isset($_POST['unPin'])){
+            $id = 14;
+            $list->unPinQuestion($id);
             header('Location: faq.php');
         }
 
@@ -28,6 +41,7 @@
     <link rel="stylesheet" href="./../../css/style.css" />
 </head>
 <body>
+<?php include_once('includes/nav.inc.php'); ?>
     <form action="" method="post">
         <div class="form-group">
             <input type="text" name="question" class="form-control" placeholder="Ask a question">
@@ -35,10 +49,15 @@
         </div>
     </form>
     <div>
-    <h2>Pinned questions</h2>
+    <h2>FAQ 🤔</h2>
         <?php if(!empty($pinned)): ?>
             <?php foreach($pinned as $p): ?>
                 <p><?php echo $p['question'] ?></p>
+                <?php if($moderator == 1): ?>
+                <form method="post" action="">
+                    <input type="submit" class="button" name="unPin" value="unPin" id="<?php echo $p['id'] ?>">
+                </form>
+                <?php endif; ?>
             <?php endforeach; ?>
         <?php else: ?>
             <?php echo '<h3>Pinned questions are shown here!</h3>' ?>
@@ -51,7 +70,9 @@
             <?php foreach($noPin as $np): ?>
                 <p><?php echo $np['question'] ?></p>
                 <?php if($moderator == 1): ?>
-                    <?php echo 'buttons' ?>
+                <form method="post" action="">
+                    <input type="submit" class="button" name="pin" value="Pin" id="<?php echo $np['id'] ?>">
+                </form>
                 <?php endif; ?>
             <?php endforeach; ?>
         <?php else: ?>
