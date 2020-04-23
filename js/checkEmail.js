@@ -17,7 +17,13 @@ function checkEmail(){} {
     .then((response) => response.json())
     .then((result) => {
         let available = document.querySelector("#available");
-        available.innerHTML = result["available"];
+
+        if(result['status']==="success"){
+            available.innerHTML = "<p>Email is available.</p>";
+        }else{
+            available.innerHTML = "<p>Email is not available.</p>";
+        }
+        
     })
     .catch((error) => {
     console.error('Error:', error);
