@@ -14,6 +14,11 @@
             $list->unPinQuestion($id);
         }
 
+        if(!empty($_POST['question'])){
+            $question = $_POST['question'];
+            $list->askQuestion($question);
+        }
+
         $noPin = $list->getAllQuestions(0);
         $pinned = $list->getAllQuestions(1);      
 
@@ -21,12 +26,6 @@
         $moderator = $list->moderator($email);
         $moderator = $moderator['moderator'];
         
-        if(!empty($_POST['question'])){
-            $question = $_POST['question'];
-            $list->askQuestion($question);
-            header('Location: faq.php');
-        }
-
     } else {
         header("Location: logout.php");
     }
@@ -51,14 +50,15 @@
     <h2>FAQ 🤔</h2>
         <?php if(!empty($pinned)): ?>
             <?php foreach($pinned as $p): ?>
-                <p><?php echo $p['question'] ?></p>
+                <p><?php echo htmlspecialchars($p['question']); ?></p>
+                <a href="discussion.php?id=<?php echo htmlspecialchars($p['id']); ?>" class="btn btn-success">Go to discussion</a>
                 <?php if($moderator == 1): ?>
-                <form method="post" action="">
-                <div class="form-group">
-                    <input type="hidden" value="<?php echo $p['id'] ?>" name="unPin" id="pin">
-                    <input type="submit" class="btn btn-info" value="unPin">
-                </div>
-                </form>
+                    <form method="post" action="">
+                        <div class="form-group">
+                            <input type="hidden" value="<?php echo htmlspecialchars($p['id']); ?>" name="unPin" id="pin">
+                            <input type="submit" class="btn btn-info" value="unPin">
+                        </div>
+                    </form>
                 <?php endif; ?>
             <?php endforeach; ?>
         <?php else: ?>
@@ -70,14 +70,15 @@
     <h2>Nonpinned questions</h2>
         <?php if(!empty($noPin)): ?>
             <?php foreach($noPin as $np): ?>
-                <p><?php echo $np['question'] ?></p>
+                <p><?php echo htmlspecialchars($np['question']); ?></p>
+                <a href="discussion.php?id=<?php echo htmlspecialchars($np['id']); ?>" class="btn btn-success">Go to discussion</a>
                 <?php if($moderator == 1): ?>
-                <form method="post" action="">
-                <div class="form-group">
-                    <input type="hidden" value="<?php echo $np['id'] ?>" name="pin" id="pin">
-                    <input type="submit" class="btn btn-info" value="Pin">
-                </div>
-                </form>
+                    <form method="post" action="">
+                        <div class="form-group">
+                            <input type="hidden" value="<?php echo htmlspecialchars($np['id']); ?>" name="pin" id="pin">
+                            <input type="submit" class="btn btn-info" value="Pin">
+                        </div>
+                    </form>
                 <?php endif; ?>
             <?php endforeach; ?>
         <?php else: ?>

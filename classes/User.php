@@ -1396,5 +1396,32 @@ include_once(__DIR__ . "/Db.php");
             $result = $statement->execute();
             return $result;
         }
+
+        public function CurrentQuestion($id){
+            $conn = DB::getConnection();
+            $statement = $conn->prepare("SELECT * FROM `questions` WHERE `id` = :id");
+            $statement->bindValue(':id', $id);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        public function getComments($id){
+            $conn = DB::getConnection();
+            $statement = $conn->prepare("SELECT * FROM `comments` WHERE `commentId` = :id");
+            $statement->bindValue(':id', $id);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        public function placeComment($comment, $id){
+            $conn = DB::getConnection();
+            $statement = $conn->prepare("INSERT INTO `comments`(`comment`, `commentId`) VALUES (:comment, :commentId)");
+            $statement->bindValue(":comment", $comment);
+            $statement->bindValue(":commentId", $id);
+            $result = $statement->execute();
+            return $result;
+        }
     }
     
