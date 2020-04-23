@@ -7,7 +7,7 @@ if(emailInput){
     });
 }
 
-function checkEmail(){} {
+function checkEmail(){
     let formData = new FormData();
     let email = emailInput.value;
     formData.append('email', email);
