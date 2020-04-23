@@ -10,8 +10,8 @@ if(emailInput){
 function checkEmail(){} {
     let formData = new FormData();
     let email = emailInput.value;
-
     formData.append('email', email);
+
     fetch('ajax/checkEmail.php', {
         method: 'POST',
         body: formData
@@ -19,6 +19,8 @@ function checkEmail(){} {
     .then((response) => response.json())
     .then((result) => {
         let available = document.querySelector("#available");
+
+        console.log(result);
 
         if(result['status']==="success"){
             available.innerHTML = "<p>Email is available.</p>";
