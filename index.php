@@ -50,6 +50,7 @@
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" name="email" placeholder="Email address" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             <small id="emailHelp" class="form-text text-muted">Email must end in @student.thomasmore.be</small>
+            <span id="available"></span>
         </div>
         <div class="form-group">
             <label for="firstName">First name</label>

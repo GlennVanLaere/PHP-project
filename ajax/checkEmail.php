@@ -11,10 +11,12 @@
 
         if ( $res ) {
             $response = [
+                'status' => 'fail',
                 'available' => 'Email is not available'
             ];
         } else {
             $response = [
+                'status' => 'success',
                 'available' => 'Email is available'
             ];
         }
