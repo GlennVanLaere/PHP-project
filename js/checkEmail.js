@@ -9,14 +9,15 @@ if(emailInput){
 
 function checkEmail(){} {
     let formData = new FormData();
-
+    let email = emailInput.value;
     fetch('ajax/checkEmail.php', {
         method: 'POST',
         body: formData
     })
     .then((response) => response.json())
     .then((result) => {
-        location.reload();
+        let available = document.querySelector("#available");
+        available.innerHTML = result["available"];
     })
     .catch((error) => {
     console.error('Error:', error);
