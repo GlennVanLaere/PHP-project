@@ -6,8 +6,9 @@
 
         $email = $_POST['email'];
         $user = new User();
-        $res = $user->checkEmail( $email );
         $user->setEmail($email);
+        $res = $user->checkEmail( $email );
+        
 
         if ( $res ) {
             $response = [
