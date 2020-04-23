@@ -3,6 +3,17 @@
     include_once(__DIR__ . "/classes/User.php");
     if(isset($_SESSION['user'])){
         $list = new user;
+
+        if(isset($_POST['pin'])){
+            $id = $_POST['pin'];
+            $list->pinQuestion($id);
+        }
+
+        if(isset($_POST['unPin'])){
+            $id = $_POST['unPin'];
+            $list->unPinQuestion($id);
+        }
+
         $noPin = $list->getAllQuestions(0);
         $pinned = $list->getAllQuestions(1);      
 
@@ -13,18 +24,6 @@
         if(!empty($_POST['question'])){
             $question = $_POST['question'];
             $list->askQuestion($question);
-            header('Location: faq.php');
-        }
-
-        if(isset($_POST['pin'])){
-            $id = 14;
-            $list->pinQuestion($id);
-            header('Location: faq.php');
-        }
-
-        if(isset($_POST['unPin'])){
-            $id = 14;
-            $list->unPinQuestion($id);
             header('Location: faq.php');
         }
 
@@ -55,7 +54,10 @@
                 <p><?php echo $p['question'] ?></p>
                 <?php if($moderator == 1): ?>
                 <form method="post" action="">
-                    <input type="submit" class="button" name="unPin" value="unPin" id="<?php echo $p['id'] ?>">
+                <div class="form-group">
+                    <input type="hidden" value="<?php echo $p['id'] ?>" name="unPin" id="pin">
+                    <input type="submit" class="btn btn-info" value="unPin">
+                </div>
                 </form>
                 <?php endif; ?>
             <?php endforeach; ?>
@@ -71,7 +73,10 @@
                 <p><?php echo $np['question'] ?></p>
                 <?php if($moderator == 1): ?>
                 <form method="post" action="">
-                    <input type="submit" class="button" name="pin" value="Pin" id="<?php echo $np['id'] ?>">
+                <div class="form-group">
+                    <input type="hidden" value="<?php echo $np['id'] ?>" name="pin" id="pin">
+                    <input type="submit" class="btn btn-info" value="Pin">
+                </div>
                 </form>
                 <?php endif; ?>
             <?php endforeach; ?>
