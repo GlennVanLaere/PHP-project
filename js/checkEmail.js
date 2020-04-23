@@ -10,6 +10,8 @@ if(emailInput){
 function checkEmail(){} {
     let formData = new FormData();
     let email = emailInput.value;
+
+    formData.append('email', email);
     fetch('ajax/checkEmail.php', {
         method: 'POST',
         body: formData
