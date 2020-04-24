@@ -31,14 +31,17 @@
     <title>Login</title>
   </head>
   <body>
-
+    <nav>
+        <p>👫 Buddy Project</p>
+    </nav>
     <?php if(isset($error)): ?>
       <div class="alert alert-danger" role="alert">
         <?php echo $error ?>
       </div>
     <?php endif; ?>
-
+    
     <form action="" method="post">
+    <h1>Sign in</h1>
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" placeholder="Enter email" name="email" id="email" class="form-control">
@@ -47,8 +50,11 @@
         <label for="password">Password</label>
         <input type="password" placeholder="Password" name="password" id="password" class="form-control">
       </div>
-      
-      <input type="submit" value="Sign in" class="btn btn-primary">
+      <div class="btnGroup">
+        <input type="submit" value="Sign in" class="btn btn-primary">
+        <p class="acc">Want to register?</p>
+        <a href="index.php" class="btn btn-primary btn-xs">Create account</a>
+      </div>
     </form>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
