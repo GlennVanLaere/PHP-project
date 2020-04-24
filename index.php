@@ -68,10 +68,10 @@
             <input type="password" name="password" class="form-control" placeholder="Password" id="exampleInputPassword1">
             <small id="passwordHelp" class="form-text text-muted">Password must include at least 1 uppercase, 1 lowercase, 1 special character and must be at least 8 characters long</small>
         </div>
-        <div class="btnGroup">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div>
+        <button type="submit" class="btn btn-primary btnu">Submit</button>
         <p class="acc">Already have an account?</p>
-        <a href="login.php" class="btn btn-primary btn-xs">Log In</a>
+        <a href="login.php" class="btn btn-primary btn-xs btnu">Log In</a>
         </div>
 
     </form>
