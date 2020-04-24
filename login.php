@@ -50,10 +50,10 @@
         <label for="password">Password</label>
         <input type="password" placeholder="Password" name="password" id="password" class="form-control">
       </div>
-      <div class="btnGroup">
-        <input type="submit" value="Sign in" class="btn btn-primary">
+      <div >
+        <input type="submit" value="Sign in" class="btn btn-primary btnu">
         <p class="acc">Want to register?</p>
-        <a href="index.php" class="btn btn-primary btn-xs">Create account</a>
+        <a href="index.php" class="btn btn-primary btn-xs btnu">Create account</a>
       </div>
     </form>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
