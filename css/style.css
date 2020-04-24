@@ -28,6 +28,11 @@ label{
     font-size: 18px;
 }
 
+#available{
+    color:darkblue;
+    font-weight: bold;
+}
+
 .btnGroup{
     display: block;
     margin: 5px auto;
