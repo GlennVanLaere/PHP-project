@@ -1,4 +1,4 @@
-<div class="btnGroup">
+<div>
     <a href="chat.php?messageid=<?php echo $person->getBuddyId(); ?>" class="btn btn-success">Open chat<?php if ($person->messageSenders($person->getUserId(), $person->getBuddyId())) { echo " 🔔";}?></a>
     <?php if ($person->hasBuddy($person->getBuddyId())): ?>
     <a href="#" id="btnRemoveBuddy" data-buddy="<?php echo $person->getBuddyId(); ?>" class="btn btn-danger">Remove buddy</a>

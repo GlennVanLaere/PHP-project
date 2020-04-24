@@ -45,7 +45,7 @@ if(isset($_SESSION['user'])){
             <input type="text" name="searchTerm" class="form-control" placeholder="Search">
         </div>
         <div class="form-group">
-            <input type="submit" name="search" value="search" class="btn btn-primary">
+            <input type="submit" name="search" value="search" class="btn btnu btn-primary">
         </div>
     </form>
     <?php if(!empty($_POST)){ ?>

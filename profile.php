@@ -67,13 +67,13 @@ if(isset($_SESSION['user'])){
         </form>
         <h2>Bio</h2>
         <p> <?php echo $showDescription ?> </p>
-        <a href="updateDescription.php"> change your description here</a>
+        <a href="updateDescription.php">Change description</a>
 
         <h2>Email adress</h2>
         <p> <?php echo $showEmail ?> </p>
-        <a href="updateEmail.php"> change your email adress here</a>
+        <a href="updateEmail.php">Change email</a>
 
-        <a href="updatePassword.php"> change your password here</a>
+        <a href="updatePassword.php">Change password</a>
     
     </div>
     <div class="buddy">
@@ -82,7 +82,8 @@ if(isset($_SESSION['user'])){
             <img src="<?php echo $showBuddy['avatar']; ?>" alt="">
             <?php echo $showBuddy['firstName']." ".$showBuddy['lastName']; ?>
     <?php else: ?>
-    <a href="match.php">You don't have a buddy yet, go find one</a>
+        <p>You don't have a buddy yet</p>
+    <a href="match.php" class="btn btn-primary">Go find one</a>
     <?php endif; ?>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
