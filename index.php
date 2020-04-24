@@ -29,9 +29,11 @@
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-
+    <nav>
+        <p>👫 Buddy Project</p>
+    </nav>
     <form action="" method="post">
-
+        <h1>Create an account</h1>
         <?php if(isset($error)): ?>
             <div class="alert alert-danger" role="alert">
                 <?php echo $error ?>
@@ -64,11 +66,15 @@
             <input type="password" name="password" class="form-control" placeholder="Password" id="exampleInputPassword1">
             <small id="passwordHelp" class="form-text text-muted">Password must include at least 1 uppercase, 1 lowercase, 1 special character and must be at least 8 characters long</small>
         </div>
+        <div class="btnGroup">
         <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    <p>Already have an account?</p>
-    <a href="login.php" class="btn btn-primary btn-xs">Log In</a>
+        <p>Already have an account?</p>
+        <a href="login.php" class="btn btn-primary btn-xs">Log In</a>
 
+        </div>
+
+    </form>
+    
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

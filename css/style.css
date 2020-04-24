@@ -3,5 +3,42 @@ img{
 }
 
 *{
-    background-color: red;
+    background-color: #D3ECFD;
+}
+
+nav{
+    padding: 10px 15px; 
+}
+
+h1{
+    text-align: center;
+    margin-top: -20px;
+    padding-top: 20px;
+}
+
+.form-group{
+    width: 25em;
+    display: block;
+    margin: 0 auto;
+     
+}
+
+label{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.text-muted{
+    color: white;
+}
+
+.btnGroup{
+    display: block;
+    margin: 5px auto;
+    text-align: center;    
+}
+
+.btn-primary{
+    background-color: darkblue;
+    margin: 5px;
 }
