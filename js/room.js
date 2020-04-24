@@ -1,4 +1,4 @@
-let room = document.querySelectorAll("#room");
+let room = document.querySelectorAll(".room");
 
 for (let i = 0; i <  room.length; i++) {
     room[i].addEventListener("keyup", (e) => {
@@ -27,7 +27,7 @@ function goToNextInput(room, roominput, i, e) {
             room[i+1].focus();
         } else {
             room[i].blur();
-            console.log("complete!");
+            searchRoom();
         }
     }
 }
@@ -38,10 +38,26 @@ function goToEmpty(room, i) {
             room[i-1].focus();
         }
     }
+}
 
-    /*for (let i = 0; room[i].value === ""; i++) {
-        room[i].focus();
-        console.log(room[i]);
-        return;
-    }*/
+function searchRoom() {
+    let campus = document.querySelector("#campus").value;
+    let floor = document.querySelector("#floor").value;
+
+    let formData = new FormData();
+
+    formData.append('campus', campus);
+    formData.append('floor', floor);
+
+    fetch('ajax/searchRoom.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then((response) => response.json())
+    .then((result) => {
+        console.log('Success:', result);
+    })
+    .catch((error) => {
+    console.error('Error:', error);
+    });
 }

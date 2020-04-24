@@ -19,11 +19,11 @@
 <body>
     <?php include("includes/nav.inc.php") ?>
     <h1>Room location</h1>
-    <input id="room" pattern="[A-Za-z]{1} type="text" maxlength="1" size="1" placeholder="Z">
-    <input id="room" type="number" min="0" max="9" placeholder="2">
+    <input id="campus" class="room" type="text" maxlength="1" size="1" placeholder="Z">
+    <input id="floor" class="room" type="number" min="0" max="9" placeholder="2">
     <p class="d-inline">.</p>
-    <input id="room" type="number" min="0" max="9" placeholder="0">
-    <input id="room" type="number" min="0" max="9" placeholder="4">
+    <input class="room" type="number" min="0" max="9" placeholder="0">
+    <input class="room" type="number" min="0" max="9" placeholder="4">
     <p>Room Z2.04 is located on the 2nd floor in Campus De Vest</p>
     <a href="#">View on Google Maps</a>
 
