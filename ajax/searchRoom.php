@@ -3,9 +3,13 @@
     session_start();
         $user = new User();
 
+        $user->setCampusLetter(strtoupper($_POST["campus"]));
+
+        $user->searchCampus();
+
         $response = [
-            'campus' => "Z",
-            'floor' => 2
+            'campus' => $user->getCampus(),
+            'letter' => $user->getCampusLetter()
         ];
 
         header('Content-Type: application/json');

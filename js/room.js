@@ -27,7 +27,7 @@ function goToNextInput(room, roominput, i, e) {
             room[i+1].focus();
         } else {
             room[i].blur();
-            searchRoom();
+            searchCampus();
         }
     }
 }
@@ -40,14 +40,12 @@ function goToEmpty(room, i) {
     }
 }
 
-function searchRoom() {
+function searchCampus() {
     let campus = document.querySelector("#campus").value;
-    let floor = document.querySelector("#floor").value;
 
     let formData = new FormData();
 
     formData.append('campus', campus);
-    formData.append('floor', floor);
 
     fetch('ajax/searchRoom.php', {
         method: 'POST',
@@ -55,9 +53,42 @@ function searchRoom() {
     })
     .then((response) => response.json())
     .then((result) => {
-        console.log('Success:', result);
+        showResult(result);
     })
     .catch((error) => {
     console.error('Error:', error);
     });
+}
+
+function showResult(result) {
+    let floorNumber = document.querySelector("#floor").value;
+    let room = document.querySelectorAll("#room");
+    let floor;
+
+    switch (floorNumber) {
+        case "0":
+            floor = "ground";
+            break;
+
+        case "1":
+            floor = "1st";
+            break;
+
+        case "2":
+            floor = "2nd";
+            break;
+
+        case "3":
+            floor = "3rd";
+            break;
+    
+        default:
+            floor = floorNumber + "th"
+            break;
+    }
+    if (result["campus"]) {
+        document.querySelector("#result").innerHTML = `Room ${result["letter"]}${floorNumber}.${room[0].value}${room[1].value} is located on the ${floor} floor in ${result["campus"]}`;
+    } else {
+        document.querySelector("#result").innerHTML = `We couldn't find this room`;
+    }
 }

@@ -28,6 +28,8 @@ include_once(__DIR__ . "/Db.php");
         private $buddyId;
         private $messageText;
         private $reason;
+        private $campusLetter;
+        private $campus;
 
         //feature 3 gedeelte
         
@@ -1352,6 +1354,56 @@ include_once(__DIR__ . "/Db.php");
             $users = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $users;
     
+        }
+
+        public function searchCampus() {
+            $letter = $this->getCampusLetter();
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT name FROM campuses WHERE letter = :letter");
+            $statement->bindValue(":letter", $letter);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $this->setCampus($result['name']);
+        }
+
+        /**
+         * Get the value of campusLetter
+         */ 
+        public function getCampusLetter()
+        {
+                return $this->campusLetter;
+        }
+
+        /**
+         * Set the value of campusLetter
+         *
+         * @return  self
+         */ 
+        public function setCampusLetter($campusLetter)
+        {
+                $this->campusLetter = $campusLetter;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of campus
+         */ 
+        public function getCampus()
+        {
+                return $this->campus;
+        }
+
+        /**
+         * Set the value of campus
+         *
+         * @return  self
+         */ 
+        public function setCampus($campus)
+        {
+                $this->campus = $campus;
+
+                return $this;
         }
     }
     

@@ -22,9 +22,9 @@
     <input id="campus" class="room" type="text" maxlength="1" size="1" placeholder="Z">
     <input id="floor" class="room" type="number" min="0" max="9" placeholder="2">
     <p class="d-inline">.</p>
-    <input class="room" type="number" min="0" max="9" placeholder="0">
-    <input class="room" type="number" min="0" max="9" placeholder="4">
-    <p>Room Z2.04 is located on the 2nd floor in Campus De Vest</p>
+    <input id="room" class="room" type="number" min="0" max="9" placeholder="0">
+    <input id="room" class="room" type="number" min="0" max="9" placeholder="4">
+    <p id="result">Room Z2.04 is located on the 2nd floor in Campus De Vest</p>
     <a href="#">View on Google Maps</a>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
