@@ -1383,16 +1383,16 @@ include_once(__DIR__ . "/Db.php");
 
         public function pinQuestion($id){
             $conn = DB::getConnection();
-            $statement = $conn->prepare("UPDATE `questions` SET `pinned`= 1 WHERE `id` = $id");
-            $statement->bindValue('id', $id);
+            $statement = $conn->prepare("UPDATE `questions` SET `pinned`= 1 WHERE `id` = :id");
+            $statement->bindValue(':id', $id);
             $result = $statement->execute();
             return $result;
         }
 
         public function unPinQuestion($id){
             $conn = DB::getConnection();
-            $statement = $conn->prepare("UPDATE `questions` SET `pinned`= 0 WHERE `id` = $id");
-            $statement->bindValue('id', $id);
+            $statement = $conn->prepare("UPDATE `questions` SET `pinned`= 0 WHERE `id` = :id");
+            $statement->bindValue(':id', $id);
             $result = $statement->execute();
             return $result;
         }
