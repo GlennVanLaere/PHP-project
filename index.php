@@ -70,7 +70,7 @@
         </div>
         <div class="btnGroup">
         <button type="submit" class="btn btn-primary">Submit</button>
-        <p>Already have an account?</p>
+        <p class="acc">Already have an account?</p>
         <a href="login.php" class="btn btn-primary btn-xs">Log In</a>
         </div>
 
