@@ -88,7 +88,9 @@ function showResult(result) {
     }
     if (result["campus"]) {
         document.querySelector("#result").innerHTML = `Room ${result["letter"]}${floorNumber}.${room[0].value}${room[1].value} is located on the ${floor} floor in ${result["campus"]}`;
+        document.querySelector("#map").href = `https://maps.google.com/?q=Thomas More Mechelen - ${result["campus"]}`;
     } else {
         document.querySelector("#result").innerHTML = `We couldn't find this room`;
+        document.querySelector("#map").href = `https://maps.google.com/?q=Thomas More Mechelen`;
     }
 }
