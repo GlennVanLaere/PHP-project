@@ -53,6 +53,7 @@ include_once(__DIR__."/classes/User.php");
    
     <?php  echo '<h1> Hi, '.$info['firstName'].'  '. $info['lastName'].'!</h1>'; ?>
     <h2>Here You can find all your matches, based on various criteria.</h2>
+    
     <h3>Perfect Match:</h3>
     <?php foreach ($perfectMatch as $pm): ?>
     <p><?php echo $pm['firstName'] . " " . $pm['lastName']; ?></p>
@@ -65,7 +66,7 @@ include_once(__DIR__."/classes/User.php");
     <p>Also watches: <?php echo $pm['tvShows'] . " tvShows" ; ?></p>
     <h4>Conclusion: 100% the perfect match!</h4>
     <?php endforeach; ?>
-    <?php if($perfectMatch ===NULL){ echo '<p>No perfect matches found.</p>'; } ?>
+    <?php if(!$perfectMatch){ echo '<p>No perfect matches found.</p>'; } ?>
 
 <h3>Buddy Matches:</h3>
     <?php foreach ($buddyMatch as $bm): ?>
@@ -73,6 +74,7 @@ include_once(__DIR__."/classes/User.php");
     <?php $person->setBuddyId($bm['id']); ?>
     <?php include("includes/buddyRequestButtons.inc.php") ?>
     <?php endforeach; ?>
+    <?php if(!$buddyMatch){ echo '<p>No matches found based on buddy settings.</p>'; } ?>
 
 <h3>Music Matches:</h3>
     <?php foreach ($musicMatch as $mum): ?>
@@ -80,7 +82,7 @@ include_once(__DIR__."/classes/User.php");
     <?php $person->setBuddyId($mum['id']); ?>
     <?php include("includes/buddyRequestButtons.inc.php") ?>
     <?php endforeach; ?>
-    <?php if($musicMatch ===NULL){ echo '<p>No perfect matches found based on music.</p>'; } ?>
+    <?php if(!$musicMatch){ echo '<p>No matches found based on music.</p>'; } ?>
 
 <h3>Movies Matches:</h3>
     <?php foreach ($moviesMatch as $mom): ?>
@@ -88,7 +90,7 @@ include_once(__DIR__."/classes/User.php");
     <?php $person->setBuddyId($mom['id']); ?>
     <?php include("includes/buddyRequestButtons.inc.php") ?>
     <?php endforeach; ?>
-    <?php if($moviesMatch ===NULL){ echo '<p>No perfect matches found based on movies.</p>'; } ?>
+    <?php if(!$moviesMatch){ echo '<p>No matches found based on movies.</p>'; } ?>
 
 <h3>Games Matches:</h3>
     <?php foreach ($gamesMatch as $gm): ?>
@@ -96,7 +98,7 @@ include_once(__DIR__."/classes/User.php");
     <?php $person->setBuddyId($gm['id']); ?>
     <?php include("includes/buddyRequestButtons.inc.php") ?>
     <?php endforeach; ?>
-    <?php if($gamesMatch ===NULL){ echo '<p>No perfect matches found based on games.</p>'; } ?>
+    <?php if(!$gamesMatch){ echo '<p>No matches found based on games.</p>'; } ?>
 
 <h3>Books Matches:</h3>
     <?php foreach ($booksMatch as $bm): ?>
@@ -104,7 +106,7 @@ include_once(__DIR__."/classes/User.php");
     <?php $person->setBuddyId($bm['id']); ?>
     <?php include("includes/buddyRequestButtons.inc.php") ?>
     <?php endforeach; ?>
-    <?php if($booksMatch ===NULL){ echo '<p> no perfect matches found based on books, search based on another tag </p>'; } ?>
+    <?php if(!$booksMatch){ echo '<p>No matches found based on books.</p>'; } ?>
 
 <h3>TvShows Matches:</h3>
     <?php foreach ($tvShowsMatch as $tm): ?>
@@ -112,7 +114,7 @@ include_once(__DIR__."/classes/User.php");
     <?php $person->setBuddyId($tm['id']); ?>
     <?php include("includes/buddyRequestButtons.inc.php") ?>
     <?php endforeach; ?>
-    <?php if($tvShowsMatch ===NULL){ echo '<p> no perfect matches found based on tv-shows, search based on another tag </p>'; } ?>
+    <?php if(!$tvShowsMatch){ echo '<p>No matches found based on tv-shows.</p>'; } ?>
 
     <script src="js/buddyRequest.js"></script>
 </body>
