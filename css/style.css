@@ -2,8 +2,21 @@ img{
     width: 100px;   
 }
 
-*{
+body{
     background-color: #D3ECFD;
+    padding: 10px;
+}
+
+.mainnav{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.mainnav a{
+    padding: 10px;
+    align-items: flex-end;
+    text-decoration: none;
+    color: darkblue;
 }
 
 nav{
@@ -28,6 +41,11 @@ h1{
 label{
     font-weight: bold;
     font-size: 18px;
+}
+
+.form-control{
+    border: 1px solid darkblue;
+    border-radius: 5px;    
 }
 
 #available{
