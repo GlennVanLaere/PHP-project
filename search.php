@@ -62,7 +62,7 @@ if(isset($_SESSION['user'])){
             </div>    
         <?php endforeach; ?>
         <?php else: ?>
-            <?php echo "<h1>Niets gevonden :( </h1>" ?>
+            <?php echo "<h1 class='blue'>Niets gevonden :( </h1>" ?>
         <?php endif; ?>
     <?php }; ?>
 

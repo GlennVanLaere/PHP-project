@@ -1,5 +1,5 @@
 img{
-    width: 100px;   
+    width: 150px;   
 }
 
 body{
@@ -10,6 +10,10 @@ body{
 .mainnav{
     display: flex;
     justify-content: space-evenly;
+}
+
+a{
+    text-decoration: none;
 }
 
 .mainnav a{
@@ -29,6 +33,10 @@ h1{
     text-align: center;
     margin-top: -20px;
     padding-top: 20px;
+}
+
+h2{
+    font-size: 22px;
 }
 
 .form-group{
@@ -80,6 +88,10 @@ label{
 
 .btn{
     font-weight: bold;
+}
+
+.blue{
+    color: darkblue;
 }
 
 .btn-primary{
@@ -187,6 +199,11 @@ label{
 .btn-info{
     background-color: darkblue;
 }
+
+.profile, .desc{
+    text-align: center;
+}
+
 
 @media (min-width: 800px){
     .mainnav{
