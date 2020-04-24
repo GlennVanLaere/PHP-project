@@ -43,7 +43,7 @@ include_once(__DIR__."/classes/User.php");
     <h2>Here You can find all your matches, based on various criteria.</h2>
     <h3>Perfect Match:</h3>
     <?php foreach ($perfectMatch as $pm): ?>
-    <p><?php echo $pm['firstName'] . " " . $pm['lastName']; ?></p>
+    <a href="public.php?id=<?php echo $pm['id']; ?>"><?php echo $pm['firstName'] . " " . $pm['lastName']; ?></a>
     <?php $person->setBuddyId($pm['id']); ?>
     <?php include("includes/buddyRequestButtons.inc.php") ?>
     <p>Also listens to: <?php echo $pm['music'] . " music" ; ?></p>
@@ -57,7 +57,7 @@ include_once(__DIR__."/classes/User.php");
 
 <h3>Buddy Matches:</h3>
     <?php foreach ($buddyMatch as $bm): ?>
-    <p><?php echo $bm['firstName'] . " " . $bm['lastName']; ?></p>
+    <a href="public.php?id=<?php echo $bm['id']; ?>"><?php echo $bm['firstName'] . " " . $bm['lastName']; ?></a>
     <?php $person->setBuddyId($bm['id']); ?>
     <?php include("includes/buddyRequestButtons.inc.php") ?>
     <?php endforeach; ?>
