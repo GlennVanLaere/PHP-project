@@ -4,7 +4,7 @@
         "db"=>[
             "user"      => "root",
             "password"  => "",
-            "host"      => "localhost:3308",
+            "host"      => "localhost",
             "dbname" => "phpproject"
         ]
     ];

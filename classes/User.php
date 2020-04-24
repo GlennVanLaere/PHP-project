@@ -1354,24 +1354,6 @@ include_once(__DIR__ . "/Db.php");
     
         }
 
-        public function getAllQuestions($pin){
-            $pin = $pin;
-            $conn = DB::getConnection();
-            $statement = $conn->prepare("SELECT * FROM `questions` WHERE `pinned` = :pin");
-            $statement->bindValue(':pin', $pin);
-            $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
-        }
-
-        public function askQuestion($question){
-            $conn = DB::getConnection();
-            $statement = $conn->prepare("INSERT INTO `questions`(`question`, `pinned`) VALUES (:question, 0)");
-            $statement->bindValue(":question", $question);
-            $result = $statement->execute();
-            return $result;
-        }
-
         public function moderator($email){
             $conn = DB::getConnection();
             $statement = $conn->prepare("SELECT * FROM `users` WHERE `email` = :email");
@@ -1380,48 +1362,4 @@ include_once(__DIR__ . "/Db.php");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;
         }
-
-        public function pinQuestion($id){
-            $conn = DB::getConnection();
-            $statement = $conn->prepare("UPDATE `questions` SET `pinned`= 1 WHERE `id` = :id");
-            $statement->bindValue(':id', $id);
-            $result = $statement->execute();
-            return $result;
-        }
-
-        public function unPinQuestion($id){
-            $conn = DB::getConnection();
-            $statement = $conn->prepare("UPDATE `questions` SET `pinned`= 0 WHERE `id` = :id");
-            $statement->bindValue(':id', $id);
-            $result = $statement->execute();
-            return $result;
-        }
-
-        public function CurrentQuestion($id){
-            $conn = DB::getConnection();
-            $statement = $conn->prepare("SELECT * FROM `questions` WHERE `id` = :id");
-            $statement->bindValue(':id', $id);
-            $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $result;
-        }
-
-        public function getComments($id){
-            $conn = DB::getConnection();
-            $statement = $conn->prepare("SELECT * FROM `comments` WHERE `commentId` = :id");
-            $statement->bindValue(':id', $id);
-            $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
-        }
-
-        public function placeComment($comment, $id){
-            $conn = DB::getConnection();
-            $statement = $conn->prepare("INSERT INTO `comments`(`comment`, `commentId`) VALUES (:comment, :commentId)");
-            $statement->bindValue(":comment", $comment);
-            $statement->bindValue(":commentId", $id);
-            $result = $statement->execute();
-            return $result;
-        }
     }
-    

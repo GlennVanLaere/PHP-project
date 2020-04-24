@@ -1,8 +1,9 @@
 <?php
     session_start();
+    include_once(__DIR__ . "/classes/Faq.php");
     include_once(__DIR__ . "/classes/User.php");
     if(isset($_SESSION['user'])){
-        $list = new user;
+        $list = new Faq;
 
         if(isset($_POST['pin'])){
             $id = $_POST['pin'];
@@ -22,8 +23,9 @@
         $noPin = $list->getAllQuestions(0);
         $pinned = $list->getAllQuestions(1);      
 
+        $mod = new User;
         $email = $_SESSION['user'];
-        $moderator = $list->moderator($email);
+        $moderator = $mod->moderator($email);
         $moderator = $moderator['moderator'];
         
     } else {
