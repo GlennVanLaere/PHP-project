@@ -1297,66 +1297,36 @@ include_once(__DIR__ . "/Db.php");
             $result = $statement->execute();
             return $result;
         }
-        public function test(){
-            $var1 = 5;
-            $var2 = 7;
+    public function publicInfo($id){
+        $conn = Db::getConnection();
+        $stmt = $conn->prepare("SELECT * FROM users WHERE id=:id");
+        $stmt->bindValue(":id", $id);
 
-            $result = $var1 + $var2;
-            return $result;
-        }
-        
-        public function output($result){
-            $var3 = 2;
-            $output = $result * $var3;
-            return $output;
-        }
+        $stmt->execute();
+        $return = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $return;
 
-        // public function viewBuddies(){
-        //     $conn = Db::getConnection();
-        //     //check if empty statement
-        //     $emptyStatement = $conn->prepare("SELECT firstName, lastName, buddyId FROM users WHERE buddyId !=(LENGTH(IFNULL(buddyId,'')) = 0)");
-        //     $emptyStatement->execute();
-        //     $result = $emptyStatement->fetchAll(PDO::FETCH_ASSOC);
-        //     foreach($result as $mainKey){
-        //         $idKey = [$mainKey["buddyId"]];
-        //         foreach($idKey as $bkey){
-        //             var_dump($idKey);
-        //             $bnstmt = $conn->prepare("SELECT firstName, lastName FROM users WHERE id=:id");
-        //             $bnstmt->bindValue(":id", $bkey);
-        //             $bnstmt->execute();
-        //             $buddyID = $bnstmt->fetchAll(PDO::FETCH_ASSOC);
-        //             foreach($buddyID as $buddyPrint){
-        //                 $fullnameBuddy = $buddyPrint["firstName"] . " ".$buddyPrint["lastName"];
 
-        //                 $Freturn = [$result, $fullnameBuddy];
-        //                 //var_dump($Freturn);
-        //                 return $Freturn;
-        //             }
-        //         }
-        //     }
 
-        //public function viewBuddies(){
-           // $conn = Db::getconnection();
-            //get all users with filled buddy field
-           // $getAllStmt = $conn->prepare("SELECT firstName, LastName, budd")
-            //get all buddyId's from those fields
-            //get names of people where buddyfield != empty
-            //get names of people 
-        }
-       
-            
-            // $getBuddyNameStmt = $conn->prepare("SELECT firstname FROM users WHERE id")
+    }
+    public function getBuddyName($buddyId){
+        $conn = Db::getConnection();
+        $stmt = $conn->prepare("SELECT id, firstName, lastName FROM users WHERE id=:id");
+        $stmt->bindValue(":id", $buddyId);
+        $stmt->execute();
+        $return = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $return;
 
+            }
+}
         
         
-        // public function viewOtherBuddies(){
-        //     $conn = Db::getConnection();
-        //     $buddyStatement = $conn->prepare("SELECT buddyId FROM users WHERE id=:id");
-        //     $buddyStatement->bindValue(":id", $value["id"]);
-        //     $buddyStatement->execute();
-        //     $signal = $buddyStatement->fetchAll(PDO::FETCH_ASSOC);
-        //     // echo $signal["buddyId"];
-        //     var_dump($signal);
-        // }
-    
-    
+    //     public function inArr($buddyId){
+    //         $conn = Db::getConnection();
+    //         $stmt = $conn->prepare("SELECT id FROM users WHERE buddyId !=(LENGTH(IFNULL(buddyId,'')) = 0)");
+
+    //     }
+
+    // }
+
+  
