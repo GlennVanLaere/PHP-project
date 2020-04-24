@@ -29,7 +29,7 @@ if(isset($_SESSION['user'])){
     <?php include("includes/nav.inc.php") ?>
     <form action="" method="post">
         <div class="dropdown" >
-            <select name="category" required class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <select name="category" required class="btn btnGroup dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <option value="">Choose a category</option>
                 <option value="email">Email</option>
                 <option value="firstName">Firstname</option>

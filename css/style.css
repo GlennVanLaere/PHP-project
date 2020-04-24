@@ -57,6 +57,18 @@ label{
     display: block;
     margin: 5px auto;
     text-align: center;    
+    background-color: darkblue;
+    color: white;
+    font-weight: bold;
+}
+
+.btnGroup:hover{
+    display: block;
+    margin: 5px auto;
+    text-align: center;    
+    background-color: darkblue;
+    color: white;
+    font-weight: bold;
 }
 
 .acc{
@@ -112,6 +124,7 @@ label{
      padding: 0;
      margin: 0;
      text-align: center;
+     font-size: 20px;
 }
 
 .parent .msg{
@@ -171,7 +184,9 @@ label{
     text-align: center;
 }
 
-
+.btn-info{
+    background-color: darkblue;
+}
 
 @media (min-width: 800px){
     .mainnav{

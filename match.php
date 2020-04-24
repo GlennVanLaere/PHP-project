@@ -69,7 +69,7 @@ include_once(__DIR__."/classes/User.php");
     <div class="pm">
         <h3>Perfect Match:</h3>
         <?php foreach ($perfectMatch as $pm): ?>
-        <p><?php echo $pm['firstName'] . " " . $pm['lastName']; ?></p>
+        <p ><?php echo $pm['firstName'] . " " . $pm['lastName']; ?></p>
         <?php $person->setBuddyId($pm['id']); ?>
         <?php include("includes/buddyRequestButtons.inc.php") ?>
         <p>Also listens to: <?php echo $pm['music'] . " music" ; ?></p>
