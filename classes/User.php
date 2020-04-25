@@ -28,6 +28,8 @@ include_once(__DIR__ . "/Db.php");
         private $buddyId;
         private $messageText;
         private $reason;
+        private $campusLetter;
+        private $campus;
 
         //feature 3 gedeelte
         
@@ -909,12 +911,12 @@ include_once(__DIR__ . "/Db.php");
                 $conn = Db::getConnection();
                 $statement = $conn->prepare("UPDATE `users` SET `music`= :music,`movies`= :movies,`games`= :games,`books`= :books,`tvShows`= :tvShows, `buddy` = :buddy WHERE `email` = :email");
                 $statement->bindValue('email', $email);
-                $statement->bindValue(':music', htmlspecialchars($music));
-                $statement->bindValue(':movies', htmlspecialchars($movies));
-                $statement->bindValue(':games', htmlspecialchars($games));
-                $statement->bindValue(':books', htmlspecialchars($books));
-                $statement->bindValue(':tvShows', htmlspecialchars($tvShows));
-                $statement->bindValue(':buddy', htmlspecialchars($buddy));
+                $statement->bindValue(':music', $music);
+                $statement->bindValue(':movies', $movies);
+                $statement->bindValue(':games', $games);
+                $statement->bindValue(':books', $books);
+                $statement->bindValue(':tvShows', $tvShows);
+                $statement->bindValue(':buddy', $buddy);
                 $statement->execute();
                 header("Location: match.php");
             } catch (PDOException $e) {
@@ -1351,6 +1353,15 @@ include_once(__DIR__ . "/Db.php");
     
         }
 
+        public function moderator($email){
+            $conn = DB::getConnection();
+            $statement = $conn->prepare("SELECT * FROM `users` WHERE `email` = :email");
+            $statement->bindValue(':email', $email);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
+    
         public function checkEmail($email)
         {
 
@@ -1367,8 +1378,57 @@ include_once(__DIR__ . "/Db.php");
             }else{
                 return false; //taken
             }
+        }
             
             
+        public function searchCampus() {
+            $letter = $this->getCampusLetter();
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT name FROM campuses WHERE letter = :letter");
+            $statement->bindValue(":letter", $letter);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $this->setCampus($result['name']);
+        }
+
+        /**
+         * Get the value of campusLetter
+         */ 
+        public function getCampusLetter()
+        {
+                return $this->campusLetter;
+        }
+
+        /**
+         * Set the value of campusLetter
+         *
+         * @return  self
+         */ 
+        public function setCampusLetter($campusLetter)
+        {
+                $this->campusLetter = $campusLetter;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of campus
+         */ 
+        public function getCampus()
+        {
+                return $this->campus;
+        }
+
+        /**
+         * Set the value of campus
+         *
+         * @return  self
+         */ 
+        public function setCampus($campus)
+        {
+                $this->campus = $campus;
+
+                return $this;
         }
     }
     
