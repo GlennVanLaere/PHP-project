@@ -28,6 +28,9 @@
     <?php if(!empty($comment)): ?>
         <?php foreach($comment as $c): ?>
             <p><?php echo htmlspecialchars($c['comment']); ?></p>
+            <form action="post">
+                <input type="submit" name="upvotes" value="🔺upvote comment" class="btn btn-info">
+            </form>
         <?php endforeach; ?>
     <?php endif; ?>
     <form action="" method="post">

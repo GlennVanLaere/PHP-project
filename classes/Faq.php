@@ -5,6 +5,7 @@ include_once(__DIR__ . "/Db.php");
     class Faq {
         private $question;
         private $comment;
+        private $upvotes;
         
         /**
          * Get the value of question
@@ -93,7 +94,7 @@ include_once(__DIR__ . "/Db.php");
 
         public function getComments($id){
             $conn = DB::getConnection();
-            $statement = $conn->prepare("SELECT * FROM `comments` WHERE `commentId` = :id");
+            $statement = $conn->prepare("SELECT * FROM `comments` WHERE `commentId` = :id ORDER BY `upvotes` ASC");
             $statement->bindValue(':id', $id);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -107,6 +108,26 @@ include_once(__DIR__ . "/Db.php");
             $statement->bindValue(":commentId", $id);
             $result = $statement->execute();
             return $result;
+        }
+
+        /**
+         * Get the value of upvotes
+         */ 
+        public function getUpvotes()
+        {
+                return $this->upvotes;
+        }
+
+        /**
+         * Set the value of upvotes
+         *
+         * @return  self
+         */ 
+        public function setUpvotes($upvotes)
+        {
+                $this->upvotes = $upvotes;
+
+                return $this;
         }
     }
 ?>
