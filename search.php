@@ -1,15 +1,15 @@
 <?php
     session_start();
-    include_once(__DIR__ . "/classes/User.php");
+    include_once(__DIR__ . "/classes/Search.php");
 if(isset($_SESSION['user'])){
 
     if(!empty($_POST)){
-
-        $search = new User;
+        
+        $search = new Search;
         $search->setCurrentEmail($_SESSION['user']);
         $search->setCategory($_POST['category']);
         $search->setSearchTerm($_POST['searchTerm']);
-        $result = $search->search();
+        $result = $search->goSearch();
     }
 
 } else {
@@ -29,7 +29,7 @@ if(isset($_SESSION['user'])){
     <?php include("includes/nav.inc.php") ?>
     <form action="" method="post">
         <div class="dropdown" >
-            <select name="category" required class="btn btnGroup dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <select name="category" id="category" required class="btn btnGroup dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <option value="">Choose a category</option>
                 <option value="email">Email</option>
                 <option value="firstName">Firstname</option>
@@ -42,8 +42,9 @@ if(isset($_SESSION['user'])){
             </select>
         </div>
         <div class="form-group">
-            <input type="text" name="searchTerm" class="form-control" placeholder="Search">
+            <input type="text" name="searchTerm" class="form-control" id="searchBox" placeholder="Search">
         </div>
+        <div class="searchResults" id="searchResults"></div>
         <div class="form-group">
             <input type="submit" name="search" value="search" class="btn btnu btn-primary">
         </div>
@@ -52,13 +53,13 @@ if(isset($_SESSION['user'])){
         <?php if(!empty($result)): ?>
         <?php foreach($result as $r): ?>
             <div>
-                <h2><?php echo $r['firstName'] . ' ' . $r['lastName']; ?></h2>
-                <p>Also listens to: <?php echo $r['music']; ?></p>
-                <p>Also wachtes: <?php echo $r['movies']; ?></p>
-                <p>Also plays: <?php echo $r['games']; ?></p>
-                <p>Also reads: <?php echo $r['books']; ?></p>
-                <p>Also watches: <?php echo $r['tvShows']; ?></p>
-                <p><?php echo $r['buddy']; ?></p>
+                <h2><?php echo htmlspecialchars($r['firstName'] . ' ' . $r['lastName']); ?></h2>
+                <p>Also listens to: <?php echo htmlspecialchars($r['music']); ?></p>
+                <p>Also wachtes: <?php echo htmlspecialchars($r['movies']); ?></p>
+                <p>Also plays: <?php echo htmlspecialchars($r['games']); ?></p>
+                <p>Also reads: <?php echo htmlspecialchars($r['books']); ?></p>
+                <p>Also watches: <?php echo htmlspecialchars($r['tvShows']); ?></p>
+                <p><?php echo htmlspecialchars($r['buddy']); ?></p>
             </div>    
         <?php endforeach; ?>
         <?php else: ?>
@@ -66,8 +67,40 @@ if(isset($_SESSION['user'])){
         <?php endif; ?>
     <?php }; ?>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script
+			  src="https://code.jquery.com/jquery-3.5.0.min.js"
+			  integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+			  crossorigin="anonymous"></script>
+		
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script>document.querySelector("#searchBox").addEventListener("keyup", function() {
+    //category?
+    //searchterm?
+    let category = document.querySelector("#category").value;
+    let searchTerm = document.querySelector("#searchBox").value;
+
+    //zoek in db
+    document.getElementById('searchResults').innerHTML = "";
+    if(searchTerm != ""){
+
+        $.ajax({
+            method: "POST",
+            url: "ajax/searchUser.php", 
+            data: { 
+                category: category,
+                searchTerm: searchTerm,
+            },
+            dataType: "JSON" 
+        }).done(function(res) {
+            
+            for(i=0;i<res.length; i++){
+                document.getElementById('searchResults').innerHTML += '<a href="public.php?id='+ res[i].id + '">' + res[i].firstName+'</a>';
+            }
+        });
+    }
+        
+        
+});</script>
   </body>
 </html>
