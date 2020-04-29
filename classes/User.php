@@ -11,6 +11,9 @@ include_once(__DIR__ . "/Db.php");
         private $firstName;
         private $lastName;
         private $password;
+        private $securityQuestion;
+        private $securityAwnser;
+        private $currentAwnser;
         private $currentEmail;
         private $currentFirstName;
         private $currentLastName;
@@ -202,6 +205,7 @@ include_once(__DIR__ . "/Db.php");
             return $this;
         }
     
+ 
   
 
 
@@ -597,12 +601,40 @@ include_once(__DIR__ . "/Db.php");
             $this->buddyId = $buddyId;
             return $this;
         }
+        public function getSecurityQuestion(){
+            return $this->securityQuestion;
+        }
+
+        public function setSecurityQuestion($securityQuestion){
+            $this->securityQuestion = $securityQuestion;
+
+            return $this;
+        }
+        public function getSecurityAwnser(){
+            return $this->securityAwnser;
+        }
+
+        public function setSecurityAwnser($securityAwnser){
+            $this->securityAwnser = $securityAwnser;
+
+            return $this;
+        }
+        public function getCurrentAwnser(){
+            return $this->currentAwnser;
+        }
+
+        public function setCurrentAwnser($currentAwnser){
+            $this->currentAwnser = $currentAwnser;
+
+            return $this;
+        }
+       
 
         public function save(){
 
             try {
                 $conn = Db::getConnection();
-                $statement = $conn->prepare('INSERT INTO users (email, firstName, lastName, password, description, avatar) VALUES (:email, :firstName, :lastName, :password, :description, :avatar)');
+                $statement = $conn->prepare('INSERT INTO users (email, firstName, lastName, password, description, avatar, securityAwnser, securityQuestion) VALUES (:email, :firstName, :lastName, :password, :description, :avatar, :securityAwnser, :securityQuestion)');
                 
                 
 
@@ -610,8 +642,11 @@ include_once(__DIR__ . "/Db.php");
                 $firstName = $this->getFirstName();
                 $lastName = $this->getLastName();
                 $password = $this->getPassword();
+                $securityQuestion = $this->getSecurityQuestion();
+                $securityAwnser = $this->getSecurityAwnser();
                 $description = "here comes your description";
                 $avatar = "uploads/standard.png";
+          
 
             
                 
@@ -620,8 +655,11 @@ include_once(__DIR__ . "/Db.php");
                 $statement->bindValue(":firstName", $firstName);
                 $statement->bindValue(":lastName", $lastName);
                 $statement->bindValue(":password", $password);
+                $statement->bindValue(":securityQuestion", $securityQuestion);
+                $statement->bindValue(":securityAwnser", $securityAwnser);
                 $statement->bindValue(":description", $description);
                 $statement->bindValue(":avatar", $avatar);
+                
 
 
     
@@ -891,6 +929,17 @@ include_once(__DIR__ . "/Db.php");
             }
         }
         public function login($complete) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("update users set failedAttempts= :failedAttempts where email=:email");
+            $email = $this->getCurrentEmail();
+            $failedAttempts = 0;
+
+            $statement->bindValue(":failedAttempts" , $failedAttempts);
+            $statement->bindValue(":email", $email);
+
+            $statement->execute();
+
+
             session_start();
             $_SESSION["user"] = $this->getCurrentEmail();
             if($complete){
@@ -1352,6 +1401,67 @@ include_once(__DIR__ . "/Db.php");
             $users = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $users;
     
+        }
+        public function cannotLogin($CEmail){
+            $conn = Db::getConnection();
+            $getStatement = $conn->prepare("select failedAttempts from users where email = :email");
+            $CEmail = $CEmail;
+            $getStatement->bindValue(":email", $CEmail);
+            $getStatement->execute();
+            $failedAtt = $getStatement->fetch(PDO::FETCH_ASSOC);
+            $value = $failedAtt["failedAttempts"];
+            $newValue = $value + 1;
+
+            $updateStatement = $conn->prepare("update users set failedAttempts = :failedAttempts where email= :email");
+            $updateStatement->bindValue(":failedAttempts", $newValue);
+            $updateStatement->bindValue(":email", $CEmail);
+            $updateStatement->execute();
+            return $newValue;
+        }
+        public function secQuestion(){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("select securityQuestion from users where email = :email");
+            $email = $this->getCurrentEmail();
+            $statement->bindValue(":email", $email);
+            $statement->execute();
+            $question_array = $statement->fetch(PDO::FETCH_ASSOC);
+            $question = $question_array["securityQuestion"];
+            return $question;
+
+
+        }
+        public function awnserCheck($awnser){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("select securityAwnser from users where email= :email");
+            $email = $this->getCurrentEmail();
+            $currentAwnser = $awnser;
+           
+
+            $statement->bindValue(":email", $email);
+
+            $statement->execute();
+            $correctAwnser_array = $statement->fetch(PDO::FETCH_ASSOC);
+            $correctAwnser = $correctAwnser_array["securityAwnser"];
+            echo $correctAwnser;
+
+            if($currentAwnser === $correctAwnser){
+                return true;
+            }
+            else{
+                return false;
+            }
+           
+
+        }
+        public function currentAttempts(){
+            $conn= Db::getConnection();
+            $statement = $conn->prepare("select failedAttempts from users where email = :email");
+            $email = $this->getCurrentEmail();
+            $statement->bindValue(":email", $email);
+            $statement->execute();
+            $current_array = $statement->fetch(PDO::FETCH_ASSOC);
+            $current = $current_array["failedAttempts"];
+            return $current;
         }
     }
     

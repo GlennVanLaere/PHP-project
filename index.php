@@ -9,6 +9,11 @@
             $user->setFirstName($_POST['firstName']);
             $user->setLastName($_POST['lastName']);
             $user->setPassword($_POST['password']);
+            $user->setSecurityQuestion($_POST['question']);
+            $user->setSecurityAwnser($_POST['securityAwnser']);
+
+
+            
             
             $user->save(); 
             $success = "User saved!";
@@ -63,6 +68,20 @@
             <label for="exampleInputPassword1">Password</label>
             <input type="password" name="password" class="form-control" placeholder="Password" id="exampleInputPassword1">
             <small id="passwordHelp" class="form-text text-muted">Password must include at least 1 uppercase, 1 lowercase, 1 special character and must be at least 8 characters long</small>
+        </div>
+        <div class="form-group">
+        <label for="security_question">Security question</label>
+        <select name="question" id="question">
+        <option value="what whas your first pet?">what whas your first pet?</option>
+        <option value="What is your favourite book? ">What is your favourite book? </option>
+        <option value="What is the name of the road you grew up on?">What is the name of the road you grew up on?</option>
+        <option value="What city were you born in?">What city were you born in?</option>
+        <option value="Where is your favourite place to vacation?">Where is your favourite place to vacation?</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label for="security_awnser">your awnser please</label>
+        <input type="text" name="securityAwnser" class="form-control" placeholder="awnser here">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
