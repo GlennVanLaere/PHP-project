@@ -480,7 +480,7 @@ class User {
         return $this->passwordCheck;
     }
 
-    public function setPasswordcheck( $passwordCheck ) {
+    public function setPasswordCheck( $passwordCheck ) {
         $this->passwordCheck = $passwordCheck;
         return $this;
     }
@@ -607,7 +607,7 @@ class User {
             $statement->bindValue( ':password', $password );
             $statement->bindValue( ':description', $description );
             $statement->bindValue( ':avatar', $avatar );
-            
+
             $result = $statement->execute();
             return $result;
         } catch ( PDOException $e ) {
