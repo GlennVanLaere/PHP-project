@@ -2,32 +2,31 @@
     session_start();
     include_once(__DIR__ . "/classes/Faq.php");
     include_once(__DIR__ . "/classes/User.php");
-    if(isset($_SESSION['user'])){
+    if (isset($_SESSION['user'])) {
         $list = new Faq;
 
-        if(isset($_POST['pin'])){
+        if (isset($_POST['pin'])) {
             $id = $_POST['pin'];
             $list->pinQuestion($id);
         }
 
-        if(isset($_POST['unPin'])){
+        if (isset($_POST['unPin'])) {
             $id = $_POST['unPin'];
             $list->unPinQuestion($id);
         }
 
-        if(!empty($_POST['question'])){
+        if (!empty($_POST['question'])) {
             $question = $_POST['question'];
             $list->askQuestion($question);
         }
 
         $noPin = $list->getAllQuestions(0);
-        $pinned = $list->getAllQuestions(1);      
+        $pinned = $list->getAllQuestions(1);
 
         $mod = new User;
         $email = $_SESSION['user'];
         $moderator = $mod->moderator($email);
         $moderator = $moderator['moderator'];
-        
     } else {
         header("Location: logout.php");
     }
@@ -50,11 +49,11 @@
     </form>
     <div>
     <h2>FAQ 🤔</h2>
-        <?php if(!empty($pinned)): ?>
-            <?php foreach($pinned as $p): ?>
+        <?php if (!empty($pinned)): ?>
+            <?php foreach ($pinned as $p): ?>
                 <p><?php echo htmlspecialchars($p['question']); ?></p>
                 <a href="discussion.php?id=<?php echo htmlspecialchars($p['id']); ?>" class="btn btn-success">Go to discussion</a>
-                <?php if($moderator == 1): ?>
+                <?php if ($moderator == 1): ?>
                     <form method="post" action="">
                         <div class="form-group">
                             <input type="hidden" value="<?php echo htmlspecialchars($p['id']); ?>" name="unPin" id="pin">
@@ -67,14 +66,13 @@
             <?php echo '<h3>Pinned questions are shown here!</h3>' ?>
         <?php endif; ?>
     </div>
-
     <div>
     <h2>Nonpinned questions</h2>
-        <?php if(!empty($noPin)): ?>
-            <?php foreach($noPin as $np): ?>
+        <?php if (!empty($noPin)): ?>
+            <?php foreach ($noPin as $np): ?>
                 <p><?php echo htmlspecialchars($np['question']); ?></p>
                 <a href="discussion.php?id=<?php echo htmlspecialchars($np['id']); ?>" class="btn btn-success">Go to discussion</a>
-                <?php if($moderator == 1): ?>
+                <?php if ($moderator == 1): ?>
                     <form method="post" action="">
                         <div class="form-group">
                             <input type="hidden" value="<?php echo htmlspecialchars($np['id']); ?>" name="pin" id="pin">

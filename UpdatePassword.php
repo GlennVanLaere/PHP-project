@@ -1,11 +1,11 @@
-<?php 
+<?php
 session_start();
 include_once(__DIR__."/classes/User.php");
 
-if(isset ($_SESSION["user"])){
+if (isset($_SESSION["user"])) {
     $email = $_SESSION["user"];
 
-    if(!empty($_POST)){
+    if (!empty($_POST)) {
         try {
             $changePassword = new User;
             $changePassword->setNewPassword($_POST["newp1"]);
@@ -13,22 +13,12 @@ if(isset ($_SESSION["user"])){
             $changePassword->setOldPassword($_POST["oldpas"]);
             $changePassword->changePassword($email);
 
-
             header("Location: profile.php");
-            
-
-
-
-
-
         } catch (\Throwable $th) {
             $error = $th->getMessage();
         }
     }
 }
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

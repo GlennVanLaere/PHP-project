@@ -17,15 +17,15 @@ function sendMessage() {
     formData.append('message', message);
     formData.append('receiver', receiver);
 
-fetch('ajax/saveMessage.php', {
-  method: 'POST',
-  body: formData
-})
-.then((response) => response.json())
-.then((result) => {
-    location.reload();
-})
-.catch((error) => {
-  console.error('Error:', error);
-});
+    fetch('ajax/saveMessage.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then((response) => response.json())
+        .then((result) => {
+            location.reload();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }

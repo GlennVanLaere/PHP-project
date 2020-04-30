@@ -2,7 +2,6 @@
   include_once(__DIR__."/classes/User.php");
 
   if (!empty($_POST)) {
-
     try {
       $user = new User();
       $user->setCurrentEmail($_POST["email"]);
@@ -20,7 +19,6 @@
     }
   }
 ?>
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -39,7 +37,6 @@
         <?php echo $error ?>
       </div>
     <?php endif; ?>
-    
     <form action="" method="post">
     <h1>Sign in</h1>
       <div class="form-group">

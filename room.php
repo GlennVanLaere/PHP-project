@@ -6,7 +6,6 @@
     } else {
         header("Location: logout.php");
     }
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,10 +1,10 @@
-<?php 
+<?php
 
-    const SETTINGS = [
-        "db"=>[
-            "user"      => "root",
-            "password"  => "",
-            "host"      => "localhost",
-            "dbname" => "phpproject"
-        ]
-    ];
+const SETTINGS = [
+    'db'=>[
+        'user'      => 'root',
+        'password'  => '',
+        'host'      => 'localhost',
+        'dbname' => 'phpproject'
+    ]
+];

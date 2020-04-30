@@ -23,12 +23,12 @@ if (isset($_SESSION['user'])) {
     <title>chat</title>
 </head>
     <?php include("includes/nav.inc.php") ?>
-    <p><?php if(isset($matchType)){echo $matchType;} ?></p>
+    <p><?php if (isset($matchType)) { echo $matchType; } ?></p>
     <div id="messages">
-    <?php foreach($allMessages as $m): ?>
-    <?php $user->setCurrentFirstName($m['sender']); ?>
-    <div><?php echo $user->getCurrentFirstName()["firstName"] . ": " . $m['message']; ?></div>
-    <?php endforeach; ?>
+        <?php foreach ($allMessages as $m): ?>
+        <?php $user->setCurrentFirstName($m['sender']); ?>
+        <div><?php echo $user->getCurrentFirstName()["firstName"] . ": " . $m['message']; ?></div>
+        <?php endforeach; ?>
     </div>
     <input type="text" placeholder="type a message" id="inputMessage">
     <a href="#" id="btnSendMessage">Send</a>

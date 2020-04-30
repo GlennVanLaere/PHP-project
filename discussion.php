@@ -1,15 +1,14 @@
 <?php
     session_start();
     include_once(__DIR__ . "/classes/Faq.php");
-    if(isset($_SESSION['user'])){
+    if (isset($_SESSION['user'])) {
         $id = $_GET['id'];
         $discussion = new Faq;
         $question = $discussion->CurrentQuestion($id);
-        if(!empty($_POST['comment'])){
+        if (!empty($_POST['comment'])) {
             $place = $discussion->placeComment($_POST['comment'], $id);
         }
         $comment = $discussion->getComments($id);
-
     } else {
         header("Location: logout.php");
     }
@@ -25,8 +24,8 @@
 <body>
 <?php include_once('includes/nav.inc.php'); ?>
     <h2><?php echo htmlspecialchars($question['question']); ?></h2>
-    <?php if(!empty($comment)): ?>
-        <?php foreach($comment as $c): ?>
+    <?php if (!empty($comment)): ?>
+        <?php foreach ($comment as $c): ?>
             <p><?php echo htmlspecialchars($c['comment']); ?></p>
         <?php endforeach; ?>
     <?php endif; ?>
