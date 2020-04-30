@@ -12,7 +12,7 @@ class Comment {
     */
 
     public function getId()
- {
+    {
         return $this->id;
     }
 
@@ -23,7 +23,7 @@ class Comment {
     */
 
     public function setId( $id )
- {
+    {
         $this->id = $id;
 
         return $this;
@@ -34,7 +34,7 @@ class Comment {
     */
 
     public function getComment()
- {
+    {
         return $this->comment;
     }
 
@@ -45,7 +45,7 @@ class Comment {
     */
 
     public function setComment( $comment )
- {
+    {
         $this->comment = $comment;
 
         return $this;
@@ -56,7 +56,7 @@ class Comment {
     */
 
     public function getCommentId()
- {
+    {
         return $this->commentId;
     }
 
@@ -67,7 +67,7 @@ class Comment {
     */
 
     public function setCommentId( $commentId )
- {
+    {
         $this->commentId = $commentId;
 
         return $this;
@@ -78,7 +78,7 @@ class Comment {
     */
 
     public function getUpvotes()
- {
+    {
         return $this->upvotes;
     }
 
@@ -89,14 +89,14 @@ class Comment {
     */
 
     public function setUpvotes( $upvotes )
- {
+    {
         $this->upvotes = $upvotes;
 
         return $this;
     }
 
     public function doUpvote()
- {
+    {
         $conn = DB::getConnection();
         $statement = $conn->prepare( 'UPDATE `comments` SET `upvotes` += 1 WHERE `id` = :id' );
         $statement->bindValue( ':id', $this->getId() );
