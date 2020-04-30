@@ -1,7 +1,7 @@
 <?php
 include_once(__DIR__."/classes/User.php");
 session_start();
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['user']) && isset($_SESSION['reportid'])) {
     $reportId = $_SESSION['reportid'];
     $user = new User;
     $user->setUserId();
