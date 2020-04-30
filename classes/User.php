@@ -217,6 +217,26 @@ class User {
     }
 
     /**
+    * Set the value of currentLastName
+    *
+    * @return  self
+    */ 
+    public function setCurrentLastName($currentLastName)
+    {
+        try {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT lastName FROM users WHERE id = :id");
+            $statement->bindValue(":id", $currentLastName);
+            $statement->execute();
+            $currentLastName = $statement->fetch(PDO::FETCH_ASSOC);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+        $this->currentLastName = $currentLastName;
+    }
+
+
+    /**
     * Set the value of currentEmail
     *
     * @return  self
