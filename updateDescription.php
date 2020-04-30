@@ -1,24 +1,20 @@
-<?php 
+<?php
 session_start();
 include_once(__DIR__."/classes/User.php");
 
-if(isset($_SESSION["user"])){
-
+if (isset($_SESSION["user"])) {
     $email = $_SESSION["user"];
     $description = new User;
     $showDescription = $description->viewDescription($email);
-if(!empty($_POST)){
-    try {
-        $description->setDescription($_POST["description"]);
-        $description->editDescription($email);
-    } 
-    catch (\Throwable $th) {
-        $error = $th->getMessage();
+    if (!empty($_POST)) {
+        try {
+            $description->setDescription($_POST["description"]);
+            $description->editDescription($email);
+        } catch (\Throwable $th) {
+            $error = $th->getMessage();
+        }
     }
-    
 }
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

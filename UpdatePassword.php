@@ -1,11 +1,11 @@
-<?php 
+<?php
 session_start();
 include_once(__DIR__."/classes/User.php");
 
-if(isset ($_SESSION["user"])){
+if (isset($_SESSION["user"])) {
     $email = $_SESSION["user"];
 
-    if(!empty($_POST)){
+    if (!empty($_POST)) {
         try {
             $changePassword = new User;
             $changePassword->setNewPassword($_POST["newp1"]);
@@ -13,22 +13,12 @@ if(isset ($_SESSION["user"])){
             $changePassword->setOldPassword($_POST["oldpas"]);
             $changePassword->changePassword($email);
 
-
             header("Location: profile.php");
-            
-
-
-
-
-
         } catch (\Throwable $th) {
             $error = $th->getMessage();
         }
     }
 }
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +35,6 @@ if(isset ($_SESSION["user"])){
     <form class="form-group" action="" method="post">
         <label for="oldp">Old password</label>
         <input class="form-control" type="password" name="oldpas" placeholder="Old password">
-    
 
         <label for="pas1">New password</label>
         <input class="form-control" type="password" name="newp1" placeholder="New password">
@@ -53,7 +42,6 @@ if(isset ($_SESSION["user"])){
         <label for="pas2">Repeat new password</label>
         <input class="form-control" type="password" name="newp2" placeholder="Repeat new password">
 
-       
         <button class="btn btnu btn-primary" type="submit" name="changeE"> Change </button>
     </form>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

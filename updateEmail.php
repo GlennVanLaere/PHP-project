@@ -1,11 +1,11 @@
-<?php 
+<?php
 session_start();
 include_once(__DIR__."/classes/User.php");
 
-if(isset($_SESSION["user"])){
+if (isset($_SESSION["user"])) {
     $email = $_SESSION["user"];
 
-    if(!empty($_POST)){
+    if (!empty($_POST)) {
         try {
             $newEmail = new User;
             $newEmail-> setOldEmail($_POST["oldE"]);
@@ -13,23 +13,11 @@ if(isset($_SESSION["user"])){
             $newEmail-> setNewEmailCheck($_POST["newE2"]);
             $newEmail->editEmail($email);
             $succes = "email changed";
-
-        }
-        
-        
-        
-        catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             $error = $th->getMessage();
         }
-
-
     }
-
-
-
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

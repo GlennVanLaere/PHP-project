@@ -1,19 +1,19 @@
 <?php
     session_start();
     include_once(__DIR__ . "/classes/Faq.php");
-    if(isset($_SESSION['user'])){
+    if (isset($_SESSION['user'])) {
         $id = $_GET['id'];
         $discussion = new Faq;
         $question = $discussion->CurrentQuestion($id);
-        if(!empty($_POST['comment'])){
+        if (!empty($_POST['comment'])) {
             $place = $discussion->placeComment($_POST['comment'], $id);
         }
         $comment = $discussion->getComments($id);
-
     } else {
         header("Location: logout.php");
     }
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,8 +25,8 @@
 <body>
 <?php include_once('includes/nav.inc.php'); ?>
     <h2><?php echo htmlspecialchars($question['question']); ?></h2>
-    <?php if(!empty($comment)): ?>
-        <?php foreach($comment as $c): ?>
+    <?php if (!empty($comment)): ?>
+        <?php foreach ($comment as $c): ?>
             <p><?php echo htmlspecialchars($c['comment']); ?></p>
             <div><a href="#" data-id="<?php echo $comment->id ?>" class="upvote btn btn-info">🔺upvote</a> <span class='upvotes'><?php echo $c['upvotes']; ?></span></div>
         <?php endforeach; ?>

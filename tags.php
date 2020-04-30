@@ -1,11 +1,10 @@
 <?php
     session_start();
     include_once(__DIR__ . "/classes/User.php");
-    if(isset($_SESSION['user'])){
-        
+    if (isset($_SESSION['user'])) {
         $email = $_SESSION["user"];
-        try{
-            if(!empty($_POST)){
+        try {
+            if (!empty($_POST)) {
                 $update = new User;
                 $update->setMusic($_POST['music']);
                 $update->setMovies($_POST['movies']);
@@ -25,8 +24,8 @@
         session_destroy();
         header("Location: login.php");
     }
-        
-        ?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -37,7 +36,7 @@
 </head>
 <body class="tag">
 <?php include("includes/nav.inc.php") ?>
-    <?php if(isset($error)): ?>
+    <?php if (isset($error)): ?>
         <div class="alert alert-danger" role="alert">
             <?php echo $error ?>
         </div>
