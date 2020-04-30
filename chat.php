@@ -7,6 +7,7 @@ if (isset($_SESSION['user'])) {
     $allMessages = User::getAllMessages($user->getUserId(), $_GET['messageid']);
     $user->userReadMessage();
     $email = $_SESSION['user'];
+    $_SESSION['reportid'] = $_GET['messageid'];
 
     $info = $user->findCurrentUser($email);
     $matchType = $user->matchType($info);
@@ -37,7 +38,7 @@ if (isset($_SESSION['user'])) {
     </div>
     <input type="text" placeholder="type a message" id="inputMessage">
     <a class="btn btn-primary" href="#" id="btnSendMessage">Send</a>
-    <a class="btn btn-danger" data-buddy="<?php echo $_GET['messageid']; ?> "href="#" id="btnReport">❗</a>
+    <a class="btn btn-danger" href="report.php" id="btnReport">❗</a>
     <script src="js/app.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
