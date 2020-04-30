@@ -2,7 +2,7 @@
 session_start();
 include_once(__DIR__."/classes/User.php");
 
-if(isset($_SESSION['user'])){
+if( isset( $_SESSION['user'] ) ) {
     $email = $_SESSION['user'];
     try {
         $user = new User;

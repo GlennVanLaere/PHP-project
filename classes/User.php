@@ -45,7 +45,8 @@ class User {
     * Get the value of email
     */
 
-    public function getEmail() {
+    public function getEmail() 
+    {
         return $this->email;
     }
 
@@ -55,7 +56,8 @@ class User {
     * @return  self
     */
 
-    public function setEmail( $email ) {
+    public function setEmail( $email ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM users WHERE email=? ' );
         $statement->execute( [$email] );
@@ -78,7 +80,8 @@ class User {
     * Get the value of firstName
     */
 
-    public function getFirstName() {
+    public function getFirstName() 
+    {
         return $this->firstName;
     }
 
@@ -88,7 +91,8 @@ class User {
     * @return  self
     */
 
-    public function setFirstName( $firstName ) {
+    public function setFirstName( $firstName ) 
+    {
         if ( empty( $firstName ) ) {
             throw new Exception( 'First name cannot be empty' );
         }
@@ -108,7 +112,8 @@ class User {
     * Get the value of lastName
     */
 
-    public function getLastName() {
+    public function getLastName() 
+    {
         return $this->lastName;
     }
 
@@ -118,7 +123,8 @@ class User {
     * @return  self
     */
 
-    public function setLastName( $lastName ) {
+    public function setLastName( $lastName ) 
+    {
         if ( empty( $lastName ) ) {
             throw new Exception( 'Last name cannot be empty' );
         }
@@ -137,7 +143,8 @@ class User {
     * Get the value of password
     */
 
-    public function getPassword() {
+    public function getPassword() 
+    {
         return $this->password;
     }
 
@@ -147,7 +154,8 @@ class User {
     * @return  self
     */
 
-    public function setPassword( $password ) {
+    public function setPassword( $password ) 
+    {
         if ( empty( $password ) ) {
             throw new Exception( 'password cannot be empty' );
         }
@@ -176,7 +184,6 @@ class User {
 
         if ( !$special ) {
             throw new Exception( 'password must include a special character (for example: @ & / - )' );
-
         }
 
         if ( strlen( $password ) < 8 ) {
@@ -189,11 +196,13 @@ class User {
         return $this;
     }
 
-    public function getDescription() {
+    public function getDescription() 
+    {
         return $this->description;
     }
 
-    public function setDescription( $description ) {
+    public function setDescription( $description ) 
+    {
         $this->description = $description;
         return $this;
     }
@@ -202,7 +211,8 @@ class User {
     * Get the value of currentEmail
     */
 
-    public function getCurrentEmail() {
+    public function getCurrentEmail() 
+    {
         return $this->currentEmail;
     }
 
@@ -212,7 +222,8 @@ class User {
     * @return  self
     */
 
-    public function setCurrentEmail( $currentEmail ) {
+    public function setCurrentEmail( $currentEmail ) 
+    {
         if ( empty( $currentEmail ) ) {
             throw new Exception( 'Email cannot be empty' );
         }
@@ -225,7 +236,8 @@ class User {
     * Get the value of currentFirstName
     */
 
-    public function getCurrentFirstName() {
+    public function getCurrentFirstName() 
+    {
         return $this->currentFirstName;
     }
 
@@ -235,7 +247,8 @@ class User {
     * @return  self
     */
 
-    public function setCurrentFirstName( $currentFirstName ) {
+    public function setCurrentFirstName( $currentFirstName ) 
+    {
         try {
             $conn = Db::getConnection();
             $statement = $conn->prepare( 'SELECT * FROM users WHERE id = :id' );
@@ -253,7 +266,8 @@ class User {
     * Get the value of currentLastName
     */
 
-    public function getCurrentLastName() {
+    public function getCurrentLastName() 
+    {
         return $this->currentLastName;
     }
 
@@ -263,7 +277,8 @@ class User {
     * @return  self
     */
 
-    public function setCurrentLastName( $currentLastName ) {
+    public function setCurrentLastName( $currentLastName ) 
+    {
         $this->currentLastName = $currentLastName;
         return $this;
     }
@@ -272,7 +287,8 @@ class User {
     * Get the value of currentPassword
     */
 
-    public function getCurrentPassword() {
+    public function getCurrentPassword() 
+    {
         return $this->currentPassword;
     }
 
@@ -282,7 +298,8 @@ class User {
     * @return  self
     */
 
-    public function setCurrentPassword( $currentPassword ) {
+    public function setCurrentPassword( $currentPassword ) 
+    {
         if ( empty( $currentPassword ) ) {
             throw new Exception( 'Password cannot be empty' );
         }
@@ -295,7 +312,8 @@ class User {
     * Get the value of tags
     */
 
-    public function getTags() {
+    public function getTags() 
+    {
         return $this->tags;
     }
 
@@ -305,7 +323,8 @@ class User {
     * @return  self
     */
 
-    public function setTags( $tags, $email ) {
+    public function setTags( $tags, $email ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM `users` WHERE `email` = :email' );
         $statement->bindValue( 'email', $email );
@@ -318,7 +337,8 @@ class User {
     * Get the value of music
     */
 
-    public function getMusic() {
+    public function getMusic() 
+    {
         return $this->music;
     }
 
@@ -328,7 +348,8 @@ class User {
     * @return  self
     */
 
-    public function setMusic( $music ) {
+    public function setMusic( $music ) 
+    {
         $this->music = $music;
         return $this;
     }
@@ -337,7 +358,8 @@ class User {
     * Get the value of movies
     */
 
-    public function getMovies() {
+    public function getMovies() 
+    {
         return $this->movies;
     }
 
@@ -347,7 +369,8 @@ class User {
     * @return  self
     */
 
-    public function setMovies( $movies ) {
+    public function setMovies( $movies ) 
+    {
         $this->movies = $movies;
         return $this;
     }
@@ -356,7 +379,8 @@ class User {
     * Get the value of games
     */
 
-    public function getGames() {
+    public function getGames() 
+    {
         return $this->games;
     }
 
@@ -366,7 +390,8 @@ class User {
     * @return  self
     */
 
-    public function setGames( $games ) {
+    public function setGames( $games ) 
+    {
         $this->games = $games;
         return $this;
     }
@@ -375,7 +400,8 @@ class User {
     * Get the value of books
     */
 
-    public function getBooks() {
+    public function getBooks() 
+    {
         return $this->books;
     }
 
@@ -385,7 +411,8 @@ class User {
     * @return  self
     */
 
-    public function setBooks( $books ) {
+    public function setBooks( $books ) 
+    {
         $this->books = $books;
         return $this;
     }
@@ -394,7 +421,8 @@ class User {
     * Get the value of tvShows
     */
 
-    public function getTvShows() {
+    public function getTvShows() 
+    {
         return $this->tvShows;
     }
 
@@ -404,7 +432,8 @@ class User {
     * @return  self
     */
 
-    public function setTvShows( $tvShows ) {
+    public function setTvShows( $tvShows ) 
+    {
         $this->tvShows = $tvShows;
         return $this;
     }
@@ -413,7 +442,8 @@ class User {
     * Get the value of buddy
     */
 
-    public function getBuddy() {
+    public function getBuddy() 
+    {
         return $this->buddy;
     }
 
@@ -423,7 +453,8 @@ class User {
     * @return  self
     */
 
-    public function setBuddy( $buddy ) {
+    public function setBuddy( $buddy ) 
+    {
         if ( $buddy == 'Make a choice' ) {
             throw new Exception( 'Choose what kind of buddy you want to be' );
         }
@@ -431,74 +462,90 @@ class User {
         return $this;
     }
 
-    public function getOldEmail() {
+    public function getOldEmail() 
+    {
         return $this->oldEmail;
     }
 
-    public function setOldEmail( $oldEmail ) {
+    public function setOldEmail( $oldEmail ) 
+    {
         $this->oldEmail = $oldEmail;
         return $this;
     }
 
-    public function getNewEmail() {
+    public function getNewEmail() 
+    {
         return $this->newEmail;
     }
 
-    public function setNewEmail( $newEmail ) {
+    public function setNewEmail( $newEmail ) 
+    {
         $this->newEmail = $newEmail;
         return $this;
     }
 
-    public function getNewEmailCheck() {
+    public function getNewEmailCheck() 
+    {
         return $this->newEmailCheck;
     }
 
-    public function setNewEmailCheck( $newEmailCheck ) {
+    public function setNewEmailCheck( $newEmailCheck ) 
+    {
         $this->newEmailCheck = $newEmailCheck;
         return $this;
     }
 
-    public function getNewPassword() {
+    public function getNewPassword() 
+    {
         return $this->newPassword;
     }
 
-    public function setNewPassword( $newPassword ) {
+    public function setNewPassword( $newPassword ) 
+    {
         $this->newPassword = $newPassword;
         return $this;
     }
 
-    public function getOldPassword() {
+    public function getOldPassword() 
+    {
         return $this->oldPassword;
     }
 
-    public function setOldPassword( $oldPassword ) {
+    public function setOldPassword( $oldPassword ) 
+    {
         $this->oldPassword = $oldPassword;
         return $this;
     }
 
-    public function getPasswordCheck() {
+    public function getPasswordCheck() 
+    {
         return $this->passwordCheck;
     }
 
-    public function setPasswordCheck( $passwordCheck ) {
+    public function setPasswordCheck( $passwordCheck ) 
+    {
         $this->passwordCheck = $passwordCheck;
         return $this;
     }
 
-    public function getAvatarUpload() {
+    public function getAvatarUpload() 
+    {
         return $this->avatarUpload;
     }
 
-    public function setAvatarUpload( $avatarUpload ) {
+    public function setAvatarUpload( $avatarUpload ) 
+    {
         $this->avatarUpload = $avatarUpload;
         return $this;
     }
 
-    public function setFileName() {
+    public function setFileName() 
+    {
         return $this->fileName;
     }
 
-    public function getFileName( $fileName ) {
+    public function getFileName( $fileName ) 
+    {
         $this->fileName = $fileName;
         return $this;
     }
@@ -507,7 +554,8 @@ class User {
     * Get the value of category
     */
 
-    public function getCategory() {
+    public function getCategory() 
+    {
         return $this->category;
     }
 
@@ -517,7 +565,8 @@ class User {
     * @return  self
     */
 
-    public function setCategory( $category ) {
+    public function setCategory( $category ) 
+    {
         $category = preg_replace( '/[^a-z-A-Z]/', '', $category );
         $this->category = $category;
         return $this;
@@ -527,7 +576,8 @@ class User {
     * Get the value of searchTerm
     */
 
-    public function getSearchTerm() {
+    public function getSearchTerm() 
+    {
         return $this->searchTerm;
     }
 
@@ -537,14 +587,17 @@ class User {
     * @return  self
     */
 
-    public function setSearchTerm( $searchTerm ) {
+    public function setSearchTerm( $searchTerm ) 
+    {
         $this->searchTerm = $searchTerm;
     }
+
     /**
     * Get the value of userId
     */
 
-    public function getUserId() {
+    public function getUserId() 
+    {
         return $this->userId;
     }
 
@@ -554,7 +607,8 @@ class User {
     * @return  self
     */
 
-    public function setUserId() {
+    public function setUserId() 
+    {
         try {
             $conn = Db::getConnection();
             $statement = $conn->prepare( 'SELECT id FROM users WHERE email = :email' );
@@ -573,7 +627,8 @@ class User {
     * Get the value of buddyId
     */
 
-    public function getBuddyId() {
+    public function getBuddyId() 
+    {
         return $this->buddyId;
     }
 
@@ -583,13 +638,14 @@ class User {
     * @return  self
     */
 
-    public function setBuddyId( $buddyId ) {
+    public function setBuddyId( $buddyId ) 
+    {
         $this->buddyId = $buddyId;
         return $this;
     }
 
-    public function save() {
-
+    public function save() 
+    {
         try {
             $conn = Db::getConnection();
             $statement = $conn->prepare( 'INSERT INTO users (email, firstName, lastName, password, description, avatar) VALUES (:email, :firstName, :lastName, :password, :description, :avatar)' );
@@ -616,7 +672,8 @@ class User {
         }
     }
 
-    public static function getAll() {
+    public static function getAll() 
+    {
         $conn = DB::getConnection();
         $statement = $conn->prepare( 'select * from users' );
         $statement->execute();
@@ -624,7 +681,8 @@ class User {
         return $users;
     }
 
-    public function viewEmail( $email ) {
+    public function viewEmail( $email ) 
+    {
         try {
             $conn = Db::getConnection();
             $statement = $conn->prepare( 'SELECT email FROM users WHERE email = :yourEmail' );
@@ -639,7 +697,8 @@ class User {
         }
     }
 
-    public function viewDescription( $email ) {
+    public function viewDescription( $email ) 
+    {
         try {
             $conn = Db::getConnection();
             $statement = $conn->prepare( 'SELECT description FROM users WHERE email = :currentEmail' );
@@ -654,7 +713,8 @@ class User {
         }
     }
 
-    public function editDescription( $email ) {
+    public function editDescription( $email ) 
+    {
         try {
             $conn = Db::getConnection();
             $updateDesStmt = $conn->prepare( 'UPDATE users SET description=:description WHERE email = :email' );
@@ -670,7 +730,8 @@ class User {
         }
     }
 
-    public function editEmail( $email ) {
+    public function editEmail( $email ) 
+    {
         try {
             $conn = Db::getConnection();
             $mailUpdateStmt = $conn->prepare( 'UPDATE users SET email=:newEmail WHERE email=:email' );
@@ -700,7 +761,8 @@ class User {
         }
     }
 
-    public function changePassword( $email ) {
+    public function changePassword( $email ) 
+    {
         //get old password
         $conn = Db::getConnection();
         $selectPassword = $conn->prepare( 'SELECT password FROM users WHERE email=:email' );
@@ -758,7 +820,8 @@ class User {
         }
     }
 
-    public function changeAvatar( $email, $fileName, $fileSize, $fileTmpName, $file ) {
+    public function changeAvatar( $email, $fileName, $fileSize, $fileTmpName, $file ) 
+    {
         $conn = Db::getConnection();
         $profileStatement = $conn->prepare( 'UPDATE users SET avatar=:avatar WHERE email=:email' );
         $fileName = $fileName;
@@ -787,7 +850,8 @@ class User {
         }
     }
 
-    public function showAvatar( $email ) {
+    public function showAvatar( $email ) 
+    {
         $conn = Db::getConnection();
         $avatarstmt = $conn->prepare( 'SELECT avatar FROM users WHERE email=:email' );
         $avatarstmt->bindValue( ':email', $email );
@@ -798,7 +862,8 @@ class User {
         }
     }
 
-    public function canLogin() {
+    public function canLogin() 
+    {
         $currentEmail = $this->getCurrentEmail();
         $currentPassword = $this->getCurrentPassword();
         $conn = Db::getConnection();
@@ -814,7 +879,8 @@ class User {
         }
     }
 
-    function checkComplete() {
+    function checkComplete() 
+    {
         $email = $this->getCurrentEmail();
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM `users` WHERE `email` = :email ' );
@@ -833,18 +899,19 @@ class User {
         }
     }
 
-    public function login( $complete ) {
+    public function login( $complete ) 
+    {
         session_start();
         $_SESSION['user'] = $this->getCurrentEmail();
         if ( $complete ) {
             header( 'Location: match.php' );
-
         } else {
             header( 'Location: tags.php' );
         }
     }
 
-    public function updateTags( $email ) {
+    public function updateTags( $email ) 
+    {
         try {
             $music = $this->getMusic();
             $movies = $this->getMovies();
@@ -869,7 +936,8 @@ class User {
         }
     }
 
-    public function findCurrentUser( $email ) {
+    public function findCurrentUser( $email ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM users where email = :email' );
         $statement->bindValue( ':email', $email );
@@ -879,7 +947,8 @@ class User {
         return $result;
     }
 
-    public function findPerfectMatch( $info ) {
+    public function findPerfectMatch( $info ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM users WHERE email != :email && buddy != :buddy && music = :music && movies = :movies && games = :games && books = :books && tvShows = :tvShows' );
         $statement->bindValue( ':email', $info['email'] );
@@ -895,7 +964,8 @@ class User {
         return $perfectMatch;
     }
 
-    public function findBuddyMatch( $info ) {
+    public function findBuddyMatch( $info ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM users WHERE email != :email && buddy != :buddy' );
         $statement->bindValue( ':email', $info['email'] );
@@ -906,7 +976,8 @@ class User {
         return $buddyMatch;
     }
 
-    public function findMusicMatch( $info ) {
+    public function findMusicMatch( $info ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM users WHERE email != :email && buddy != :buddy && music = :music' );
         $statement->bindValue( ':email', $info['email'] );
@@ -918,7 +989,8 @@ class User {
         return $musicMatch;
     }
 
-    public function findMoviesMatch( $info ) {
+    public function findMoviesMatch( $info ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM users WHERE email != :email && buddy != :buddy && movies = :movies' );
         $statement->bindValue( ':email', $info['email'] );
@@ -930,7 +1002,8 @@ class User {
         return $moviesMatch;
     }
 
-    public function findGamesMatch( $info ) {
+    public function findGamesMatch( $info ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM users WHERE email != :email && buddy != :buddy && games = :games' );
         $statement->bindValue( ':email', $info['email'] );
@@ -942,7 +1015,8 @@ class User {
         return $gamesMatch;
     }
 
-    public function findBooksMatch( $info ) {
+    public function findBooksMatch( $info ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM users WHERE email != :email && buddy != :buddy && books = :books' );
         $statement->bindValue( ':email', $info['email'] );
@@ -954,7 +1028,8 @@ class User {
         return $booksMatch;
     }
 
-    public function findTvShowsMatch( $info ) {
+    public function findTvShowsMatch( $info ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM users WHERE email != :email && buddy != :buddy && tvShows = :tvShows' );
         $statement->bindValue( ':email', $info['email'] );
@@ -966,7 +1041,8 @@ class User {
         return $tvShowsMatch;
     }
 
-    public function search() {
+    public function search() 
+    {
         $currentEmail = $this->getCurrentEmail();
         $searchTerm = $this->getSearchTerm();
         $category = $this->getCategory();
@@ -980,7 +1056,8 @@ class User {
         return $result;
     }
 
-    public function hasBuddy( $id ) {
+    public function hasBuddy( $id ) 
+    {
         try {
             $conn = Db::getConnection();
             $statement = $conn->prepare( 'SELECT id, buddyId FROM users WHERE email = :email AND buddyId = :buddyId' );
@@ -994,7 +1071,8 @@ class User {
         }
     }
 
-    public function sentRequest( $userId, $id ) {
+    public function sentRequest( $userId, $id ) 
+    {
         try {
             $conn = Db::getConnection();
             $statement = $conn->prepare( 'SELECT sender, receiver FROM requests WHERE sender = :sender AND receiver = :receiver AND active = 1' );
@@ -1009,7 +1087,8 @@ class User {
         }
     }
 
-    public function receivedRequest( $userId, $id ) {
+    public function receivedRequest( $userId, $id ) 
+    {
         try {
             $conn = Db::getConnection();
             $statement = $conn->prepare( 'SELECT sender, receiver FROM requests WHERE sender = :sender AND receiver = :receiver AND active = 1' );
@@ -1023,7 +1102,8 @@ class User {
         }
     }
 
-    public function saveMessage() {
+    public function saveMessage() 
+    {
         try {
             $conn = Db::getConnection();
             $statement = $conn->prepare( 'INSERT INTO chat (sender, receiver, message) values (:sender, :receiver, :message)' );
@@ -1043,7 +1123,8 @@ class User {
         }
     }
 
-    public static function getAllMessages( $sender, $receiver ) {
+    public static function getAllMessages( $sender, $receiver ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM chat WHERE (sender = :sender AND receiver = :receiver) OR (sender = :receiver AND receiver = :sender) ORDER BY timestamp' );
         $statement->bindValue( ':sender', $sender );
@@ -1056,7 +1137,8 @@ class User {
     * Get the value of messageText
     */
 
-    public function getMessageText() {
+    public function getMessageText() 
+    {
         return $this->messageText;
     }
 
@@ -1066,12 +1148,14 @@ class User {
     * @return  self
     */
 
-    public function setMessageText( $messageText ) {
+    public function setMessageText( $messageText ) 
+    {
         $this->messageText = $messageText;
         return $this;
     }
 
-    public function messageRead( $receiver ) {
+    public function messageRead( $receiver ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM chat WHERE receiver = :receiver AND `read` = 0' );
         $statement->bindValue( ':receiver', $receiver );
@@ -1079,7 +1163,8 @@ class User {
         return $statement->fetchAll( PDO::FETCH_ASSOC );
     }
 
-    public function messageSenders( $receiver, $sender ) {
+    public function messageSenders( $receiver, $sender ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT receiver FROM chat WHERE receiver = :receiver AND `read` = 0 AND sender = :sender' );
         $statement->bindValue( ':receiver', $receiver );
@@ -1088,7 +1173,8 @@ class User {
         return $statement->fetch( PDO::FETCH_ASSOC );
     }
 
-    public function userReadMessage() {
+    public function userReadMessage() 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'UPDATE chat SET `read` = 1 WHERE receiver = :receiver AND sender = :sender' );
 
@@ -1098,7 +1184,8 @@ class User {
         return $result;
     }
 
-    public function matchType( $info ) {
+    public function matchType( $info ) 
+    {
         $musicMatch = $this->findMusicMatch( $info );
         foreach ( $musicMatch as $m ) {
             if ( $m['id'] === $_GET['messageid'] ) {
@@ -1135,7 +1222,8 @@ class User {
         }
     }
 
-    public function sendRequest() {
+    public function sendRequest() 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT sender FROM requests WHERE sender = :sender' );
 
@@ -1147,7 +1235,8 @@ class User {
         return $result;
     }
 
-    public function sendRequestFalse() {
+    public function sendRequestFalse() 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'INSERT INTO requests (sender, receiver) VALUES (:sender, :receiver)' );
 
@@ -1160,7 +1249,8 @@ class User {
         return $result;
     }
 
-    public function sendRequestTrue() {
+    public function sendRequestTrue() 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'UPDATE requests SET receiver = :receiver, active = 1 WHERE sender = :sender' );
 
@@ -1173,7 +1263,8 @@ class User {
         return $result;
     }
 
-    public function cancelRequest() {
+    public function cancelRequest() 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'DELETE FROM requests WHERE sender = :sender' );
 
@@ -1184,7 +1275,8 @@ class User {
         return $result;
     }
 
-    public function removeBuddy() {
+    public function removeBuddy() 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'UPDATE users SET buddyId = CASE WHEN id = :id THEN 0 WHEN id = :buddyId THEN 0 ELSE buddyId END' );
 
@@ -1197,7 +1289,8 @@ class User {
         return $result;
     }
 
-    public function acceptRequest() {
+    public function acceptRequest() 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'UPDATE users SET buddyId = CASE WHEN id = :id THEN :buddyId WHEN id = :buddyId THEN :id ELSE buddyId END' );
 
@@ -1214,7 +1307,8 @@ class User {
     * Get the value of reason
     */
 
-    public function getReason() {
+    public function getReason() 
+    {
         return $this->reason;
     }
 
@@ -1224,13 +1318,15 @@ class User {
     * @return  self
     */
 
-    public function setReason( $reason ) {
+    public function setReason( $reason ) 
+    {
         $this->reason = $reason;
 
         return $this;
     }
 
-    public function ignoreRequest() {
+    public function ignoreRequest() 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'UPDATE requests SET active = 0, reason = :reason WHERE sender = :sender' );
 
@@ -1243,7 +1339,8 @@ class User {
         return $result;
     }
 
-    public function findBuddyId( $email ) {
+    public function findBuddyId( $email ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT buddyId FROM users where email = :email' );
         $statement->bindValue( ':email', $email );
@@ -1253,7 +1350,8 @@ class User {
         return $buddyId;
     }
 
-    public function showBuddy( $buddyId ) {
+    public function showBuddy( $buddyId ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM users WHERE id = :buddyId' );
         $statement->bindValue( ':buddyId', ( int )$buddyId );
@@ -1262,7 +1360,8 @@ class User {
         return $result;
     }
 
-    public function findReceiverEmail( $receiver ) {
+    public function findReceiverEmail( $receiver ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT email FROM users INNER JOIN requests ON users.id = requests.receiver WHERE requests.receiver = :receiver' );
         $receiver = $this->getBuddyId();
@@ -1272,7 +1371,8 @@ class User {
         return $result['email'];
     }
 
-    public function isReasonSet( $receiver ) {
+    public function isReasonSet( $receiver ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( "SELECT * FROM requests WHERE receiver = :receiver AND reason != '' AND sender = :sender AND active = 0" );
 
@@ -1288,7 +1388,8 @@ class User {
         return $result;
     }
 
-    public static function getNumberAccept() {
+    public static function getNumberAccept() 
+    {
         $conn = DB::getConnection();
 
         $statement = $conn->prepare( 'SELECT * FROM `users` WHERE `buddyId` != 0' );
@@ -1297,7 +1398,8 @@ class User {
         return $users;
     }
 
-    public function moderator( $email ) {
+    public function moderator( $email ) 
+    {
         $conn = DB::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM `users` WHERE `email` = :email' );
         $statement->bindValue( ':email', $email );
@@ -1306,7 +1408,8 @@ class User {
         return $result;
     }
 
-    public function checkEmail( $email ) {
+    public function checkEmail( $email ) 
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM users WHERE email= :email' );
 
@@ -1325,7 +1428,8 @@ class User {
         }
     }
 
-    public function searchCampus() {
+    public function searchCampus() 
+    {
         $letter = $this->getCampusLetter();
         $conn = Db::getConnection();
         $statement = $conn->prepare( 'SELECT name FROM campuses WHERE letter = :letter' );
@@ -1339,7 +1443,8 @@ class User {
     * Get the value of campusLetter
     */
 
-    public function getCampusLetter() {
+    public function getCampusLetter() 
+    {
         return $this->campusLetter;
     }
 
@@ -1349,7 +1454,8 @@ class User {
     * @return  self
     */
 
-    public function setCampusLetter( $campusLetter ) {
+    public function setCampusLetter( $campusLetter ) 
+    {
         $this->campusLetter = $campusLetter;
         return $this;
     }
@@ -1358,7 +1464,8 @@ class User {
     * Get the value of campus
     */
 
-    public function getCampus() {
+    public function getCampus() 
+    {
         return $this->campus;
     }
 
@@ -1368,7 +1475,8 @@ class User {
     * @return  self
     */
 
-    public function setCampus( $campus ) {
+    public function setCampus( $campus ) 
+    {
         $this->campus = $campus;
         return $this;
     }

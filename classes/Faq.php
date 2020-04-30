@@ -11,7 +11,8 @@ class Faq {
     * Get the value of question
     */
 
-    public function getQuestion() {
+    public function getQuestion() 
+    {
         return $this->question;
     }
 
@@ -21,7 +22,8 @@ class Faq {
     * @return  self
     */
 
-    public function setQuestion( $question ) {
+    public function setQuestion( $question ) 
+    {
         $this->question = $question;
 
         return $this;
@@ -31,7 +33,8 @@ class Faq {
     * Get the value of comment
     */
 
-    public function getComment() {
+    public function getComment() 
+    {
         return $this->comment;
     }
 
@@ -41,13 +44,15 @@ class Faq {
     * @return  self
     */
 
-    public function setComment( $comment ) {
+    public function setComment( $comment ) 
+    {
         $this->comment = $comment;
 
         return $this;
     }
 
-    public function getAllQuestions( $pin ) {
+    public function getAllQuestions( $pin ) 
+    {
         $pin = $pin;
         $conn = DB::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM `questions` WHERE `pinned` = :pin ORDER BY `id` DESC' );
@@ -57,7 +62,8 @@ class Faq {
         return $result;
     }
 
-    public function askQuestion( $question ) {
+    public function askQuestion( $question ) 
+    {
         $conn = DB::getConnection();
         $statement = $conn->prepare( 'INSERT INTO `questions`(`question`, `pinned`) VALUES (:question, 0)' );
         $statement->bindValue( ':question', $question );
@@ -65,7 +71,8 @@ class Faq {
         return $result;
     }
 
-    public function pinQuestion( $id ) {
+    public function pinQuestion( $id ) 
+    {
         $conn = DB::getConnection();
         $statement = $conn->prepare( 'UPDATE `questions` SET `pinned`= 1 WHERE `id` = :id' );
         $statement->bindValue( ':id', $id );
@@ -73,7 +80,8 @@ class Faq {
         return $result;
     }
 
-    public function unPinQuestion( $id ) {
+    public function unPinQuestion( $id ) 
+    {
         $conn = DB::getConnection();
         $statement = $conn->prepare( 'UPDATE `questions` SET `pinned`= 0 WHERE `id` = :id' );
         $statement->bindValue( ':id', $id );
@@ -83,7 +91,8 @@ class Faq {
 
     /*-- discussion functions --*/
 
-    public function CurrentQuestion( $id ) {
+    public function CurrentQuestion( $id ) 
+    {
         $conn = DB::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM `questions` WHERE `id` = :id' );
         $statement->bindValue( ':id', $id );
@@ -92,7 +101,8 @@ class Faq {
         return $result;
     }
 
-    public function getComments( $id ) {
+    public function getComments( $id ) 
+    {
         $conn = DB::getConnection();
         $statement = $conn->prepare( 'SELECT * FROM `comments` WHERE `commentId` = :id' );
         $statement->bindValue( ':id', $id );
@@ -101,7 +111,8 @@ class Faq {
         return $result;
     }
 
-    public function placeComment( $comment, $id ) {
+    public function placeComment( $comment, $id ) 
+    {
         $conn = DB::getConnection();
         $statement = $conn->prepare( 'INSERT INTO `comments`(`comment`, `commentId`) VALUES (:comment, :commentId)' );
         $statement->bindValue( ':comment', $comment );

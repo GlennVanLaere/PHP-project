@@ -5,6 +5,6 @@ const SETTINGS = [
         'user'      => 'root',
         'password'  => '',
         'host'      => 'localhost',
-        'dbname' => 'phpproject'
+        'dbname'    => 'phpproject'
     ]
 ];
