@@ -272,6 +272,15 @@ include_once(__DIR__ . "/Db.php");
          */ 
         public function setCurrentLastName($currentLastName)
         {
+            try {
+                $conn = Db::getConnection();
+                $statement = $conn->prepare("SELECT lastName FROM users WHERE id = :id");
+                $statement->bindValue(":id", $currentLastName);
+                $statement->execute();
+                $currentLastName = $statement->fetch(PDO::FETCH_ASSOC);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
                 $this->currentLastName = $currentLastName;
 
                 return $this;
