@@ -4,31 +4,31 @@ include_once(__DIR__."/classes/User.php");
 
  session_start();
  if (isset($_SESSION['user'])) {
-     $email = $_SESSION['user'];
-     $person = new User;
-     $info = $person->findCurrentUser($email);
+    $email = $_SESSION['user'];
+    $person = new User;
+    $info = $person->findCurrentUser($email);
 
-     $perfectMatch = $person->findPerfectMatch($info);
-     $buddyMatch = $person->findBuddyMatch($info);
-     $musicMatch = $person->findMusicMatch($info);
-     $moviesMatch = $person->findMoviesMatch($info);
-     $gamesMatch = $person->findGamesMatch($info);
-     $booksMatch = $person->findBooksMatch($info);
-     $tvShowsMatch = $person->findTvShowsMatch($info);
+    $perfectMatch = $person->findPerfectMatch($info);
+    $buddyMatch = $person->findBuddyMatch($info);
+    $musicMatch = $person->findMusicMatch($info);
+    $moviesMatch = $person->findMoviesMatch($info);
+    $gamesMatch = $person->findGamesMatch($info);
+    $booksMatch = $person->findBooksMatch($info);
+    $tvShowsMatch = $person->findTvShowsMatch($info);
    
-     $person->setUserId();
-     $userId = $person->getUserId();
+    $person->setUserId();
+    $userId = $person->getUserId();
 
-     $messageRead = $person->messageRead($userId);
+    $messageRead = $person->messageRead($userId);
 
-     $register = $person->getAll();
-     $totalRegister = count($register);
+    $register = $person->getAll();
+    $totalRegister = count($register);
 
-     $numberAccept = $person->getNumberAccept();
-     $totalAccept = count($numberAccept);
- } else {
-     header("Location: login.php");
- }
+    $numberAccept = $person->getNumberAccept();
+    $totalAccept = count($numberAccept);
+} else {
+    header("Location: login.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +69,9 @@ include_once(__DIR__."/classes/User.php");
         <p>Also watches: <?php echo $pm['tvShows'] . " tvShows" ; ?></p>
         <h4>Conclusion: 100% the perfect match!</h4>
         <?php endforeach; ?>
-        <?php if (!$perfectMatch) { echo '<p>No perfect matches found.</p>'; } ?>
+        <?php if (!$perfectMatch) {
+    echo '<p>No perfect matches found.</p>';
+} ?>
     </div>
     <div class="bm">
         <h3>Buddy Matches:</h3>
@@ -78,7 +80,9 @@ include_once(__DIR__."/classes/User.php");
         <?php $person->setBuddyId($bm['id']); ?>
         <?php include("includes/buddyRequestButtons.inc.php") ?>
         <?php endforeach; ?>
-        <?php if (!$buddyMatch) { echo '<p>No matches found based on buddy settings.</p>'; } ?>
+        <?php if (!$buddyMatch) {
+    echo '<p>No matches found based on buddy settings.</p>';
+} ?>
     </div>
     <div class="mum">
         <h3>Music Matches:</h3>
@@ -87,7 +91,9 @@ include_once(__DIR__."/classes/User.php");
         <?php $person->setBuddyId($mum['id']); ?>
         <?php include("includes/buddyRequestButtons.inc.php") ?>
         <?php endforeach; ?>
-        <?php if (!$musicMatch) { echo '<p>No matches found based on music.</p>'; } ?>
+        <?php if (!$musicMatch) {
+    echo '<p>No matches found based on music.</p>';
+} ?>
     </div>
     <div class="mom">
         <h3>Movies Matches:</h3>
@@ -96,7 +102,9 @@ include_once(__DIR__."/classes/User.php");
         <?php $person->setBuddyId($mom['id']); ?>
         <?php include("includes/buddyRequestButtons.inc.php") ?>
         <?php endforeach; ?>
-        <?php if (!$moviesMatch) { echo '<p>No matches found based on movies.</p>'; } ?>
+        <?php if (!$moviesMatch) {
+    echo '<p>No matches found based on movies.</p>';
+} ?>
     </div>
     <div class="gm">
         <h3>Games Matches:</h3>
@@ -105,7 +113,9 @@ include_once(__DIR__."/classes/User.php");
         <?php $person->setBuddyId($gm['id']); ?>
         <?php include("includes/buddyRequestButtons.inc.php") ?>
         <?php endforeach; ?>
-        <?php if (!$gamesMatch) { echo '<p>No matches found based on games.</p>'; } ?>
+        <?php if (!$gamesMatch) {
+    echo '<p>No matches found based on games.</p>';
+} ?>
     </div>
     <div class="bom">
         <h3>Books Matches:</h3>
@@ -114,7 +124,9 @@ include_once(__DIR__."/classes/User.php");
         <?php $person->setBuddyId($bm['id']); ?>
         <?php include("includes/buddyRequestButtons.inc.php") ?>
         <?php endforeach; ?>
-        <?php if (!$booksMatch) { echo '<p>No matches found based on books.</p>'; } ?>
+        <?php if (!$booksMatch) {
+    echo '<p>No matches found based on books.</p>';
+} ?>
     </div>
     <div class="tm">
         <h3>TvShows Matches:</h3>
@@ -123,7 +135,9 @@ include_once(__DIR__."/classes/User.php");
         <?php $person->setBuddyId($tm['id']); ?>
         <?php include("includes/buddyRequestButtons.inc.php") ?>
         <?php endforeach; ?>
-        <?php if (!$tvShowsMatch) { echo '<p>No matches found based on tv-shows.</p>'; } ?>
+        <?php if (!$tvShowsMatch) {
+    echo '<p>No matches found based on tv-shows.</p>';
+} ?>
     </div>
     <script src="js/buddyRequest.js"></script>
 </body>
