@@ -1,21 +1,21 @@
 <?php
-    include_once( __DIR__ . '/../classes/Comment.php' );
-    session_start();
+include_once( __DIR__ . '/../classes/Comment.php' );
+session_start();
 
-    if( !empty($_POST) ){
-   
-        $id = $_POST['id'];
+if ( !empty( $_POST ) ) {
 
-        $comment = new Comment();
-        $comment->setId($id);
-        $comment->doUpvote($id);
+    $id = $_POST['id'];
 
-        $response = [
-            "status" => "succes",
-            "message" => "upvote was successful"
-        ];
+    $comment = new Comment();
+    $comment->setId( $id );
+    $comment->doUpvote( $id );
 
-        header( 'Content-Type: application/json' );
-        echo json_encode( $response );
-    };
-?>
+    $response = [
+        'status' => 'succes',
+        'message' => 'upvote was successful',
+        'id' => $id
+    ];
+
+    header( 'Content-Type: application/json' );
+    echo json_encode( $response );
+};

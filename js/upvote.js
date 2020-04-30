@@ -5,14 +5,18 @@ document.querySelector(".upvote").addEventListener("click", (e) => {
 })
 
 function doUpvote(){  
-    let id = $(this).data("id")
+    const upvote = document.querySelector(".upvote")
+    let id = upvote.dataset.value
     let link = $(this)
     console.log(id)
     
+    const formData = new FormData()
+
+    formData.append("id", id)
 
     fetch('ajax/upvote.php', {
         method: 'POST',
-        body: JSON.stringify({ id: id })
+        body: form
     })
     .then((response) => response.json())
     .then((result) => {
@@ -27,8 +31,6 @@ function doUpvote(){
     .catch((error) => {
         console.error('Error:', error)
     })
-    
-   
 }
 
 

@@ -1,8 +1,8 @@
 <?php
     session_start();
     include_once(__DIR__ . "/classes/User.php");
-if (isset($_SESSION['user'])) {
-    if (!empty($_POST)) {
+if ( isset ( $_SESSION['user'] ) ) {
+    if ( !empty ( $_POST )) {
         $search = new User;
         $search->setCurrentEmail($_SESSION['user']);
         $search->setCategory($_POST['category']);
@@ -12,8 +12,8 @@ if (isset($_SESSION['user'])) {
 } else {
     header("Location: logout.php");
 }
-
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
