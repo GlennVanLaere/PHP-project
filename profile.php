@@ -2,9 +2,8 @@
 session_start();
 include_once(__DIR__."/classes/User.php");
 
-if(isset($_SESSION['user'])){
+if( isset( $_SESSION['user'] ) ) {
     $email = $_SESSION['user'];
-
     try {
         $user = new User;
         $showEmail = $user->viewEmail($email);
@@ -15,7 +14,6 @@ if(isset($_SESSION['user'])){
         
         if(!empty($_POST)){
             try {
-
                 $file = $_FILES["avatar"];
                 $fileName = $_FILES["avatar"]["name"];
                 //$fileError = $_FILES["avatar"]["error"];
@@ -32,18 +30,7 @@ if(isset($_SESSION['user'])){
         $error = $t->getMessage();
     }
 }
-//pofiel aanpassen is mogelijk
-//opladen van foto / avatar
-//Beperk de bestandstypes en bestandsgrootte
-//Geef gebruiksvriendelijke feedback als de update mislukt, maar ook als die lukt
-//Beschrijving / korte profieltekst (emoji’s bewaren moet mogelijk zijn) //werkt op emoji na
-//wachtwoord wijzigen lukt
-//Wat is een veilige manier om dit te doen? Overleg met je team.
-//email adres wijzigen
-//Hoe kan je dit veilig toelaten? (wat als je even van je laptop weg bent en iemand je wachtwoord wijzigt?) Idem voor wachtwoord wijzigen.
-//Zorg dat je hier aantoont dat je hebt nagedacht over een veilige procedure 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

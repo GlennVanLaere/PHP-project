@@ -1,17 +1,14 @@
 <?php
     session_start();
     include_once(__DIR__ . "/classes/Search.php");
-if(isset($_SESSION['user'])){
-
-    if(!empty($_POST)){
-        
+if (isset($_SESSION['user'])) {
+    if (!empty($_POST)) {
         $search = new Search;
         $search->setCurrentEmail($_SESSION['user']);
         $search->setCategory($_POST['category']);
         $search->setSearchTerm($_POST['searchTerm']);
         $result = $search->goSearch();
     }
-
 } else {
     header("Location: logout.php");
 }
@@ -49,9 +46,9 @@ if(isset($_SESSION['user'])){
             <input type="submit" name="search" value="search" class="btn btnu btn-primary">
         </div>
     </form>
-    <?php if(!empty($_POST)){ ?>
-        <?php if(!empty($result)): ?>
-        <?php foreach($result as $r): ?>
+    <?php if (!empty($_POST)) { ?>
+        <?php if (!empty($result)): ?>
+        <?php foreach ($result as $r): ?>
             <div>
                 <h2><?php echo htmlspecialchars($r['firstName'] . ' ' . $r['lastName']); ?></h2>
                 <p>Also listens to: <?php echo htmlspecialchars($r['music']); ?></p>
