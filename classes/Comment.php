@@ -95,13 +95,22 @@ class Comment {
         return $this;
     }
 
-    public function doUpvote()
+    public function doUpvote($id)
     {
         $conn = DB::getConnection();
-        $statement = $conn->prepare( 'UPDATE `comments` SET `upvotes` += 1 WHERE `id` = :id' );
-        $statement->bindValue( ':id', $this->getId() );
+        $statement = $conn->prepare( 'UPDATE `comments` SET `upvotes` = `upvotes` + 1 WHERE `id` = :id' );
+        $statement->bindValue( ':id', $id );
         $result = $statement->execute();
         return $result;
     }
 
+    public function getCurrentUpvotes($id)
+    {
+        $conn = DB::getConnection();
+        $statement = $conn->prepare( 'SELECT `upvotes` FROM `comments` WHERE `id` = :id' );
+        $statement->bindValue( ':id', $id );
+        $statement->execute();
+        $result = $statement->fetch( PDO::FETCH_ASSOC );
+        return $result['upvotes'];
+    }
 }

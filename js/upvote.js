@@ -1,13 +1,13 @@
 document.querySelector(".upvote").addEventListener("click", (e) => {
     console.log("click upvote")
-    doUpvote()
+    upvote()
     e.preventDefault()
 })
 
-function doUpvote(){  
-    const upvote = document.querySelector(".upvote")
-    let id = upvote.dataset.value
-    let link = $(this)
+function upvote(){ 
+    let upvote = document.querySelector(".upvote") 
+    let upvotes = document.querySelector(".upvotes")
+    let id = upvote.dataset.id
     console.log(id)
     
     const formData = new FormData()
@@ -16,22 +16,17 @@ function doUpvote(){
 
     fetch('ajax/upvote.php', {
         method: 'POST',
-        body: form
+        body: formData
     })
     .then((response) => response.json())
     .then((result) => {
-        console.log(result.status);
+        console.log(result);
         if(result.status == "succes"){
-            var upvotes = link.next().html()
             console.log(upvotes)
-            upvotes++
-            link.next().html(upvotes)
+            upvotes.innerHTML = result.upvotes
         }
     })
     .catch((error) => {
         console.error('Error:', error)
     })
 }
-
-
-

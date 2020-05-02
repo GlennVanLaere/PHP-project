@@ -9,11 +9,13 @@ if ( !empty( $_POST ) ) {
     $comment = new Comment();
     $comment->setId( $id );
     $comment->doUpvote( $id );
+    $upvotes = $comment->getCurrentUpvotes($id);
 
     $response = [
         'status' => 'succes',
         'message' => 'upvote was successful',
-        'id' => $id
+        'id' => $id,
+        'upvotes' =>  $upvotes
     ];
 
     header( 'Content-Type: application/json' );
