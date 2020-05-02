@@ -2,7 +2,8 @@ document.querySelector("#searchBox").addEventListener("keyup", function() {
     let category = document.querySelector("#category").value;
     let searchTerm = document.querySelector("#searchBox").value;
     document.getElementById('searchResults').innerHTML = "";
-    if(searchTerm != ""){
+    if (searchTerm != "") 
+    {
         $.ajax({
             method: "POST",
             url: "ajax/searchUser.php", 
