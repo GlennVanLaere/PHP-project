@@ -19,7 +19,7 @@ document.querySelector("#searchBox").addEventListener("keyup", function() {
                 for(i=0;i<res.length; i++){
                     changeIt.innerHTML += '<a href="public.php?id='+ res[i].id + '" class="searchItem">' + res[i].firstName + ' -> go to profile' + '</a>';
                 }
-            } else if( category == '' )
+            } else if( (res.lenght != 0) && (category == '') )
             {
                 changeIt.style.visibility = 'visible';
                 changeIt.innerHTML += '<p>Choose a category!</p>';

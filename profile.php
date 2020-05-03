@@ -4,8 +4,21 @@ include_once(__DIR__."/classes/User.php");
 
 if( isset( $_SESSION['user'] ) ) {
     $email = $_SESSION['user'];
+
+    $user = new User();
+    $moderator = $user->moderator($email);
+    $moderator = $moderator['moderator'];
+    if(isset($_POST['undoModerator'])){
+        $user->undoModerator($email);
+        header("Location: profile.php");
+    }
+    if(isset($_POST['makeModerator'])){
+        $user->makeModerator($email);
+        header("Location: profile.php");
+    }
+
     try {
-        $user = new User();
+        //$user = new User();
         $showEmail = $user->viewEmail($email);
         $showDescription = $user->viewDescription($email);
         $viewAvatar = $user->showAvatar($email);
@@ -73,6 +86,17 @@ if( isset( $_SESSION['user'] ) ) {
     <a href="match.php" class="btn btn-primary">Go find one</a>
     <?php endif; ?>
     </div>
+    <div class="moderator">
+        <h2>Moderator</h2>
+        <p>Easy to test pin questions feature</p>
+        <form action="" method="post">
+        <?php if($moderator == 1): ?>
+            <input type="submit" class="btn btn-success" value="Undo moderator" name="undoModerator">
+        <?php else: ?>
+            <input type="submit" class="btn btn-success" value="Become a moderator" name="makeModerator">
+        <?php endif; ?>
+        </form>
+    </div>    
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
