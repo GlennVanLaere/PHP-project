@@ -24,8 +24,6 @@ btns.forEach((btn) => {
                 console.log(result);
                 console.log(result.currentUpvotes)
                 btn.parentNode.innerHTML = result.currentUpvotes + " upvotes"
-                document.querySelector('.done').innerHTML = result.message
-
             })
             .catch((error) => {
                 console.error('Error:', error)

@@ -30,13 +30,14 @@
 </head>
 <body>
 <?php include_once('includes/nav.inc.php'); ?>
-<p class="done"> message</p>
     <h2><?php echo htmlspecialchars($question['question']); ?></h2>
     <?php if (!empty($comment)): ?>
         <?php foreach ($comment as $c): ?>
             <p><?php echo htmlspecialchars($c['comment']); ?></p>
-            <?php if (!$post->hasVoted($user->getUserId(), $c['id'])):?>
-            <div><a href="#" data-id="<?php echo $c['id'] ?>" class="click upvote btn btn-info">🔺upvote</a> <?php echo $c['upvotes']; ?></div>
+            <?php if ($post->hasVoted($user->getUserId(), $c['id'])):?>
+            <p><?php echo $c['upvotes']; ?> upvotes</p>
+            <?php else: ?>
+            <div><a href="#" data-id="<?php echo $c['id'] ?>" class="click upvote btn btn-info">🔺upvote</a></div>
             <?php endif; ?>
         <?php endforeach; ?>
     <?php endif; ?>
