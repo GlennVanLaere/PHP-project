@@ -2,14 +2,13 @@
 include_once( __DIR__ . '/../classes/User.php' );
 session_start();
 $user = new User();
-$user->setUserId();
-$user->setBuddyId( $_POST['receiver'] );
+$user->setCampusLetter( strtoupper( $_POST['campus'] ) );
 
-$user->acceptRequest();
+$user->searchCampus();
 
 $response = [
-    'id' => $user->getUserId(),
-    'buddyId' => $user->getBuddyId()
+    'campus' => $user->getCampus(),
+    'letter' => $user->getCampusLetter()
 ];
 
 header( 'Content-Type: application/json' );

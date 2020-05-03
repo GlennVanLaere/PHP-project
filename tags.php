@@ -1,11 +1,10 @@
 <?php
     session_start();
     include_once(__DIR__ . "/classes/User.php");
-    if(isset($_SESSION['user'])){
-        
+    if (isset($_SESSION['user'])) {
         $email = $_SESSION["user"];
-        try{
-            if(!empty($_POST)){
+        try {
+            if (!empty($_POST)) {
                 $update = new User;
                 $update->setMusic($_POST['music']);
                 $update->setMovies($_POST['movies']);
@@ -25,18 +24,19 @@
         session_destroy();
         header("Location: login.php");
     }
-        
-        ?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css" />
     <title>Profile</title>
 </head>
-<body>
+<body class="tag">
 <?php include("includes/nav.inc.php") ?>
-    <?php if(isset($error)): ?>
+    <?php if (isset($error)): ?>
         <div class="alert alert-danger" role="alert">
             <?php echo $error ?>
         </div>
@@ -44,16 +44,16 @@
     <form action="" method="POST">
     <div class="dropdown">
     <label for="buddy">Buddy:</label></br>
-        <select name="buddy" class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <option><?php echo $tags['buddy'] ?></option>
+        <select name="buddy" class="btn btn-info btnGroup dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <option><?php echo htmlspecialchars($tags['buddy']); ?></option>
             <option>I am searching a buddy</option>
             <option>I want to be a buddy</option>>
         </select>
     </div>
     <div class="dropdown">
     <label for="music">Music:</label></br>
-        <select name="music" class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <option><?php echo $tags['music'] ?></option>
+        <select name="music" class="btn btn-info btnGroup dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <option><?php echo htmlspecialchars($tags['music']); ?></option>
             <option>Electro</option>
             <option>Hiphop</option>
             <option>Jazz</option>
@@ -66,8 +66,8 @@
     </div>
     <div class="dropdown">
     <label for="movies">Movies:</label></br>
-        <select name="movies" class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <option><?php echo $tags['movies'] ?></option>
+        <select name="movies" class="btn btn-info btnGroup dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <option><?php echo htmlspecialchars($tags['movies']); ?></option>
             <option>Action</option>
             <option>Adventure</option>
             <option>Animation</option>
@@ -84,8 +84,8 @@
     </div>
     <div class="dropdown">
     <label for="books">Books:</label></br>
-        <select name="books" class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <option><?php echo $tags['books'] ?></option>
+        <select name="books" class="btn btn-info btnGroup dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <option><?php echo htmlspecialchars($tags['books']); ?></option>
             <option>Action</option>
             <option>Comedy</option>
             <option>Comics</option>
@@ -99,8 +99,8 @@
     </div>
     <div class="dropdown">
     <label for="games">Games:</label></br>
-        <select name="games" class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <option><?php echo $tags['games'] ?></option>
+        <select name="games" class="btn btn-info btnGroup dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <option><?php echo htmlspecialchars($tags['games']); ?></option>
             <option>Action</option>
             <option>Adventure</option>
             <option>Comedy</option>
@@ -116,8 +116,8 @@
     </div>
 <div class="dropdown">
     <label for="tvShows">Tv-Shows:</label></br>
-        <select name="tvShows" class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <option><?php echo $tags['tvShows'] ?></option>
+        <select name="tvShows" class="btn btn-info btnGroup dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <option><?php echo htmlspecialchars($tags['tvShows']); ?></option>
             <option>American series</option>
             <option>Dutch series</option>
             <option>News</option>
@@ -127,7 +127,7 @@
         </select>
 </div>
     <div>
-        <input type="submit" value="Submit" class="btn btn-primary">	
+        <input type="submit" value="Submit" class="btn btnu btn-primary">	
     </div>
     </form>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

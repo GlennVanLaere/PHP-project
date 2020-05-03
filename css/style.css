@@ -1,4 +1,284 @@
 img{
-    width: 100px;
-    
+    width: 150px;   
+}
+
+body{
+    background-color: #D3ECFD;
+    padding: 10px;
+}
+
+.mainnav{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+a{
+    text-decoration: none;
+    display: block;
+}
+
+.mainnav a{
+    padding: 5px;
+    align-items: flex-end;
+    text-decoration: none;
+    color: darkblue;
+}
+
+nav{
+    padding: 10px 15px; 
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+h1{
+    text-align: center;
+    margin-top: -20px;
+    padding-top: 20px;
+}
+
+h2{
+    font-size: 22px;
+    padding-top: 15px;
+}
+
+.form-group{
+    width: 25em;
+    display: block;
+    margin: 0 auto;
+     
+}
+
+label{
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+
+.form-control{
+    border: 1px solid darkblue;
+    border-radius: 5px;    
+}
+
+#available{
+    color:darkblue;
+    font-weight: bold;
+}
+
+.btnGroup{
+    display: block;
+    margin: 5px auto;
+    text-align: center;    
+    background-color: darkblue;
+    color: white;
+    font-weight: bold;
+}
+
+.btnGroup:hover{
+    display: block;
+    margin: 5px auto;
+    text-align: center;    
+    background-color: darkblue;
+    color: white;
+    font-weight: bold;
+}
+
+.acc{
+    color: darkblue;
+    font-size: 14px;
+    padding-top: 15px;
+    text-align: center;
+}
+
+.btn{
+    font-weight: bold;
+}
+
+.blue{
+    color: darkblue;
+}
+
+.btn-primary{
+    background-color: darkblue;
+    margin: 5px;
+    margin-top: 15px;
+}
+
+.btn-xs{
+    background-color: grey;
+    opacity: 50%;
+    margin-top: -5px;
+    font-size: 12px;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(11, auto(50px));
+    grid-column-gap: 0px;
+    grid-row-gap: 10px;
+}
+
+.parent .navdiv{
+    grid-row: 1/1;
+    padding: 0;
+    margin: 0;
+
+    text-align: center;
+}
+
+.parent .welcome{
+    grid-row: 2/ 2 ;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.parent .stats{
+     grid-row: 3/ 3;
+     padding: 0;
+     margin: 0;
+     text-align: center;
+     font-size: 20px;
+}
+
+.parent .msg{
+    grid-row: 4/ 4;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.parent .pm{
+    grid-row: 5/ 5;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+.parent .bm{
+    grid-row: 6/ 6;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.parent .mum{
+    grid-row: 7/ 7;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+.parent .mom{
+    grid-row: 8/ 8;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+.parent .gm{
+    grid-row: 9 /9;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+.parent .bom{
+    grid-row: 10/ 10;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+.parent .tm{
+    grid-row: 11/ 11;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.btn-info{
+    background-color: darkblue;
+}
+
+.profile, .desc, .tag, .changeEmail, .changePass{
+    text-align: center;
+}
+
+.btnu{
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;;
+}
+
+@media (min-width: 800px){
+    .mainnav{
+        justify-content: flex-end;
+    }
+}
+
+
+@media (min-width: 950px){
+    .parent {
+        display: grid;
+        grid-template-columns: repeat(7, auto);
+        grid-template-rows: repeat(4, auto(75px));
+        grid-column-gap: 5px;
+        grid-row-gap: 0px;
+        
+        }
+
+        .parent .navdiv{
+            grid-row: 1/ 2;
+            grid-column: 1 /8;
+        }
+        
+        .parent .welcome{
+            grid-row: 2/ 3;
+            grid-column: 1/ 8;
+        }
+        
+        .parent .stats{
+             grid-row:3 /4;
+             grid-column: 1/ 8;
+        }
+        
+        .parent .msg{
+            grid-row: 3/ 4;
+            grid-column: 1/ 8;
+        }
+        
+        .parent .pm{
+            grid-row: 4/ 5;
+            grid-column: 1 /2;
+        }
+        .parent .bm{
+            grid-row: 4/ 5;
+            grid-column: 2 /3;
+        }
+        
+        .parent .mum{
+            grid-row: 4 /5;
+            grid-column: 3 /4;
+        }
+        .parent .mom{
+            grid-row: 4/ 5;
+            grid-column: 4 /5;
+        }
+        .parent .gm{
+            grid-row: 4 /5;
+            grid-column: 5 /6;
+        }
+        .parent .bom{
+            grid-row: 4 /5;
+            grid-column: 6 /7;
+
+        }
+        .parent .tm{
+            grid-row: 4 /5; 
+            grid-column: 7 /7;
+        }
+        
 }
