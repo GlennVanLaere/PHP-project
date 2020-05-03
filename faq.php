@@ -38,9 +38,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Questions</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="./../../css/style.css" />
+    <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body style="text-align: center">
 <?php include_once('includes/nav.inc.php'); ?>
     <form action="" method="post">
         <div class="form-group">
@@ -53,7 +53,7 @@
         <?php if (!empty($pinned)): ?>
             <?php foreach ($pinned as $p): ?>
                 <p><?php echo htmlspecialchars($p['question']); ?></p>
-                <a href="discussion.php?id=<?php echo htmlspecialchars($p['id']); ?>" class="btn btn-success">Go to discussion</a>
+                <a href="discussion.php?id=<?php echo htmlspecialchars($p['id']); ?>" class="btn btn-xs btn-success">Go to discussion</a>
                 <?php if ($moderator == 1): ?>
                     <form method="post" action="">
                         <div class="form-group">
@@ -72,7 +72,7 @@
         <?php if (!empty($noPin)): ?>
             <?php foreach ($noPin as $np): ?>
                 <p><?php echo htmlspecialchars($np['question']); ?></p>
-                <a href="discussion.php?id=<?php echo htmlspecialchars($np['id']); ?>" class="btn btn-success">Go to discussion</a>
+                <a href="discussion.php?id=<?php echo htmlspecialchars($np['id']); ?>" class="btn btn-xs btn-success">Go to discussion</a>
                 <?php if ($moderator == 1): ?>
                     <form method="post" action="">
                         <div class="form-group">

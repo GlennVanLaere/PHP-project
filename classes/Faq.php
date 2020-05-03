@@ -104,7 +104,7 @@ class Faq {
     public function getComments( $id ) 
     {
         $conn = DB::getConnection();
-        $statement = $conn->prepare( 'SELECT * FROM `comments` WHERE `commentId` = :id' );
+        $statement = $conn->prepare( 'SELECT * FROM `comments` WHERE `commentId` = :id ORDER BY `upvotes` DESC ' );
         $statement->bindValue( ':id', $id );
         $statement->execute();
         $result = $statement->fetchAll( PDO::FETCH_ASSOC );
