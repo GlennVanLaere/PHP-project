@@ -41,7 +41,7 @@ include_once(__DIR__."/classes/User.php");
 </head>
 <body class="parent">
 <div class="navdiv">
-    <?php include("includes/nav.inc.php") ?>
+    <?php include("app/frontend/includes/navbar.php") ?>
 </div>
 <div class="welcome">
     <?php  echo '<h1> Hi, '.$info['firstName'].'  '. $info['lastName'].'!</h1>'; ?>

@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body style="text-align: center">
-<?php include_once('includes/nav.inc.php'); ?>
+<?php include("app/frontend/includes/navbar.php") ?>
     <form action="" method="post">
         <div class="form-group">
             <input type="text" name="question" class="form-control" placeholder="Ask a question">

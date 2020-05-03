@@ -26,7 +26,7 @@ if (isset($_SESSION["user"])) {
     <title>Change your description</title>
 </head>
 <body class="desc">
-<?php include("includes/nav.inc.php") ?>
+<?php include("app/frontend/includes/navbar.php") ?>
     <form action="" method="post">
         <h2><label for="dscrptn" >Your description</label></h2>
         <textarea class="form-control" name="description" id="description" cols="30" rows="10" > <?php echo $showDescription ?> </textarea>

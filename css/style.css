@@ -4,30 +4,11 @@ img{
 
 body{
     background-color: #D3ECFD;
-    padding: 10px;
-}
-
-.mainnav{
-    display: flex;
-    justify-content: space-evenly;
 }
 
 a{
     text-decoration: none;
     display: block;
-}
-
-.mainnav a{
-    padding: 5px;
-    align-items: flex-end;
-    text-decoration: none;
-    color: darkblue;
-}
-
-nav{
-    padding: 10px 15px; 
-    font-size: 18px;
-    font-weight: bolder;
 }
 
 h1{
@@ -118,13 +99,6 @@ label{
     grid-row-gap: 10px;
 }
 
-.parent .navdiv{
-    grid-row: 1/1;
-    padding: 0;
-    margin: 0;
-
-    text-align: center;
-}
 
 .parent .welcome{
     grid-row: 2/ 2 ;
@@ -211,12 +185,6 @@ label{
     display: block;
     margin: 0 auto;
     margin-top: 15px;;
-}
-
-@media (min-width: 800px){
-    .mainnav{
-        justify-content: flex-end;
-    }
 }
 
 

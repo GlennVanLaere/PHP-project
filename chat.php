@@ -25,7 +25,7 @@ if (isset($_SESSION['user'])) {
     <title>chat</title>
 </head>
 <body>
-    <?php include("includes/nav.inc.php") ?>
+    <?php include("app/frontend/includes/navbar.php") ?>
     <?php $user->setCurrentFirstName($_GET['messageid']) ?>
     <?php $user->setCurrentLastName($_GET['messageid']) ?>
     <h1><?php echo $user->getCurrentFirstName()["firstName"] .' '. $user->getCurrentLastName()["lastName"]?></h1>
