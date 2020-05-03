@@ -28,7 +28,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Sign in</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="> -->
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
     <nav>
@@ -81,9 +81,8 @@
         <label for="security_awnser">your awnser please</label>
         <input type="text" name="securityAwnser" class="form-control" placeholder="awnser here">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <div>
         <button type="submit" class="btn btn-primary btnu">Submit</button>
+        <div>
         <p class="acc">Already have an account?</p>
         <a href="login.php" class="btn btn-primary btn-xs btnu">Log In</a>
         </div>

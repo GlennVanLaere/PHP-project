@@ -1,4 +1,4 @@
-s<?php
+<?php
 
 include_once(__DIR__."/classes/User.php");
 
@@ -55,9 +55,8 @@ include_once(__DIR__."/classes/User.php");
     <?php if ($messageRead): ?>
     <p>🔔 There are new messages</p>
     <?php endif; ?>
-   
-    <?php  echo '<h1> Hi, '.$info['firstName'].'  '. $info['lastName'].'!</h1>'; ?>
-    <h2>Here You can find all your matches, based on various criteria.</h2>
+</div>
+
     <h3>Perfect Match:</h3>
     <?php foreach ($perfectMatch as $pm): ?>
     <a href="public.php?id=<?php echo $pm['id']; ?>"><?php echo $pm['firstName'] . " " . $pm['lastName']; ?></a>
