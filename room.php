@@ -1,10 +1,7 @@
 <?php
     include_once(__DIR__."/classes/User.php");
     session_start();
-    if (isset($_SESSION['user'])) {
-    if ( isset ( $_SESSION['user'] ) ) {
-        # code...
-    } else {
+    if ( !isset ( $_SESSION['user'] ) ) {
         header("Location: logout.php");
     }
 }

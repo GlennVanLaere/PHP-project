@@ -18,6 +18,8 @@ if (isset($_SESSION["user"])) {
             $error = $th->getMessage();
         }
     }
+} else {
+    header("Location: login.php");
 }
 ?>
 <!DOCTYPE html>
