@@ -39,7 +39,7 @@ if (isset($_SESSION['user'])) {
             </select>
         </div>
         <div class="form-group">
-            <input type="text" name="searchTerm" class="form-control" id="searchBox" placeholder="Search">
+            <input type="text" name="searchTerm" class="form-control" id="searchBox" placeholder="Search" autocomplete="off">
         </div>
         <div class="searchResults" id="searchResults"></div>
         <div class="form-group">
@@ -51,11 +51,21 @@ if (isset($_SESSION['user'])) {
         <?php foreach ($result as $r): ?>
             <div>
                 <h2><?php echo htmlspecialchars($r['firstName'] . ' ' . $r['lastName']); ?></h2>
-                <p>Also listens to: <?php echo htmlspecialchars($r['music']); ?></p>
-                <p>Also wachtes: <?php echo htmlspecialchars($r['movies']); ?></p>
-                <p>Also plays: <?php echo htmlspecialchars($r['games']); ?></p>
-                <p>Also reads: <?php echo htmlspecialchars($r['books']); ?></p>
-                <p>Also watches: <?php echo htmlspecialchars($r['tvShows']); ?></p>
+                <?php if($r['music'] != 'Make a choice'): ?>
+                    <p>Also listens to: <?php echo htmlspecialchars($r['music']); ?></p>
+                <?php endif; ?>
+                <?php if($r['movies'] != 'Make a choice'): ?>
+                    <p>Also wachtes: <?php echo htmlspecialchars($r['movies']); ?></p>
+                <?php endif; ?>
+                <?php if($r['games'] != 'Make a choice'): ?>
+                    <p>Also plays: <?php echo htmlspecialchars($r['games']); ?></p>
+                <?php endif; ?>
+                <?php if($r['books'] != 'Make a choice'): ?>
+                    <p>Also reads: <?php echo htmlspecialchars($r['books']); ?></p>
+                <?php endif; ?>
+                <?php if($r['tvShows'] != 'Make a choice'): ?>
+                    <p>Also watches: <?php echo htmlspecialchars($r['tvShows']); ?></p>
+                <?php endif; ?>
                 <p><?php echo htmlspecialchars($r['buddy']); ?></p>
             </div>    
         <?php endforeach; ?>

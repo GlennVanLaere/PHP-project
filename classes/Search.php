@@ -3,12 +3,10 @@
 include_once(__DIR__ . "/Db.php");
 
     class Search {
-
         private $searchTerm;
         private $category;
         private $currentEmail;
-
-         /**
+        /**
          * Get the value of category
          */ 
         public function getCategory()
@@ -28,7 +26,7 @@ include_once(__DIR__ . "/Db.php");
 
                 return $this;
         }
-
+        
         /**
          * Get the value of searchTerm
          */ 
@@ -36,7 +34,7 @@ include_once(__DIR__ . "/Db.php");
         {
                 return $this->searchTerm;
         }
-
+        
         /**
          * Set the value of searchTerm
          *
@@ -47,6 +45,7 @@ include_once(__DIR__ . "/Db.php");
                 $searchTerm = preg_replace("/[^a-z-A-Z]/", "", $searchTerm);
                 $this->searchTerm = $searchTerm;
         }
+        
         /**
          * Get the value of currentEmail
          */ 
@@ -54,7 +53,7 @@ include_once(__DIR__ . "/Db.php");
         {
                 return $this->currentEmail;
         }
-    
+        
         /**
          * Set the value of currentEmail
          *
@@ -66,19 +65,17 @@ include_once(__DIR__ . "/Db.php");
     
                 return $this;
         }
-
-    public function goSearch() {
-        $currentEmail = $this->getCurrentEmail();
-        $category = $this->getCategory();
-        $searchTerm = $this->getSearchTerm();
-       
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT * FROM `users` WHERE `email` != :currentEmail && `$category` like '%$searchTerm%' ");
-        $statement->bindValue(':currentEmail', $currentEmail);
-        $statement->execute();
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-    } 
-    
-
+        
+        public function goSearch()
+        {
+                $currentEmail = $this->getCurrentEmail();
+                $category = $this->getCategory();
+                $searchTerm = $this->getSearchTerm();
+                $conn = Db::getConnection();
+                $statement = $conn->prepare("SELECT `id`,`email`,`firstName`,`lastName`,`music`,`movies`,`games`,`tvShows`,`books`,`buddy`,`avatar`,`description` FROM `users` WHERE `email` != :currentEmail && `$category` like '%$searchTerm%' ");
+                $statement->bindValue(':currentEmail', $currentEmail);
+                $statement->execute();
+                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
+        } 
 }
