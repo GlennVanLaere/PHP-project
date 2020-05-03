@@ -128,13 +128,13 @@ class Comment {
     public function hasVoted($userId, $commentId)
     {
         $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT commentId FROM votes WHERE userId = :userId AND commentId = :commentId)");
+        $statement = $conn->prepare("SELECT commentId FROM votes WHERE userId = :userId AND commentId = :commentId");
         $statement->bindValue(":userId", $userId);
         $statement->bindValue(":commentId", $commentId);
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         
-        var_dump($result);
+       
         if (!empty($result)) {
             return true;
         } else {

@@ -18,8 +18,7 @@ if ( !empty( $_POST ) ) {
     $user->setUserId();
     $userId = $user->getUserId();
     
-    $comment->setVote( $userId, $commentId);
-    
+    $comment->setVote( $userId, $commentId);   
 
     $response = [
         'status' => 'success',

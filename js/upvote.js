@@ -22,13 +22,10 @@ btns.forEach((btn) => {
             .then((response) => response.json())
             .then((result) => {
                 console.log(result);
-                if (result.status == "success") {
-                    console.log(result.currentUpvotes)
-                    btn.parentNode.innerHTML = result.currentUpvotes + " upvotes"
-                } else if (result.status == "fail") {
-                    console.log(result.message)
-                    btn.innerHTML = result.currentUpvotes + " upvotes"
-                }
+                console.log(result.currentUpvotes)
+                btn.parentNode.innerHTML = result.currentUpvotes + " upvotes"
+                document.querySelector('.done').innerHTML = result.message
+
             })
             .catch((error) => {
                 console.error('Error:', error)

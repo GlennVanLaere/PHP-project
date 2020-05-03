@@ -1,10 +1,16 @@
 <?php
     session_start();
     include_once(__DIR__ . "/classes/Faq.php");
+    include_once(__DIR__ . "/classes/User.php");
+    include_once(__DIR__ . "/classes/Comment.php");
     if (isset($_SESSION['user'])) {
         $id = $_GET['id'];
         $discussion = new Faq;
+        $user = new User;
+        $post = new Comment;
+        $user->setUserId();
         $question = $discussion->CurrentQuestion($id);
+
         if (!empty($_POST['comment'])) {
             $place = $discussion->placeComment($_POST['comment'], $id);
         }
@@ -24,11 +30,14 @@
 </head>
 <body>
 <?php include_once('includes/nav.inc.php'); ?>
+<p class="done"> message</p>
     <h2><?php echo htmlspecialchars($question['question']); ?></h2>
     <?php if (!empty($comment)): ?>
         <?php foreach ($comment as $c): ?>
             <p><?php echo htmlspecialchars($c['comment']); ?></p>
+            <?php if (!$post->hasVoted($user->getUserId(), $c['id'])):?>
             <div><a href="#" data-id="<?php echo $c['id'] ?>" class="click upvote btn btn-info">🔺upvote</a> <?php echo $c['upvotes']; ?></div>
+            <?php endif; ?>
         <?php endforeach; ?>
     <?php endif; ?>
     <form action="" method="post">
