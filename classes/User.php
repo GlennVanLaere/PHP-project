@@ -644,6 +644,7 @@ include_once(__DIR__ . "/Db.php");
                 $password = $this->getPassword();
                 $securityQuestion = $this->getSecurityQuestion();
                 $securityAwnser = $this->getSecurityAwnser();
+                $secAsnwerHash = password_hash($securityAwnser, PASSWORD_DEFAULT,["cost"=>16]);
                 $description = "here comes your description";
                 $avatar = "uploads/standard.png";
           
@@ -656,7 +657,7 @@ include_once(__DIR__ . "/Db.php");
                 $statement->bindValue(":lastName", $lastName);
                 $statement->bindValue(":password", $password);
                 $statement->bindValue(":securityQuestion", $securityQuestion);
-                $statement->bindValue(":securityAwnser", $securityAwnser);
+                $statement->bindValue(":securityAwnser", $secAsnwerHash);
                 $statement->bindValue(":description", $description);
                 $statement->bindValue(":avatar", $avatar);
                 
@@ -1442,9 +1443,11 @@ include_once(__DIR__ . "/Db.php");
             $statement->execute();
             $correctAwnser_array = $statement->fetch(PDO::FETCH_ASSOC);
             $correctAwnser = $correctAwnser_array["securityAwnser"];
-            echo $correctAwnser;
+            //echo $correctAwnser;
+           // $cAwnserHash = password_hash($currentAwnser, PASSWORD_DEFAULT,["cost"=>16]);
+           // echo $cAwnserHash;
 
-            if($currentAwnser === $correctAwnser){
+            if(password_verify($currentAwnser, $correctAwnser)){
                 return true;
             }
             else{
