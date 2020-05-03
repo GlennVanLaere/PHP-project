@@ -54,7 +54,7 @@ if( isset( $_SESSION['user'] ) ) {
     <title>Profile</title>
 </head>
 <body class="profile">
-<?php include("includes/nav.inc.php") ?>
+<?php include("app/frontend/includes/navbar.php") ?>
     <div class="content">
         <div class="profilePicture">
         <h1>Your profile</h1>

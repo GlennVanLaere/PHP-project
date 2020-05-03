@@ -30,7 +30,7 @@ if (isset($_SESSION["user"])) {
     <title>Change your password</title>
 </head>
 <body class="changePass">
-<?php include("includes/nav.inc.php") ?>
+<?php include("app/frontend/includes/navbar.php") ?>
 <h1>Change password</h1>
     <form class="form-group" action="" method="post">
         <label for="oldp">Old password</label>

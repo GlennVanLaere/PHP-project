@@ -35,7 +35,7 @@
     <title>Profile</title>
 </head>
 <body class="tag">
-<?php include("includes/nav.inc.php") ?>
+<?php include("app/frontend/includes/navbar.php") ?>
     <?php if (isset($error)): ?>
         <div class="alert alert-danger" role="alert">
             <?php echo $error ?>
