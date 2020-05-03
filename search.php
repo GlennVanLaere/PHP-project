@@ -53,23 +53,25 @@ if (isset($_SESSION['user'])) {
             <input type="submit" name="search" value="search" class="btn btnu btn-primary">
         </div>
     </form>
-    <?php if ( !empty( $_POST ) ) { ?>
-        <?php if ( !empty( $result ) ): ?>
-        <?php foreach ( $result as $pm ): ?>
-        <p ><?php echo htmlspecialchars( $pm['firstName'] . " " . $pm['lastName'] ); ?></p>
-        <?php $person->setBuddyId( $pm['id'] ); ?>
-        <?php include( "includes/buddyRequestButtons.inc.php" ) ?>
-        <p>Listens to: <?php echo htmlspecialchars( $pm['music'] . " music" ); ?></p>
-        <p>Wachtes: <?php echo htmlspecialchars( $pm['movies'] . " movies" ); ?></p>
-        <p>Plays: <?php echo htmlspecialchars( $pm['games'] . " games" ); ?></p>
-        <p>Reads: <?php echo htmlspecialchars( $pm['books'] . " books" ); ?></p>
-        <p>Watches: <?php echo htmlspecialchars( $pm['tvShows'] . " tvShows" ); ?></p>
-        <p><?php echo htmlspecialchars( $pm['buddy'] ); ?></p>
-        <?php endforeach; ?>
-        <?php else: ?>
-            <?php echo "<h1 class='blue'>Niets gevonden :( </h1>" ?>
-        <?php endif; ?>
-    <?php }; ?>
+    <div class="list">
+        <?php if ( !empty( $_POST ) ) { ?>
+            <?php if ( !empty( $result ) ): ?>
+            <?php foreach ( $result as $pm ): ?>
+            <p ><?php echo "<a href='public.php?=" . htmlspecialchars( $pm['id'] ) . "'>" . htmlspecialchars( $pm['firstName'] ) . " " . htmlspecialchars( $pm['lastName'] ) . "</a>" ; ?></p>
+            <?php $person->setBuddyId( $pm['id'] ); ?>
+            <?php include( "includes/buddyRequestButtons.inc.php" ) ?>
+            <p>Listens to: <?php echo htmlspecialchars( $pm['music'] . " music" ); ?></p>
+            <p>Wachtes: <?php echo htmlspecialchars( $pm['movies'] . " movies" ); ?></p>
+            <p>Plays: <?php echo htmlspecialchars( $pm['games'] . " games" ); ?></p>
+            <p>Reads: <?php echo htmlspecialchars( $pm['books'] . " books" ); ?></p>
+            <p>Watches: <?php echo htmlspecialchars( $pm['tvShows'] . " tvShows" ); ?></p>
+            <p><?php echo htmlspecialchars( $pm['buddy'] ); ?></p>
+            <?php endforeach; ?>
+            <?php else: ?>
+                <?php echo "<h1 class='blue'>Niets gevonden :( </h1>" ?>
+            <?php endif; ?>
+        <?php }; ?>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
