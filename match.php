@@ -1,4 +1,4 @@
-<?php
+s<?php
 
 include_once(__DIR__."/classes/User.php");
 
@@ -55,90 +55,70 @@ include_once(__DIR__."/classes/User.php");
     <?php if ($messageRead): ?>
     <p>🔔 There are new messages</p>
     <?php endif; ?>
-</div> 
-    <div class="pm">
-        <h3>Perfect Match:</h3>
-        <?php foreach ($perfectMatch as $pm): ?>
-        <p ><?php echo $pm['firstName'] . " " . $pm['lastName']; ?></p>
-        <?php $person->setBuddyId($pm['id']); ?>
-        <?php include("includes/buddyRequestButtons.inc.php") ?>
-        <p>Also listens to: <?php echo $pm['music'] . " music" ; ?></p>
-        <p>Also wachtes: <?php echo $pm['movies'] . " movies" ; ?></p>
-        <p>Also plays: <?php echo $pm['games'] . " games" ; ?></p>
-        <p>Also reads: <?php echo $pm['books'] . " books" ; ?></p>
-        <p>Also watches: <?php echo $pm['tvShows'] . " tvShows" ; ?></p>
-        <h4>Conclusion: 100% the perfect match!</h4>
-        <?php endforeach; ?>
-        <?php if (!$perfectMatch) {
-    echo '<p>No perfect matches found.</p>';
-} ?>
-    </div>
-    <div class="bm">
-        <h3>Buddy Matches:</h3>
-        <?php foreach ($buddyMatch as $bm): ?>
-        <p><?php echo $bm['firstName'] . " " . $bm['lastName']; ?></p>
-        <?php $person->setBuddyId($bm['id']); ?>
-        <?php include("includes/buddyRequestButtons.inc.php") ?>
-        <?php endforeach; ?>
-        <?php if (!$buddyMatch) {
-    echo '<p>No matches found based on buddy settings.</p>';
-} ?>
-    </div>
-    <div class="mum">
-        <h3>Music Matches:</h3>
-        <?php foreach ($musicMatch as $mum): ?>
-        <p><?php echo $mum['firstName'] . " " . $mum['lastName']; ?></p>
-        <?php $person->setBuddyId($mum['id']); ?>
-        <?php include("includes/buddyRequestButtons.inc.php") ?>
-        <?php endforeach; ?>
-        <?php if (!$musicMatch) {
-    echo '<p>No matches found based on music.</p>';
-} ?>
-    </div>
-    <div class="mom">
-        <h3>Movies Matches:</h3>
-        <?php foreach ($moviesMatch as $mom): ?>
-        <p><?php echo $mom['firstName'] . " " . $mom['lastName']; ?></p>
-        <?php $person->setBuddyId($mom['id']); ?>
-        <?php include("includes/buddyRequestButtons.inc.php") ?>
-        <?php endforeach; ?>
-        <?php if (!$moviesMatch) {
-    echo '<p>No matches found based on movies.</p>';
-} ?>
-    </div>
-    <div class="gm">
-        <h3>Games Matches:</h3>
-        <?php foreach ($gamesMatch as $gm): ?>
-        <p><?php echo $gm['firstName'] . " " . $gm['lastName']; ?></p>
-        <?php $person->setBuddyId($gm['id']); ?>
-        <?php include("includes/buddyRequestButtons.inc.php") ?>
-        <?php endforeach; ?>
-        <?php if (!$gamesMatch) {
-    echo '<p>No matches found based on games.</p>';
-} ?>
-    </div>
-    <div class="bom">
-        <h3>Books Matches:</h3>
-        <?php foreach ($booksMatch as $bm): ?>
-        <p><?php echo $bm['firstName'] . " " . $bm['lastName']; ?></p>
-        <?php $person->setBuddyId($bm['id']); ?>
-        <?php include("includes/buddyRequestButtons.inc.php") ?>
-        <?php endforeach; ?>
-        <?php if (!$booksMatch) {
-    echo '<p>No matches found based on books.</p>';
-} ?>
-    </div>
-    <div class="tm">
-        <h3>TvShows Matches:</h3>
-        <?php foreach ($tvShowsMatch as $tm): ?>
-        <p><?php echo $tm['firstName'] . " " . $tm['lastName']; ?></p>
-        <?php $person->setBuddyId($tm['id']); ?>
-        <?php include("includes/buddyRequestButtons.inc.php") ?>
-        <?php endforeach; ?>
-        <?php if (!$tvShowsMatch) {
-    echo '<p>No matches found based on tv-shows.</p>';
-} ?>
-    </div>
+   
+    <?php  echo '<h1> Hi, '.$info['firstName'].'  '. $info['lastName'].'!</h1>'; ?>
+    <h2>Here You can find all your matches, based on various criteria.</h2>
+    <h3>Perfect Match:</h3>
+    <?php foreach ($perfectMatch as $pm): ?>
+    <a href="public.php?id=<?php echo $pm['id']; ?>"><?php echo $pm['firstName'] . " " . $pm['lastName']; ?></a>
+    <?php $person->setBuddyId($pm['id']); ?>
+    <?php include("includes/buddyRequestButtons.inc.php") ?>
+    <p>Also listens to: <?php echo $pm['music'] . " music" ; ?></p>
+    <p>Also wachtes: <?php echo $pm['movies'] . " movies" ; ?></p>
+    <p>Also plays: <?php echo $pm['games'] . " games" ; ?></p>
+    <p>Also reads: <?php echo $pm['books'] . " books" ; ?></p>
+    <p>Also watches: <?php echo $pm['tvShows'] . " tvShows" ; ?></p>
+    <h4>Conclusion: 100% the perfect match!</h4>
+    <?php endforeach; ?>
+    <?php if($perfectMatch ===NULL){ echo '<p>No perfect matches found.</p>'; } ?>
+
+<h3>Buddy Matches:</h3>
+    <?php foreach ($buddyMatch as $bm): ?>
+    <a href="public.php?id=<?php echo $bm['id']; ?>"><?php echo $bm['firstName'] . " " . $bm['lastName']; ?></a>
+    <?php $person->setBuddyId($bm['id']); ?>
+    <?php include("includes/buddyRequestButtons.inc.php") ?>
+    <?php endforeach; ?>
+
+<h3>Music Matches:</h3>
+    <?php foreach ($musicMatch as $mum): ?>
+    <p><?php echo $mum['firstName'] . " " . $mum['lastName']; ?></p>
+    <?php $person->setBuddyId($mum['id']); ?>
+    <?php include("includes/buddyRequestButtons.inc.php") ?>
+    <?php endforeach; ?>
+    <?php if($musicMatch ===NULL){ echo '<p>No perfect matches found based on music.</p>'; } ?>
+
+<h3>Movies Matches:</h3>
+    <?php foreach ($moviesMatch as $mom): ?>
+    <p><?php echo $mom['firstName'] . " " . $mom['lastName']; ?></p>
+    <?php $person->setBuddyId($mom['id']); ?>
+    <?php include("includes/buddyRequestButtons.inc.php") ?>
+    <?php endforeach; ?>
+    <?php if($moviesMatch ===NULL){ echo '<p>No perfect matches found based on movies.</p>'; } ?>
+
+<h3>Games Matches:</h3>
+    <?php foreach ($gamesMatch as $gm): ?>
+    <p><?php echo $gm['firstName'] . " " . $gm['lastName']; ?></p>
+    <?php $person->setBuddyId($gm['id']); ?>
+    <?php include("includes/buddyRequestButtons.inc.php") ?>
+    <?php endforeach; ?>
+    <?php if($gamesMatch ===NULL){ echo '<p>No perfect matches found based on games.</p>'; } ?>
+
+<h3>Books Matches:</h3>
+    <?php foreach ($booksMatch as $bm): ?>
+    <p><?php echo $bm['firstName'] . " " . $bm['lastName']; ?></p>
+    <?php $person->setBuddyId($bm['id']); ?>
+    <?php include("includes/buddyRequestButtons.inc.php") ?>
+    <?php endforeach; ?>
+    <?php if($booksMatch ===NULL){ echo '<p> no perfect matches found based on books, search based on another tag </p>'; } ?>
+
+<h3>TvShows Matches:</h3>
+    <?php foreach ($tvShowsMatch as $tm): ?>
+    <p><?php echo $tm['firstName'] . " " . $tm['lastName']; ?></p>
+    <?php $person->setBuddyId($tm['id']); ?>
+    <?php include("includes/buddyRequestButtons.inc.php") ?>
+    <?php endforeach; ?>
+    <?php if($tvShowsMatch ===NULL){ echo '<p> no perfect matches found based on tv-shows, search based on another tag </p>'; } ?>
+
     <script src="js/buddyRequest.js"></script>
 </body>
 </html>

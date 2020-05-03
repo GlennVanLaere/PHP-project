@@ -1428,5 +1428,36 @@ include_once(__DIR__ . "/Db.php");
 
                 return $this;
         }
+    public function publicInfo($id){
+        $conn = Db::getConnection();
+        $stmt = $conn->prepare("SELECT * FROM users WHERE id=:id");
+        $stmt->bindValue(":id", $id);
+
+        $stmt->execute();
+        $return = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $return;
+
+
+
     }
-    
+    public function getBuddyName($buddyId){
+        $conn = Db::getConnection();
+        $stmt = $conn->prepare("SELECT id, firstName, lastName FROM users WHERE id=:id");
+        $stmt->bindValue(":id", $buddyId);
+        $stmt->execute();
+        $return = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $return;
+
+            }
+}
+        
+        
+    //     public function inArr($buddyId){
+    //         $conn = Db::getConnection();
+    //         $stmt = $conn->prepare("SELECT id FROM users WHERE buddyId !=(LENGTH(IFNULL(buddyId,'')) = 0)");
+
+    //     }
+
+    // }
+
+  
