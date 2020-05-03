@@ -28,8 +28,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body style="text-align: center">
 <?php include_once('includes/nav.inc.php'); ?>
+    <h1>Discussion</h1>
     <h2><?php echo htmlspecialchars($question['question']); ?></h2>
     <?php if (!empty($comment)): ?>
         <?php foreach ($comment as $c): ?>
@@ -37,14 +38,14 @@
             <?php if ($post->hasVoted($user->getUserId(), $c['id'])):?>
             <p><?php echo $c['upvotes']; ?> upvotes</p>
             <?php else: ?>
-            <div><a href="#" data-id="<?php echo $c['id'] ?>" class="click upvote btn btn-info">🔺upvote</a></div>
+            <div id="upvote"><a href="#" data-id="<?php echo $c['id'] ?>" class="click upvote btn btn-xs btn-info">🔺upvote</a></div>
             <?php endif; ?>
         <?php endforeach; ?>
     <?php endif; ?>
     <form action="" method="post">
         <div class="form-group">
                 <input type="text" name="comment" placeholder="Write a comment">
-                <input type="submit" name="placeComment" value="Place a comment" class="btn btn-info">
+                <input type="submit" name="placeComment" value="Place a comment" class="btn btn-xs btn-info">
         </div>
     </form>
     <script src="js/upvote.js"></script>
