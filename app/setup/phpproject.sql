@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 03 mei 2020 om 16:05
--- Serverversie: 10.4.11-MariaDB
--- PHP-versie: 7.4.2
+-- Gegenereerd op: 03 mei 2020 om 17:29
+-- Serverversie: 10.1.38-MariaDB
+-- PHP-versie: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,23 +31,22 @@ SET time_zone = "+00:00";
 CREATE TABLE `campuses` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `letter` char(1) NOT NULL,
-  `map` text NOT NULL
+  `letter` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `campuses`
 --
 
-INSERT INTO `campuses` (`id`, `name`, `letter`, `map`) VALUES
-(1, 'Campus De Vest A-wing', 'A', ''),
-(2, 'Campus De Vest B-wing', 'B', ''),
-(3, 'Campus De Vest C-wing', 'C', ''),
-(4, 'Campus Lucas Faydherbe', 'F', ''),
-(5, 'Campus Kruidtuin G-wing', 'G', ''),
-(6, 'Campus Kruidtuin K-wing', 'K', ''),
-(7, 'Campus Kruidtuin T-wing', 'T', ''),
-(8, 'Campus De Ham', 'Z', '');
+INSERT INTO `campuses` (`id`, `name`, `letter`) VALUES
+(1, 'Campus De Vest A-wing', 'A'),
+(2, 'Campus De Vest B-wing', 'B'),
+(3, 'Campus De Vest C-wing', 'C'),
+(4, 'Campus Lucas Faydherbe', 'F'),
+(5, 'Campus Kruidtuin G-wing', 'G'),
+(6, 'Campus Kruidtuin K-wing', 'K'),
+(7, 'Campus Kruidtuin T-wing', 'T'),
+(8, 'Campus De Ham', 'Z');
 
 -- --------------------------------------------------------
 
@@ -60,8 +59,8 @@ CREATE TABLE `chat` (
   `sender` int(11) NOT NULL,
   `receiver` int(11) NOT NULL,
   `message` text NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
-  `read` tinyint(1) NOT NULL DEFAULT 0
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `read` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -100,7 +99,7 @@ CREATE TABLE `requests` (
   `sender` int(11) NOT NULL,
   `receiver` int(11) NOT NULL,
   `reason` text NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT 1
+  `active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -115,6 +114,11 @@ CREATE TABLE `users` (
   `firstName` varchar(300) NOT NULL,
   `lastName` varchar(300) NOT NULL,
   `password` varchar(300) NOT NULL,
+  `isEmailConfirmed` tinyint(4) NOT NULL DEFAULT '0',
+  `token` varchar(10) NOT NULL,
+  `securityQuestion` varchar(600) NOT NULL,
+  `securityAwnser` varchar(600) NOT NULL,
+  `failedAttempts` int(11) NOT NULL DEFAULT '1',
   `moderator` int(1) NOT NULL,
   `music` varchar(300) NOT NULL DEFAULT 'Make a choice',
   `movies` varchar(300) NOT NULL DEFAULT 'Make a choice',
