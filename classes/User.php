@@ -1587,9 +1587,11 @@ include_once(__DIR__ . "/Db.php");
             $statement->execute();
             $correctAwnser_array = $statement->fetch(PDO::FETCH_ASSOC);
             $correctAwnser = $correctAwnser_array["securityAwnser"];
-            $cAwnserHash = password_hash($currentAwnser, PASSWORD_DEFAULT);
+            //echo $correctAwnser;
+           // $cAwnserHash = password_hash($currentAwnser, PASSWORD_DEFAULT,["cost"=>16]);
+           // echo $cAwnserHash;
 
-            if(password_verify($cAwnserHash, $correctAwnser)){
+            if(password_verify($currentAwnser, $correctAwnser)){
                 return true;
             }
             else{
