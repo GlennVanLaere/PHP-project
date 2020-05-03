@@ -22,7 +22,7 @@ if ( !empty( $_POST ) ) {
     
 
     $response = [
-        'status' => 'succes',
+        'status' => 'success',
         'message' => 'upvote was successful',
         'id' => $commentId,
         'currentUpvotes' =>  $currentUpvotes

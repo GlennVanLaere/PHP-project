@@ -28,7 +28,7 @@
     <?php if (!empty($comment)): ?>
         <?php foreach ($comment as $c): ?>
             <p><?php echo htmlspecialchars($c['comment']); ?></p>
-            <div class="click" data-id="<?php echo $c['id'] ?>" ><a href="#" class="upvote btn btn-info">🔺upvote</a> <?php echo $c['upvotes']; ?></div>
+            <div><a href="#" data-id="<?php echo $c['id'] ?>" class="click upvote btn btn-info">🔺upvote</a> <?php echo $c['upvotes']; ?></div>
         <?php endforeach; ?>
     <?php endif; ?>
     <form action="" method="post">
