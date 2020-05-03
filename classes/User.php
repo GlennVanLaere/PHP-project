@@ -8,6 +8,9 @@ include_once(__DIR__ . "/Db.php");
         private $firstName;
         private $lastName;
         private $password;
+        private $securityQuestion;
+        private $securityAwnser;
+        private $currentAwnser;
         private $currentEmail;
         private $currentFirstName;
         private $currentLastName;
@@ -23,8 +26,6 @@ include_once(__DIR__ . "/Db.php");
         private $buddyId;
         private $messageText;
         private $reason;
-        private $campusLetter;
-        private $campus;
 
         //feature 3 gedeelte
         
@@ -39,6 +40,8 @@ include_once(__DIR__ . "/Db.php");
 
 
         private $fileName;
+        // private $profilePicture;
+
         /**
          * Get the value of email
          */ 
@@ -46,6 +49,12 @@ include_once(__DIR__ . "/Db.php");
         {
             return $this->email;
         }
+
+    /**
+    * Set the value of email
+    *
+    * @return  self
+    */
 
         /**
          * Set the value of email
@@ -194,6 +203,7 @@ include_once(__DIR__ . "/Db.php");
             return $this;
         }
     
+ 
   
 
 
@@ -463,6 +473,103 @@ include_once(__DIR__ . "/Db.php");
             $this->newEmailCheck = $newEmailCheck;
             return $this;
         }
+        /**
+         * Set the value of buddyId
+         *
+         * @return  self
+         */ 
+        public function setBuddyId($buddyId)
+        {
+            $this->buddyId = $buddyId;
+            return $this;
+        }
+        public function getSecurityQuestion(){
+            return $this->securityQuestion;
+        }
+
+        public function setSecurityQuestion($securityQuestion){
+            $this->securityQuestion = $securityQuestion;
+
+            return $this;
+        }
+        public function getSecurityAwnser(){
+            return $this->securityAwnser;
+        }
+
+        public function setSecurityAwnser($securityAwnser){
+            $this->securityAwnser = $securityAwnser;
+
+            return $this;
+        }
+        public function getCurrentAwnser(){
+            return $this->currentAwnser;
+        }
+
+        public function setCurrentAwnser($currentAwnser){
+            $this->currentAwnser = $currentAwnser;
+
+            return $this;
+        }
+       
+
+        public function save(){
+
+            try {
+                $conn = Db::getConnection();
+                $statement = $conn->prepare('INSERT INTO users (email, firstName, lastName, password, description, avatar, securityAwnser, securityQuestion) VALUES (:email, :firstName, :lastName, :password, :description, :avatar, :securityAwnser, :securityQuestion)');
+                
+                
+
+                $email = $this->getEmail();
+                $firstName = $this->getFirstName();
+                $lastName = $this->getLastName();
+                $password = $this->getPassword();
+                $securityQuestion = $this->getSecurityQuestion();
+                $securityAwnser = $this->getSecurityAwnser();
+                $secAsnwerHash = password_hash($securityAwnser, PASSWORD_DEFAULT);
+                $description = "here comes your description";
+                $avatar = "uploads/standard.png";
+          
+
+            
+                
+            
+                $statement->bindValue(":email", $email);
+                $statement->bindValue(":firstName", $firstName);
+                $statement->bindValue(":lastName", $lastName);
+                $statement->bindValue(":password", $password);
+                $statement->bindValue(":securityQuestion", $securityQuestion);
+                $statement->bindValue(":securityAwnser", $secAsnwerHash);
+                $statement->bindValue(":description", $description);
+                $statement->bindValue(":avatar", $avatar);
+                
+
+
+    
+                $result = $statement->execute();
+    
+                return $result;
+                    
+            } catch (PDOException $e) {
+                print "Error!: " . $e->getMessage() . "<br/>";
+                die();
+            }
+        }
+    
+        public static function getAll(){
+            $conn = DB::getConnection();
+    
+            $statement = $conn->prepare("select * from users");
+            $statement->execute();
+            $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $users;
+    
+        }
+    /**
+    * Set the value of tvShows
+    *
+    * @return  self
+    */
 
         public function getNewPassword(){
             return $this->newPassword;
@@ -1444,5 +1551,104 @@ include_once(__DIR__ . "/Db.php");
 
                 return $this;
         }
+    public function publicInfo($id){
     }
-    
+        public function cannotLogin($CEmail){
+            $conn = Db::getConnection();
+            $getStatement = $conn->prepare("select failedAttempts from users where email = :email");
+            $CEmail = $CEmail;
+            $getStatement->bindValue(":email", $CEmail);
+            $getStatement->execute();
+            $failedAtt = $getStatement->fetch(PDO::FETCH_ASSOC);
+            $value = $failedAtt["failedAttempts"];
+            $newValue = $value + 1;
+
+            $updateStatement = $conn->prepare("update users set failedAttempts = :failedAttempts where email= :email");
+            $updateStatement->bindValue(":failedAttempts", $newValue);
+            $updateStatement->bindValue(":email", $CEmail);
+            $updateStatement->execute();
+            return $newValue;
+        }
+        public function secQuestion(){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("select securityQuestion from users where email = :email");
+            $email = $this->getCurrentEmail();
+            $statement->bindValue(":email", $email);
+            $statement->execute();
+            $question_array = $statement->fetch(PDO::FETCH_ASSOC);
+            $question = $question_array["securityQuestion"];
+            return $question;
+
+
+        }
+        public function awnserCheck($awnser){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("select securityAwnser from users where email= :email");
+            $email = $this->getCurrentEmail();
+            $currentAwnser = $awnser;
+           
+
+            $statement->bindValue(":email", $email);
+
+            $statement->execute();
+            $correctAwnser_array = $statement->fetch(PDO::FETCH_ASSOC);
+            $correctAwnser = $correctAwnser_array["securityAwnser"];
+            //echo $correctAwnser;
+           // $cAwnserHash = password_hash($currentAwnser, PASSWORD_DEFAULT,["cost"=>16]);
+           // echo $cAwnserHash;
+
+            if(password_verify($currentAwnser, $correctAwnser)){
+                return true;
+            }
+            else{
+                return false;
+            }
+           
+
+        }
+        public function currentAttempts(){
+            $conn= Db::getConnection();
+            $statement = $conn->prepare("select failedAttempts from users where email = :email");
+            $email = $this->getCurrentEmail();
+            $statement->bindValue(":email", $email);
+            $statement->execute();
+            $current_array = $statement->fetch(PDO::FETCH_ASSOC);
+            $current = $current_array["failedAttempts"];
+            return $current;
+        }
+    }
+
+    public function searchCampus(){
+        $letter = $this->getCampusLetter();
+        $conn = Db::getConnection();
+        $stmt = $conn->prepare("SELECT * FROM users WHERE id=:id");
+        $stmt->bindValue(":id", $id);
+
+        $stmt->execute();
+        $return = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $return;
+
+
+
+    }
+    public function getBuddyName($buddyId){
+        $conn = Db::getConnection();
+        $stmt = $conn->prepare("SELECT id, firstName, lastName FROM users WHERE id=:id");
+        $stmt->bindValue(":id", $buddyId);
+        $stmt->execute();
+        $return = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $return;
+
+            }
+}
+        
+        
+    //     public function inArr($buddyId){
+    //         $conn = Db::getConnection();
+    //         $stmt = $conn->prepare("SELECT id FROM users WHERE buddyId !=(LENGTH(IFNULL(buddyId,'')) = 0)");
+
+    //     }
+
+    // }
+
+  

@@ -101,7 +101,6 @@ function showResult(result) {
         case "3":
             floor = "3rd";
             break;
-
         default:
             floor = floorNumber + "th"
             break;
