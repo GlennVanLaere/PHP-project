@@ -113,4 +113,33 @@ class Comment {
         $result = $statement->fetch( PDO::FETCH_ASSOC );
         return $result['upvotes'];
     }
+
+    public function setVote($userId, $commentId)
+    {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("INSERT INTO votes (userId, commentId) VALUES (:userId, :commentId)");
+        $statement->bindValue(":userId", $userId );
+        $statement->bindValue(":commentId", $commentId );
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function hasVoted($userId, $commentId)
+    {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT commentId FROM votes WHERE userId = :userId AND commentId = :commentId)");
+        $statement->bindValue(":userId", $userId);
+        $statement->bindValue(":commentId", $commentId);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        
+        var_dump($result);
+        if (!empty($result)) {
+            return true;
+        } else {
+            return false;
+        }
+    }    
+
 }

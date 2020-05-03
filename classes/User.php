@@ -44,8 +44,6 @@ include_once(__DIR__ . "/Db.php");
 
 
         private $fileName;
-        // private $profilePicture;
-
         /**
          * Get the value of email
          */ 
