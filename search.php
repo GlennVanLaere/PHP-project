@@ -57,7 +57,7 @@ if (isset($_SESSION['user'])) {
         <?php if ( !empty( $_POST ) ) { ?>
             <?php if ( !empty( $result ) ): ?>
             <?php foreach ( $result as $pm ): ?>
-            <p ><?php echo "<a href='public.php?=" . htmlspecialchars( $pm['id'] ) . "'>" . htmlspecialchars( $pm['firstName'] ) . " " . htmlspecialchars( $pm['lastName'] ) . "</a>" ; ?></p>
+            <p ><?php echo "<a href='public.php?id=" . htmlspecialchars( $pm['id'] ) . "'>" . htmlspecialchars( $pm['firstName'] ) . " " . htmlspecialchars( $pm['lastName'] ) . "</a>" ; ?></p>
             <?php $person->setBuddyId( $pm['id'] ); ?>
             <?php include( "includes/buddyRequestButtons.inc.php" ) ?>
             <p>Listens to: <?php echo htmlspecialchars( $pm['music'] . " music" ); ?></p>
