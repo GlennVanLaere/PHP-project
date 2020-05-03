@@ -42,6 +42,8 @@ if( isset( $_SESSION['user'] ) ) {
     } catch (\Throwable $t) {
         $error = $t->getMessage();
     }
+} else {
+    header("Location: logout.php");
 }
 ?>
 <!DOCTYPE html>

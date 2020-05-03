@@ -19,7 +19,7 @@ if (isset($_SESSION["user"])) {
         }
     }
 } else {
-    header("Location: login.php");
+    header("Location: logout.php");
 }
 ?>
 <!DOCTYPE html>

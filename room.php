@@ -4,7 +4,6 @@
     if ( !isset ( $_SESSION['user'] ) ) {
         header("Location: logout.php");
     }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
