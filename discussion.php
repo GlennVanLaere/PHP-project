@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body style="text-align: center">
-<?php include_once('includes/nav.inc.php'); ?>
+<?php include("app/frontend/includes/navbar.php") ?>
     <h1>Discussion</h1>
     <h2><?php echo htmlspecialchars($question['question']); ?></h2>
     <?php if (!empty($comment)): ?>

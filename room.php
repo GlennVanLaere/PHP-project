@@ -19,7 +19,7 @@
     <title>Room</title>
 </head>
 <body class="place">
-    <?php include("includes/nav.inc.php") ?>
+    <?php include("app/frontend/includes/navbar.php") ?>
     <form action="" class="form-group">
         <h1>Room location</h1>
         <input id="campus" class="room form-control" type="text" maxlength="1" size="1" placeholder="Z">
