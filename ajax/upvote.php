@@ -10,15 +10,15 @@ if ( !empty( $_POST ) ) {
     $comment = new Comment();
     $comment->setId( $commentId );
     $comment->doUpvote( $commentId );
-    $currentUpvotes = $comment->getCurrentUpvotes($commentId);
+    $currentUpvotes = $comment->getCurrentUpvotes( $commentId );
 
     $email = $_SESSION['user'];
     $user = new User();
     $user->setEmail( $email );
     $user->setUserId();
     $userId = $user->getUserId();
-    
-    $comment->setVote( $userId, $commentId);   
+
+    $comment->setVote( $userId, $commentId );
 
     $response = [
         'status' => 'success',
