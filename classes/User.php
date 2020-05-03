@@ -215,26 +215,6 @@ class User {
     }
 
     /**
-    * Set the value of currentLastName
-    *
-    * @return  self
-    */ 
-    public function setCurrentLastName($currentLastName)
-    {
-        try {
-            $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT lastName FROM users WHERE id = :id");
-            $statement->bindValue(":id", $currentLastName);
-            $statement->execute();
-            $currentLastName = $statement->fetch(PDO::FETCH_ASSOC);
-            } catch (\Throwable $th) {
-                //throw $th;
-            }
-        $this->currentLastName = $currentLastName;
-    }
-
-
-    /**
     * Set the value of currentEmail
     *
     * @return  self
@@ -1347,6 +1327,26 @@ class User {
         $statement->execute();
         $users = $statement->fetchAll( PDO::FETCH_ASSOC );
         return $users;
+    }
+
+    public function makeModerator( $email ) 
+    {
+        $conn = DB::getConnection();
+        $statement = $conn->prepare( 'UPDATE `users` SET `moderator`=1 WHERE email = :email' );
+        $statement->bindValue( ':email', $email );
+        $statement->execute();
+        $result = $statement->fetch( PDO::FETCH_ASSOC );
+        return $result;
+    }
+    
+    public function undoModerator( $email ) 
+    {
+        $conn = DB::getConnection();
+        $statement = $conn->prepare( 'UPDATE `users` SET `moderator`=0 WHERE email = :email' );
+        $statement->bindValue( ':email', $email );
+        $statement->execute();
+        $result = $statement->fetch( PDO::FETCH_ASSOC );
+        return $result;
     }
 
     public function moderator( $email ) 
