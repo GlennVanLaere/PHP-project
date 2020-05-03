@@ -601,7 +601,7 @@ include_once(__DIR__ . "/Db.php");
 
             try {
                 $conn = Db::getConnection();
-                $statement = $conn->prepare('INSERT INTO users (email, firstName, lastName, password, description, avatar) VALUES (:email, :firstName, :lastName, :password, :description, :avatar)');
+                $statement = $conn->prepare('INSERT INTO users (email, firstName, lastName, password, description, avatar, token) VALUES (:email, :firstName, :lastName, :password, :description, :avatar, :token)');
                 
                 
 
@@ -611,6 +611,11 @@ include_once(__DIR__ . "/Db.php");
                 $password = $this->getPassword();
                 $description = "here comes your description";
                 $avatar = "uploads/standard.png";
+                $tokengeneratorlist = 'azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN123456789!#&/(';
+                $tokengenerator = str_shuffle($tokengeneratorlist);
+                $token = substr($tokengenerator,0,10);
+
+               
 
             
                 
@@ -621,6 +626,8 @@ include_once(__DIR__ . "/Db.php");
                 $statement->bindValue(":password", $password);
                 $statement->bindValue(":description", $description);
                 $statement->bindValue(":avatar", $avatar);
+                $statement->bindValue(":token", $token);
+                
 
 
     
@@ -1430,5 +1437,17 @@ include_once(__DIR__ . "/Db.php");
 
                 return $this;
         }
+        public function getToken($email){
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("select token from users where email= :email");
+            $statement->bindValue(":email", $email);
+            $statement->execute();
+            $token = $statement->fetch(PDO::FETCH_ASSOC);
+            var_dump($token);
+            return "token";
+
+
+        }
+
     }
     
