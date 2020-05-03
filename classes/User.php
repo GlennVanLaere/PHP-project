@@ -583,63 +583,6 @@ include_once(__DIR__ . "/Db.php");
                 return $this->buddyId;
         }
 
-        /**
-         * Set the value of buddyId
-         *
-         * @return  self
-         */ 
-        public function setBuddyId($buddyId)
-        {
-            $this->buddyId = $buddyId;
-            return $this;
-        }
-
-        public function save(){
-
-            try {
-                $conn = Db::getConnection();
-                $statement = $conn->prepare('INSERT INTO users (email, firstName, lastName, password, description, avatar) VALUES (:email, :firstName, :lastName, :password, :description, :avatar)');
-                
-                
-
-                $email = $this->getEmail();
-                $firstName = $this->getFirstName();
-                $lastName = $this->getLastName();
-                $password = $this->getPassword();
-                $description = "here comes your description";
-                $avatar = "uploads/standard.png";
-
-            
-                
-            
-                $statement->bindValue(":email", $email);
-                $statement->bindValue(":firstName", $firstName);
-                $statement->bindValue(":lastName", $lastName);
-                $statement->bindValue(":password", $password);
-                $statement->bindValue(":description", $description);
-                $statement->bindValue(":avatar", $avatar);
-
-
-    
-                $result = $statement->execute();
-    
-                return $result;
-                    
-            } catch (PDOException $e) {
-                print "Error!: " . $e->getMessage() . "<br/>";
-                die();
-            }
-        }
-    
-        public static function getAll(){
-            $conn = DB::getConnection();
-    
-            $statement = $conn->prepare("select * from users");
-            $statement->execute();
-            $users = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $users;
-    
-        }
 
         public function viewEmail($email){
 
@@ -1433,8 +1376,14 @@ include_once(__DIR__ . "/Db.php");
 
                 return $this;
         }
-    public function publicInfo($id){
-    }
+        public function publicInfo($id){
+            $conn = Db::getConnection();
+            $stmt = $conn->prepare("SELECT * FROM users WHERE id=:id");
+            $stmt->bindValue(":id", $id);
+            $stmt->execute();
+            $return = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $return;
+        }
         public function cannotLogin($CEmail){
             $conn = Db::getConnection();
             $getStatement = $conn->prepare("select failedAttempts from users where email = :email");

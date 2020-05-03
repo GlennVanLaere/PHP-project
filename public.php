@@ -34,7 +34,12 @@ if( isset($_SESSION['user']) ) {
     <h2>about myself</h2>
     <p> <?php echo $profileData[0]["description"] ?></p>
     <h2>I am buddies with</h2>
+    <?php if(isset($buddyName[0]["id"])): ?>
     <a href="public.php?id=<?php echo $buddyName[0]["id"] ?>" ><?php echo $buddyName[0]["firstName"]. " ". $buddyName[0]["lastName"] ?></a>
-
+    <?php else:?>
+    <h3>nobody yet</h3>
+    <?php endif;?>
+    
+    
 </body>
 </html>
