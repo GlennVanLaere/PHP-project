@@ -1,58 +1,51 @@
-<?php
+<?php 
 
-include_once( __DIR__ . '/Db.php' );
+include_once(__DIR__ . "/Db.php");
 
-class User {
+    class User {
+        private $id;
+        private $email;
+        private $firstName;
+        private $lastName;
+        private $password;
+        private $currentEmail;
+        private $currentFirstName;
+        private $currentLastName;
+        private $currentPassword;
+        private $tags;
+        private $music;
+        private $movies;
+        private $games;
+        private $books;
+        private $tvShows;
+        private $buddy;
+        private $userId;
+        private $buddyId;
+        private $messageText;
+        private $reason;
+        private $campusLetter;
+        private $campus;
 
-    private $id;
-    private $email;
-    private $firstName;
-    private $lastName;
-    private $password;
-    private $currentEmail;
-    private $currentFirstName;
-    private $currentLastName;
-    private $currentPassword;
-    private $tags;
-    private $music;
-    private $movies;
-    private $games;
-    private $books;
-    private $tvShows;
-    private $buddy;
-    private $userId;
-    private $buddyId;
-    private $messageText;
-    private $reason;
-    private $campusLetter;
-    private $campus;
+        //feature 3 gedeelte
+        
+        private $description;
+        private $oldEmail;
+        private $newEmail;
+        private $newEmailCheck;
+        private $newPassword;
+        private $oldPassword;
+        private $passwordCheck;
+        private $avatarUpload;
 
-    //feature 3 gedeelte
 
-    private $description;
-    private $oldEmail;
-    private $newEmail;
-    private $newEmailCheck;
-    private $newPassword;
-    private $oldPassword;
-    private $passwordCheck;
-    private $avatarUpload;
-    private $fileName;
-
-    /**
-    * Get the value of email
-    */
-
-    public function getEmail() 
-    {
-        return $this->email;
-    }
-
-    /**
-    * Set the value of email
-    *
-    * @return  self
-    */
+        private $fileName;
+        /**
+         * Get the value of email
+         */ 
+        public function getEmail()
+        {
+            return $this->email;
+        }
 
         /**
          * Set the value of email
@@ -1352,7 +1345,7 @@ class User {
             return $users;
     
         }
-
+        
         public function makeModerator( $email ) 
         {
             $conn = DB::getConnection();
@@ -1373,12 +1366,13 @@ class User {
             return $result;
         }
 
-        public function moderator($email){
+        public function moderator( $email ) 
+        {
             $conn = DB::getConnection();
-            $statement = $conn->prepare("SELECT * FROM `users` WHERE `email` = :email");
-            $statement->bindValue(':email', $email);
+            $statement = $conn->prepare( 'SELECT * FROM `users` WHERE `email` = :email' );
+            $statement->bindValue( ':email', $email );
             $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $result = $statement->fetch( PDO::FETCH_ASSOC );
             return $result;
         }
     
