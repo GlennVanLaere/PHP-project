@@ -644,7 +644,7 @@ include_once(__DIR__ . "/Db.php");
                 $password = $this->getPassword();
                 $securityQuestion = $this->getSecurityQuestion();
                 $securityAwnser = $this->getSecurityAwnser();
-                $secAsnwerHash = password_hash($securityAwnser, PASSWORD_DEFAULT,["cost"=>16]);
+                $secAsnwerHash = password_hash($securityAwnser, PASSWORD_DEFAULT);
                 $description = "here comes your description";
                 $avatar = "uploads/standard.png";
           
