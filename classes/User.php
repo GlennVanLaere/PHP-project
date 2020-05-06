@@ -165,7 +165,6 @@ include_once(__DIR__ . "/Db.php");
             $upper = preg_match('@[A-Z]@', $password); // includes uppercase?
             $lower = preg_match('@[a-z]@', $password); // includes lowercase?
             $number = preg_match('@[0-9]@', $password); // includes number?
-            $special = preg_match('@[^\w]@', $password); // includes special characters?
 
             if(!$upper){
                 throw new Exception("password must include an uppercase");
@@ -177,14 +176,6 @@ include_once(__DIR__ . "/Db.php");
 
             if(!$number) {
                 throw new Exception("password must include a number");
-            }
-
-            if(!$special) {
-                throw new Exception("password must include a special character (for example: @ & / - )"); 
-            }
-
-            if(strlen($password) < 8) {
-                throw new Exception("password must be at least 8 characters long");
             }
 
             $password = password_hash($password, PASSWORD_DEFAULT,["cost"=>16]);   

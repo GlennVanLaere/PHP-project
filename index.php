@@ -10,9 +10,6 @@
             $user->setPassword($_POST['password']);
             $user->setSecurityQuestion($_POST['question']);
             $user->setSecurityAwnser($_POST['securityAwnser']);
-
-
-            
             
             $user->save();
             $success = "User saved!";
@@ -65,7 +62,7 @@
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
             <input type="password" name="password" class="form-control" placeholder="Password" id="exampleInputPassword1">
-            <small id="passwordHelp" class="form-text text-muted">Password must include at least 1 uppercase, 1 lowercase, 1 special character and must be at least 8 characters long</small>
+            <small id="passwordHelp" class="form-text text-muted">Password must include at least 1 uppercase, 1 lowercase and a number.</small>
         </div>
         <div class="form-group">
         <label for="security_question">Security question</label>
