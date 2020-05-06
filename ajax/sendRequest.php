@@ -16,6 +16,9 @@ if ( !empty( $_POST ) ) {
 
     require_once( '../vendor/autoload.php' );
     $receiverEmail = $user->findReceiverEmail( $receiver );
+    $senderId = $user->getUserId();
+    $sender = $user->getCurrentFirstName();
+
 
     $client = new PostmarkClient( '6ba3c44e-a76f-4ca9-91e6-18ed5a57cd12' );
 
@@ -24,7 +27,7 @@ if ( !empty( $_POST ) ) {
         'info@wakoodi.be',
         $receiverEmail,
         'Buddy Request',
-        'Hi! you got a buddy request, go to your profile and check it out!'
+        'Hi! </br> You got a buddy request. </br> Go to <a href="http://buddy.merakea.be/">your profile</a> to find out who it is. </br> Greetings the Buddy-team.'
     );
 
     $response = [

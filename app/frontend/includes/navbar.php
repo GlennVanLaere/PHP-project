@@ -22,7 +22,7 @@
                 <a class="nav-link" href="profile.php">Edit profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="tags.php">Edit tags</a>
+                <a class="nav-link" href="tags.php">Edit characteristics</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="logout.php">Logout</a>

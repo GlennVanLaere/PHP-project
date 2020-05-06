@@ -11,16 +11,10 @@ if( isset($_SESSION['user']) ) {
 
     $buddyName =$user->getBuddyName($buddyId);
 
-
-
 } else {
     header("Location: logout.php");
 }
-
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,8 +34,6 @@ if( isset($_SESSION['user']) ) {
     <a href="public.php?id=<?php echo $buddyName[0]["id"] ?>" ><?php echo $buddyName[0]["firstName"]. " ". $buddyName[0]["lastName"] ?></a>
     <?php else:?>
     <h3>nobody yet</h3>
-    <?php endif;?>
-    
-    
+    <?php endif;?>  
 </body>
 </html>
