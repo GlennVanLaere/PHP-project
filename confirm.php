@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>fuck yeah</h1>
+    <h1>🎉</h1>
 </body>
 </html>
