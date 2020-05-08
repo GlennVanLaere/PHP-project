@@ -905,7 +905,7 @@ include_once(__DIR__ . "/Db.php");
                 $statement->bindValue(':tvShows', $tvShows);
                 $statement->bindValue(':buddy', $buddy);
                 $statement->execute();
-                header("Location: match.php");
+                header("Location: profile.php");
             } catch (PDOException $e) {
                 print "Error!: " . $e->getMessage() . "<br/>";
                 die();
