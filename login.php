@@ -1,11 +1,11 @@
 <?php
-  include_once(__DIR__."/classes/User.php");
+ spl_autoload_register();
   $failedAtt = 0; 
  
 
   if (!empty($_POST)) {
     try {
-      $user = new User();
+      $user = new classes\User();
       $user->setCurrentEmail($_POST["email"]);
       $user->setCurrentPassword($_POST["password"]);
       $canLogin = $user->canLogin();
@@ -50,12 +50,10 @@
       
           }
       }
-  
-include_once( __DIR__.'/classes/User.php' );
 
 if ( !empty( $_POST ) ) {
     try {
-        $user = new User();
+        $user = new classes\User();
         $user->setCurrentEmail( $_POST['email'] );
         $user->setCurrentPassword( $_POST['password'] );
         $canLogin = $user->canLogin();

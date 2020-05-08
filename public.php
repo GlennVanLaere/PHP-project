@@ -1,10 +1,10 @@
 <?php 
-include_once(__DIR__."/classes/User.php");
 
+spl_autoload_register();
 session_start();
 if( isset($_SESSION['user']) ) {
 
-    $user = New User;
+    $user = New classes\User;
     $id = $_GET["id"];
     $profileData = $user->publicInfo($id);
     $buddyId = $profileData[0]["buddyId"];

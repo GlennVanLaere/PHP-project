@@ -1,7 +1,7 @@
 <?php
-include_once(__DIR__."/classes/User.php");
+spl_autoload_register();
 
-$user = new User;
+$user = new classes\User;
 // $viewNames = $user->viewBuddies();
 // $var = [$viewNames[0][0]["firstName"]];
 // var_dump($viewNames);
@@ -11,15 +11,7 @@ $user = new User;
 // }
 $test = $user->output();
 echo $test;
-
-
-
-
-
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

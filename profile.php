@@ -1,11 +1,12 @@
 <?php
+
+spl_autoload_register();
 session_start();
-include_once(__DIR__."/classes/User.php");
 
 if( isset( $_SESSION['user'] ) ) {
     $email = $_SESSION['user'];
 
-    $user = new User();
+    $user = new classes\User();
     $moderator = $user->moderator($email);
     $moderator = $moderator['moderator'];
     if(isset($_POST['undoModerator'])){
@@ -18,7 +19,6 @@ if( isset( $_SESSION['user'] ) ) {
     }
 
     try {
-        //$user = new User();
         $showEmail = $user->viewEmail($email);
         $showDescription = $user->viewDescription($email);
         $viewAvatar = $user->showAvatar($email);

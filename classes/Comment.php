@@ -1,5 +1,9 @@
 <?php
+
+namespace classes;
+use PDO;
 include_once( __DIR__ . '/Db.php' );
+
 
 class Comment {
     private $id;

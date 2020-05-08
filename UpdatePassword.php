@@ -1,13 +1,14 @@
 <?php
+
+spl_autoload_register();
 session_start();
-include_once(__DIR__."/classes/User.php");
 
 if (isset($_SESSION["user"])) {
     $email = $_SESSION["user"];
 
     if (!empty($_POST)) {
         try {
-            $changePassword = new User;
+            $changePassword = new classes\User;
             $changePassword->setNewPassword($_POST["newp1"]);
             $changePassword->setPasswordCheck($_POST["newp2"]);
             $changePassword->setOldPassword($_POST["oldpas"]);

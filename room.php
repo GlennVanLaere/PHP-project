@@ -1,5 +1,5 @@
 <?php
-    include_once(__DIR__."/classes/User.php");
+    spl_autoload_register();
     session_start();
     if ( !isset ( $_SESSION['user'] ) ) {
         header("Location: logout.php");

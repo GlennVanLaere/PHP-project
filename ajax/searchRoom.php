@@ -1,7 +1,8 @@
 <?php
-include_once( __DIR__ . '/../classes/User.php' );
+
+spl_autoload_register();
 session_start();
-$user = new User();
+$user = new classes\User();
 $user->setCampusLetter( strtoupper( $_POST['campus'] ) );
 
 $user->searchCampus();

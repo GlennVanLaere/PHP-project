@@ -1,11 +1,12 @@
 <?php
+
+spl_autoload_register();
     session_start();
-    include_once(__DIR__ . "/classes/User.php");
     if (isset($_SESSION['user'])) {
         $email = $_SESSION["user"];
         try {
             if (!empty($_POST)) {
-                $update = new User;
+                $update = new classes\User;
                 $update->setMusic($_POST['music']);
                 $update->setMovies($_POST['movies']);
                 $update->setGames($_POST['games']);
@@ -17,7 +18,7 @@
         } catch (\Throwable $t) {
             $error = $t->getMessage();
         }
-        $tags = new User;
+        $tags = new classes\User;
         $tags->setTags($tags, $email);
         $tags = $tags->getTags();
     } else {

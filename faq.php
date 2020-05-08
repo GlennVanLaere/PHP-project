@@ -1,9 +1,9 @@
 <?php
+spl_autoload_register();
     session_start();
-    include_once(__DIR__ . "/classes/Faq.php");
-    include_once(__DIR__ . "/classes/User.php");
+   
     if (isset($_SESSION['user'])) {
-        $list = new Faq;
+        $list = new classes\Faq;
 
         if (isset($_POST['pin'])) {
             $id = $_POST['pin'];
@@ -23,7 +23,7 @@
         $noPin = $list->getAllQuestions(0);
         $pinned = $list->getAllQuestions(1);
 
-        $mod = new User;
+        $mod = new classes\User;
         $email = $_SESSION['user'];
         $moderator = $mod->moderator($email);
         $moderator = $moderator['moderator'];
