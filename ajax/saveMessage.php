@@ -1,9 +1,9 @@
 <?php
 
-spl_autoload_register();
+include_once( __DIR__ . '/../classes/User.php' );
 session_start();
 if ( !empty( $_POST ) ) {
-    $user = new classes\User();
+    $user = new User();
     $user->setUserId();
     $user->setBuddyId( $_POST['receiver'] );
     $user->setMessageText( $_POST['message'] );

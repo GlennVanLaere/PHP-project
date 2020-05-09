@@ -1,8 +1,8 @@
 <?php
    
-   spl_autoload_register();
+   include_once( __DIR__ . '/../classes/User.php' );
     session_start();
-        $search = new classes\Search();
+        $search = new Search();
         $search->setCurrentEmail($_SESSION['user']);
         $search->setSearchTerm($_POST['searchTerm']);
         $search->setCategory($_POST['category']);
