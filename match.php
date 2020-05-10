@@ -69,7 +69,7 @@ if (isset($_SESSION['user'])) {
                                 href="public.php?id=<?php echo $pm['id']; ?>"><?php echo htmlspecialchars($pm['firstName']) . " " . htmlspecialchars($pm['lastName']); ?></a>
                         </h6>
                         <?php $person->setBuddyId($pm['id']); ?>
-                        <?php include("includes/buddyRequestButtons.inc.php") ?>
+                        <?php include("app/frontend/includes/buddyRequestButtons.inc.php") ?>
                         <p>Also listens to: <?php echo htmlspecialchars($pm['music']) . " music" ; ?></p>
                         <p>Also wachtes: <?php echo htmlspecialchars($pm['movies']) . " movies" ; ?></p>
                         <p>Also plays: <?php echo htmlspecialchars($pm['games']) . " games" ; ?></p>
@@ -92,7 +92,7 @@ if (isset($_SESSION['user'])) {
                                 href="public.php?id=<?php echo $bm['id']; ?>"><?php echo htmlspecialchars($bm['firstName']) . " " . htmlspecialchars($bm['lastName']); ?></a>
                         </h6>
                         <?php $person->setBuddyId($bm['id']); ?>
-                        <?php include("includes/buddyRequestButtons.inc.php") ?>
+                        <?php include("app/frontend/includes/buddyRequestButtons.inc.php") ?>
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -108,7 +108,7 @@ if (isset($_SESSION['user'])) {
                             <p><?php echo htmlspecialchars($mum['firstName']) . " " . htmlspecialchars($mum['lastName']); ?></p>
                         </h6>
                         <?php $person->setBuddyId($mum['id']); ?>
-                        <?php include("includes/buddyRequestButtons.inc.php") ?>
+                        <?php include("app/frontend/includes/buddyRequestButtons.inc.php") ?>
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -123,7 +123,7 @@ if (isset($_SESSION['user'])) {
                             <p><?php echo htmlspecialchars($mom['firstName']) . " " . htmlspecialchars($mom['lastName']); ?></p>
                         </h6>
                         <?php $person->setBuddyId($mom['id']); ?>
-                        <?php include("includes/buddyRequestButtons.inc.php") ?>
+                        <?php include("app/frontend/includes/buddyRequestButtons.inc.php") ?>
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -140,7 +140,7 @@ if (isset($_SESSION['user'])) {
                             <p><?php echo htmlspecialchars($gm['firstName']) . " " . htmlspecialchars($gm['lastName']); ?></p>
                         </h6>
                         <?php $person->setBuddyId($gm['id']); ?>
-                        <?php include("includes/buddyRequestButtons.inc.php") ?>
+                        <?php include("app/frontend/includes/buddyRequestButtons.inc.php") ?>
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -156,7 +156,7 @@ if (isset($_SESSION['user'])) {
                             <p><?php echo htmlspecialchars($bm['firstName']) . " " . htmlspecialchars($bm['lastName']); ?></p>
                         </h6>
                         <?php $person->setBuddyId($bm['id']); ?>
-                        <?php include("includes/buddyRequestButtons.inc.php") ?>
+                        <?php include("app/frontend/includes/buddyRequestButtons.inc.php") ?>
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -172,7 +172,7 @@ if (isset($_SESSION['user'])) {
                             <p><?php echo htmlspecialchars($tm['firstName']) . " " . htmlspecialchars($tm['lastName']); ?></p>
                         </h6>
                         <?php $person->setBuddyId($tm['id']); ?>
-                        <?php include("includes/buddyRequestButtons.inc.php") ?>
+                        <?php include("app/frontend/includes/buddyRequestButtons.inc.php") ?>
                     </div>
                 </div>
                 <?php endforeach; ?>

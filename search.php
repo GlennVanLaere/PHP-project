@@ -35,8 +35,8 @@ if (isset($_SESSION['user'])) {
     <?php include("app/frontend/includes/navbar.php") ?>
     <h1>Search</h1>
     <form action="" method="post">
-        <div class="dropdown" >
-            <select name="category" id="category" required class="btn btnGroup dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <div class="dropdown form-group" >
+            <select name="category" id="category" required class="form-control btnGroup ">
                 <option value="">Choose a category</option>
                 <option value="email">Email</option>
                 <option value="firstName">Firstname</option>
@@ -66,7 +66,7 @@ if (isset($_SESSION['user'])) {
                         <p class="text-center"><?php echo "<a href='public.php?id=" . htmlspecialchars( $pm['id'] ) . "'>" . htmlspecialchars( $pm['firstName'] ) . " " . htmlspecialchars( $pm['lastName'] ) . "</a>" ; ?></p>
                         </h6>
                         <?php $person->setBuddyId($pm['id']); ?>
-                        <?php include( "includes/buddyRequestButtons.inc.php" ) ?>
+                        <?php include("app/frontend/includes/buddyRequestButtons.inc.php") ?>
                 </div>
             </div>
             <p class="text-center">Listens to: <?php echo htmlspecialchars( $pm['music'] . " music" ); ?></p>

@@ -9,7 +9,7 @@
     <a href="#" id="btnAcceptRequest" data-buddy="<?php echo htmlspecialchars($person->getBuddyId()); ?>" class="btn btn-success btn-block">Accept</a>
     <textarea id="textIgnoreRequest" class="form-control" rows="4" placeholder="Reason"></textarea>
     <?php else: ?>
-    <a href="#" id="btnSendRequest" data-buddy="<?php echo $person->getBuddyId(); ?>" class="btn btn-info btn-block">Send Request</a>
+    <a href="#" id="btnSendRequest" data-buddy="<?php echo htmlspecialchars($person->getBuddyId()); ?>" class="btn btn-info btn-block">Send Request</a>
     <?php if ($person->isReasonSet($person->getBuddyId())): ?>
     <p>Reason:</p>
     <p><?php echo htmlspecialchars($person->getReason()); ?></p>
