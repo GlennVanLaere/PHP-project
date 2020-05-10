@@ -24,13 +24,13 @@ if( isset($_SESSION['user']) ) {
 </head>
 <body class="public">
 <?php include("app/frontend/includes/navbar.php") ?>
-    <h1><?php echo $profileData[0]["firstName"]." ". $profileData[0]["lastName"] ?></h1>
+    <h1><?php echo htmlspecialchars($profileData[0]["firstName"])." ". htmlspecialchars($profileData[0]["lastName"]) ?></h1>
     <img class="img-thumbnail" src=" <?php echo $profileData[0]["avatar"]?> " alt="profilePicture">
     <h2>About me</h2>
-    <p> <?php echo $profileData[0]["description"] ?></p>
+    <p> <?php echo htmlspecialchars($profileData[0]["description"] )?></p>
     <h2>My buddies</h2>
     <?php if(isset($buddyName[0]["id"])): ?>
-    <a href="public.php?id=<?php echo $buddyName[0]["id"] ?>" ><?php echo $buddyName[0]["firstName"]. " ". $buddyName[0]["lastName"] ?></a>
+    <a href="public.php?id=<?php echo htmlspecialchars($buddyName[0]["id"]) ?>" ><?php echo htmlspecialchars($buddyName[0]["firstName"]). " ". htmlspecialchars($buddyName[0]["lastName"]) ?></a>
     <?php else:?>
     <p>nobody yet</p>
     <?php endif;?>

@@ -85,7 +85,7 @@ if ( isset( $_SESSION['user'] ) ) {
                 <button type="submit" name="submitAvatar" class="btn btn-primary">Upload profile picture</button>
             </form>
             <h2>Bio</h2>
-            <p> <?php echo $showDescription ?> </p>
+            <p> <?php echo htmlspecialchars($showDescription) ?> </p>
             <a href="updateDescription.php">Change description</a>
             <h2>Email adress</h2>
             <p> <?php echo $showEmail ?> </p>
@@ -96,7 +96,7 @@ if ( isset( $_SESSION['user'] ) ) {
         <h2>Your buddy:</h2>
         <?php if($buddyId != false): ?>
                 <img src="<?php echo $showBuddy['avatar']; ?>" alt="">
-                <?php echo $showBuddy['firstName']." ".$showBuddy['lastName']; ?>
+                <?php echo htmlspecialchars($showBuddy['firstName'])." ".htmlspecialchars($showBuddy['lastName']); ?>
         <?php else: ?>
             <p>You don't have a buddy yet</p>
         <a href="match.php" class="btn btn-primary">Go find one</a>

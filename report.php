@@ -24,7 +24,7 @@ if (isset($_SESSION['user']) && isset($_SESSION['reportid'])) {
 </head>
 <body>
     <?php include("app/frontend/includes/navbar.php") ?>
-    <h1>Report <?php echo $user->getCurrentFirstName()["firstName"] .' '. $user->getCurrentLastName()["lastName"]; ?></h1>
+    <h1>Report <?php echo htmlspecialchars($user->getCurrentFirstName()["firstName"]) .' '. htmlspecialchars($user->getCurrentLastName()["lastName"]); ?></h1>
     <form action="">
         <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="verbalAbuse">

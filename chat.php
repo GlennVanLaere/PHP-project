@@ -29,12 +29,12 @@ if (isset($_SESSION['user'])) {
     <?php include("app/frontend/includes/navbar.php") ?>
     <?php $user->setCurrentFirstName($_GET['messageid']) ?>
     <?php $user->setCurrentLastName($_GET['messageid']) ?>
-    <h1><?php echo $user->getCurrentFirstName()["firstName"] .' '. $user->getCurrentLastName()["lastName"]?></h1>
+    <h1><?php echo htmlspecialchars( $user->getCurrentFirstName()["firstName"]) .' '. htmlspecialchars($user->getCurrentLastName()["lastName"])?></h1>
     <p><?php if(isset($matchType)){echo $matchType;} ?></p>
     <div id="messages">
         <?php foreach ($allMessages as $m): ?>
         <?php $user->setCurrentFirstName($m['sender']); ?>
-        <div><?php echo $user->getCurrentFirstName()["firstName"] . ": " . $m['message']; ?></div>
+        <div><?php echo htmlspecialchars($user->getCurrentFirstName()["firstName"]) . ": " . htmlspecialchars($m['message']); ?></div>
         <?php endforeach; ?>
     </div>
     <input type="text" placeholder="type a message" id="inputMessage">

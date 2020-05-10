@@ -44,7 +44,7 @@ if (isset($_SESSION['user'])) {
 <body>
     <?php include("app/frontend/includes/navbar.php") ?>
     <div class="welcome">
-        <?php  echo '<h1> Hi, '.$info['firstName'].'  '. $info['lastName'].'!</h1>'; ?>
+        <?php  echo '<h1> Hi, '.htmlspecialchars($info['firstName']).'  '. htmlspecialchars($info['lastName']).'!</h1>'; ?>
         <h2>Here You can find all your matches, based on various criteria.</h2>
     </div>
     <div class="stats">
@@ -66,7 +66,7 @@ if (isset($_SESSION['user'])) {
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title"><a
-                                href="public.php?id=<?php echo $pm['id']; ?>"><?php echo $pm['firstName'] . " " . $pm['lastName']; ?></a>
+                                href="public.php?id=<?php echo $pm['id']; ?>"><?php echo htmlspecialchars($pm['firstName']) . " " . htmlspecialchars($pm['lastName']); ?></a>
                         </h6>
                         <?php $person->setBuddyId($pm['id']); ?>
                         <?php include("includes/buddyRequestButtons.inc.php") ?>
@@ -89,7 +89,7 @@ if (isset($_SESSION['user'])) {
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title"><a
-                                href="public.php?id=<?php echo $bm['id']; ?>"><?php echo $bm['firstName'] . " " . $bm['lastName']; ?></a>
+                                href="public.php?id=<?php echo $bm['id']; ?>"><?php echo htmlspecialchars($bm['firstName']) . " " . htmlspecialchars($bm['lastName']); ?></a>
                         </h6>
                         <?php $person->setBuddyId($bm['id']); ?>
                         <?php include("includes/buddyRequestButtons.inc.php") ?>
