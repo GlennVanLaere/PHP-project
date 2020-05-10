@@ -477,19 +477,30 @@ class User {
     {
         try {
             $conn = Db::getConnection();
-            $statement = $conn->prepare( 'INSERT INTO users (email, firstName, lastName, password, description, avatar) VALUES (:email, :firstName, :lastName, :password, :description, :avatar)' );
+            $statement = $conn->prepare( 'INSERT INTO users (email, firstName, lastName, password, description, avatar, securityQuestion, securityAwnser) VALUES (:email, :firstName, :lastName, :password, :description, :avatar, :securityQuestion, :securityAwnser )' );
             $email = $this->getEmail();
             $firstName = $this->getFirstName();
             $lastName = $this->getLastName();
             $password = $this->getPassword();
-            $description = 'here comes your description';
-            $avatar = 'uploads/standard.png';
-            $statement->bindValue( ':email', $email );
-            $statement->bindValue( ':firstName', $firstName );
-            $statement->bindValue( ':lastName', $lastName );
-            $statement->bindValue( ':password', $password );
-            $statement->bindValue( ':description', $description );
-            $statement->bindValue( ':avatar', $avatar );
+            $securityQuestion = $this->getSecurityQuestion();
+            $securityAwnser = $this->getSecurityAwnser();
+            $secAsnwerHash = password_hash($securityAwnser, PASSWORD_DEFAULT);
+            $description = "here comes your description";
+            $avatar = "uploads/standard.png";
+      
+
+        
+            
+        
+            $statement->bindValue(":email", $email);
+            $statement->bindValue(":firstName", $firstName);
+            $statement->bindValue(":lastName", $lastName);
+            $statement->bindValue(":password", $password);
+            $statement->bindValue(":securityQuestion", $securityQuestion);
+            $statement->bindValue(":securityAwnser", $secAsnwerHash);
+            $statement->bindValue(":description", $description);
+            $statement->bindValue(":avatar", $avatar);
+
 
             $result = $statement->execute();
 
