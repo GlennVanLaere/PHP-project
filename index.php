@@ -66,7 +66,7 @@ include_once( __DIR__ . '/classes/User.php' );
         </div>
         <div class="form-group">
         <label for="security_question">Security question</label>
-        <select name="question" id="question">
+        <select name="question" id="question" class="form-control">
         <option value="what whas your first pet?">what whas your first pet?</option>
         <option value="What is your favourite book? ">What is your favourite book? </option>
         <option value="What is the name of the road you grew up on?">What is the name of the road you grew up on?</option>
@@ -81,8 +81,15 @@ include_once( __DIR__ . '/classes/User.php' );
         <button type="submit" class="btn btn-primary btnu">Submit</button>
         <div>
         <p class="acc">Already have an account?</p>
-        <a href="login.php" class="btn btn-primary btn-xs btnu">Log In</a>
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <a href = 'login.php' class = 'btn btn-primary btn-xs'>Create account</a>
+                </div>
+            </div>
         </div>
+      </div>
+    </div>
     </form>
     <script src="js/checkEmail.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
