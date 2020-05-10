@@ -728,7 +728,7 @@ class User {
             header( 'Location: match.php' );
 
         } else {
-            header( 'Location: tags.php' );
+            header( 'Location: profile.php' );
         }
     }
 
