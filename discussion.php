@@ -40,9 +40,9 @@ include_once( __DIR__ . '/classes/Comment.php' );
         <?php foreach ($comment as $c): ?>
             <p class="comment"><?php echo htmlspecialchars($c['comment']); ?> 
                 <?php if ($post->hasVoted($user->getUserId(), $c['id'])):?>
-                    <p class="count"><?php echo $c['upvotes']; ?> upvotes</p>
+                    <p class="count"><?php echo htmlspecialchars($c['upvotes']); ?> upvotes</p>
                 <?php else: ?>
-                    <div class="upvote"id="upvote"><a href="#" data-id="<?php echo $c['id'] ?>" class="click upvote btn btn-xs btn-info count">🔺upvote</a></div>
+                    <div class="upvote"id="upvote"><a href="#" data-id="<?php echo htmlspecialchars($c['id']) ?>" class="click upvote btn btn-xs btn-info count">🔺upvote</a></div>
                 <?php endif; ?>
             </p>
         <?php endforeach; ?>

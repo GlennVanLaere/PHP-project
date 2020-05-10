@@ -25,7 +25,7 @@ if( isset($_SESSION['user']) ) {
 <body class="public">
 <?php include("app/frontend/includes/navbar.php") ?>
     <h1><?php echo htmlspecialchars($profileData[0]["firstName"])." ". htmlspecialchars($profileData[0]["lastName"]) ?></h1>
-    <img class="img-thumbnail" src=" <?php echo $profileData[0]["avatar"]?> " alt="profilePicture">
+    <img class="img-thumbnail" src=" <?php echo htmlspecialchars($profileData[0]["avatar"])?> " alt="profilePicture">
     <h2>About me</h2>
     <p> <?php echo htmlspecialchars($profileData[0]["description"] )?></p>
     <h2>My buddies</h2>
