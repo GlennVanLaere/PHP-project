@@ -96,7 +96,7 @@ if ( !empty( $_POST ) ) {
       <?php if($failedAtt >2 ): ?>
       <h2>To many login attempts pleas fill in the extra security</h2>
       <label for="securityQuestion"> Security Question</label>
-      <h2> <?php echo $question ?></h2>
+      <h2> <?php echo htmlspecialchars($question) ?></h2>
     
       <label for="answerSec">Please awnser the question here</label>
       <input type="text" placeholder="awnser" name="awnser" id="awnser" class="form-control">

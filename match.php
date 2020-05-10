@@ -70,11 +70,11 @@ if (isset($_SESSION['user'])) {
                         </h6>
                         <?php $person->setBuddyId($pm['id']); ?>
                         <?php include("includes/buddyRequestButtons.inc.php") ?>
-                        <p>Also listens to: <?php echo $pm['music'] . " music" ; ?></p>
-                        <p>Also wachtes: <?php echo $pm['movies'] . " movies" ; ?></p>
-                        <p>Also plays: <?php echo $pm['games'] . " games" ; ?></p>
-                        <p>Also reads: <?php echo $pm['books'] . " books" ; ?></p>
-                        <p>Also watches: <?php echo $pm['tvShows'] . " tvShows" ; ?></p>
+                        <p>Also listens to: <?php echo htmlspecialchars($pm['music']) . " music" ; ?></p>
+                        <p>Also wachtes: <?php echo htmlspecialchars($pm['movies']) . " movies" ; ?></p>
+                        <p>Also plays: <?php echo htmlspecialchars($pm['games']) . " games" ; ?></p>
+                        <p>Also reads: <?php echo htmlspecialchars($pm['books']) . " books" ; ?></p>
+                        <p>Also watches: <?php echo htmlspecialchars($pm['tvShows']) . " tvShows" ; ?></p>
                         <h4>Conclusion: 100% the perfect match!</h4>
                     </div>
                 </div>
@@ -105,7 +105,7 @@ if (isset($_SESSION['user'])) {
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title">
-                            <p><?php echo $mum['firstName'] . " " . $mum['lastName']; ?></p>
+                            <p><?php echo htmlspecialchars($mum['firstName']) . " " . htmlspecialchars($mum['lastName']); ?></p>
                         </h6>
                         <?php $person->setBuddyId($mum['id']); ?>
                         <?php include("includes/buddyRequestButtons.inc.php") ?>
@@ -120,7 +120,7 @@ if (isset($_SESSION['user'])) {
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title">
-                            <p><?php echo $mom['firstName'] . " " . $mom['lastName']; ?></p>
+                            <p><?php echo htmlspecialchars($mom['firstName']) . " " . htmlspecialchars($mom['lastName']); ?></p>
                         </h6>
                         <?php $person->setBuddyId($mom['id']); ?>
                         <?php include("includes/buddyRequestButtons.inc.php") ?>
@@ -137,7 +137,7 @@ if (isset($_SESSION['user'])) {
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title">
-                            <p><?php echo $gm['firstName'] . " " . $gm['lastName']; ?></p>
+                            <p><?php echo htmlspecialchars($gm['firstName']) . " " . htmlspecialchars($gm['lastName']); ?></p>
                         </h6>
                         <?php $person->setBuddyId($gm['id']); ?>
                         <?php include("includes/buddyRequestButtons.inc.php") ?>
@@ -153,7 +153,7 @@ if (isset($_SESSION['user'])) {
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title">
-                            <p><?php echo $bm['firstName'] . " " . $bm['lastName']; ?></p>
+                            <p><?php echo htmlspecialchars($bm['firstName']) . " " . htmlspecialchars($bm['lastName']); ?></p>
                         </h6>
                         <?php $person->setBuddyId($bm['id']); ?>
                         <?php include("includes/buddyRequestButtons.inc.php") ?>
@@ -169,7 +169,7 @@ if (isset($_SESSION['user'])) {
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title">
-                            <p><?php echo $tm['firstName'] . " " . $tm['lastName']; ?></p>
+                            <p><?php echo htmlspecialchars($tm['firstName']) . " " . htmlspecialchars($tm['lastName']); ?></p>
                         </h6>
                         <?php $person->setBuddyId($tm['id']); ?>
                         <?php include("includes/buddyRequestButtons.inc.php") ?>
