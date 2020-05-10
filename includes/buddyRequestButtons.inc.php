@@ -6,7 +6,7 @@
     <a href="#"  id="btnCancelRequest" class="btn btn-danger btn-block">Cancel Request</a>
     <?php elseif ($person->receivedRequest($userId, $person->getBuddyId())): ?>
     <a href="#" id="btnIgnoreRequest" data-buddy="<?php echo $person->getBuddyId(); ?>" class="btn btn-grey btn-block">Ignore</a>
-    <a href="#" id="btnAcceptRequest" data-buddy="<?php echo $person->getBuddyId(); ?>" class="btn btn-succes btn-block">Accept</a>
+    <a href="#" id="btnAcceptRequest" data-buddy="<?php echo $person->getBuddyId(); ?>" class="btn btn-success btn-block">Accept</a>
     <textarea id="textIgnoreRequest" class="form-control" rows="4" placeholder="Reason"></textarea>
     <?php else: ?>
     <a href="#" id="btnSendRequest" data-buddy="<?php echo $person->getBuddyId(); ?>" class="btn btn-info btn-block">Send Request</a>
