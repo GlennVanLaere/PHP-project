@@ -42,7 +42,7 @@ include_once( __DIR__ . '/classes/Comment.php' );
                 <?php if ($post->hasVoted($user->getUserId(), $c['id'])):?>
                     <p class="count"><?php echo $c['upvotes']; ?> upvotes</p>
                 <?php else: ?>
-                    <div id="upvote"><a href="#" data-id="<?php echo $c['id'] ?>" class="click upvote btn btn-xs btn-info">🔺upvote</a></div>
+                    <div class="upvote"id="upvote"><a href="#" data-id="<?php echo $c['id'] ?>" class="click upvote btn btn-xs btn-info count">🔺upvote</a></div>
                 <?php endif; ?>
             </p>
         <?php endforeach; ?>
