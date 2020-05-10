@@ -33,5 +33,5 @@ if ( !empty( $_POST ) ) {
     ];
 
     header( 'Content-Type: application/json' );
-    echo json_encode( $response );
+    echo json_encode( htmlspecialchars($response) );
 }
