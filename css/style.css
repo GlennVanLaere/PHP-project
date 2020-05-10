@@ -181,6 +181,11 @@ label{
     background-color: darkblue;
 }
 
+.btn-grey{
+    background-color: grey;
+    color: white;
+}
+
 .profile, .desc, .tag, .changeEmail, .changePass{
     text-align: center;
 }
