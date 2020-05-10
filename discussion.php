@@ -35,12 +35,13 @@
     <h2><?php echo htmlspecialchars($question['question']); ?></h2>
     <?php if (!empty($comment)): ?>
         <?php foreach ($comment as $c): ?>
-            <p><?php echo htmlspecialchars($c['comment']); ?></p>
-            <?php if ($post->hasVoted($user->getUserId(), $c['id'])):?>
-            <p><?php echo $c['upvotes']; ?> upvotes</p>
-            <?php else: ?>
-            <div id="upvote"><a href="#" data-id="<?php echo $c['id'] ?>" class="click upvote btn btn-xs btn-info">🔺upvote</a></div>
-            <?php endif; ?>
+            <p class="comment"><?php echo htmlspecialchars($c['comment']); ?> 
+                <?php if ($post->hasVoted($user->getUserId(), $c['id'])):?>
+                    <p class="count"><?php echo $c['upvotes']; ?> upvotes</p>
+                <?php else: ?>
+                    <div id="upvote"><a href="#" data-id="<?php echo $c['id'] ?>" class="click upvote btn btn-xs btn-info">🔺upvote</a></div>
+                <?php endif; ?>
+            </p>
         <?php endforeach; ?>
     <?php endif; ?>
     <form action="" method="post">

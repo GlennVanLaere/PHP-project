@@ -196,6 +196,15 @@ label{
     margin-top: 15px;;
 }
 
+.comment{
+    display: inline-block;
+    margin-right: 15px;
+}
+.count{
+    display: inline-block;
+    color: grey;
+    font-size:14px;
+}
 
 @media (min-width: 950px){
     .parent {
