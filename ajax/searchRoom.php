@@ -1,16 +1,16 @@
 <?php
 
-include_once( __DIR__ . '/../classes/User.php' );
+include_once( __DIR__ . '/../classes/Room.php' );
 session_start();
 
-$user = new User();
-$user->setCampusLetter( strtoupper( $_POST['campus'] ) );
+$room = new Room();
+$room->setCampusLetter( strtoupper( $_POST['campus'] ) );
 
-$user->searchCampus();
+$room->searchCampus();
 
 $response = [
-    'campus' => $user->getCampus(),
-    'letter' => $user->getCampusLetter()
+    'campus' => $room->getCampus(),
+    'letter' => $room->getCampusLetter()
 ];
 
 header( 'Content-Type: application/json' );

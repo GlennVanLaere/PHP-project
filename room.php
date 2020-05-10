@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-include_once( __DIR__ . '/classes/User.php' );
 
 if ( !isset ( $_SESSION['user'] ) ) {
         header("Location: logout.php");
