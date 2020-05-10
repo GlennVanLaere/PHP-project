@@ -1,10 +1,10 @@
 <?php
     
-    spl_autoload_register();
+    include_once( __DIR__ . '/../classes/User.php' );
     use Postmark\PostmarkClient;
   
     if(!empty($_POST)){
-        $user = new classes\User;
+        $user = new User;
         $email = $_POST["email"];
         $token = $user->getToken($email);
         //$content = "<a href='http://localhost/PHP-project/confirm.php?email=$email&token=$token'></a>";

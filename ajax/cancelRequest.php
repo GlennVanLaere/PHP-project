@@ -1,8 +1,8 @@
 <?php
 
-spl_autoload_register();
+include_once( __DIR__ . '/../classes/User.php' );
 session_start();
-$user = new classes\User();
+$user = new User();
 $user->setUserId();
 
 $user->cancelRequest();
