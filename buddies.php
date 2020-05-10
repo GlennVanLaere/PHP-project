@@ -1,8 +1,8 @@
 <?php
 
-spl_autoload_register();
+include_once( __DIR__ . '/classes/User.php' );
 
-$user = new classes\User;
+$user = new User;
 // $viewNames = $user->viewBuddies();
 // $var = [$viewNames[0][0]["firstName"]];
 // var_dump($viewNames);

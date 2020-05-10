@@ -1,13 +1,16 @@
 <?php
 
-   spl_autoload_register();
-   session_start();
+session_start();
+include_once( __DIR__ . '/classes/User.php' );
+include_once( __DIR__ . '/classes/Faq.php' );
+include_once( __DIR__ . '/classes/Comment.php' );
+
    
     if (isset($_SESSION['user'])) {
         $id = $_GET['id'];
-        $discussion = new classes\Faq;
-        $user = new classes\User;
-        $post = new classes\Comment;
+        $discussion = new Faq;
+        $user = new User;
+        $post = new Comment;
         $user->setUserId();
         $question = $discussion->CurrentQuestion($id);
 

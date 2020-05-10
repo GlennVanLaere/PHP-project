@@ -1,10 +1,10 @@
 <?php
 
-    spl_autoload_register();
+include_once( __DIR__ . '/classes/User.php' );
     
     if (!empty($_POST)) {
         try {
-            $user = new classes\User();
+            $user = new User();
             $user->setEmail($_POST['email']);
             $user->setFirstName($_POST['firstName']);
             $user->setLastName($_POST['lastName']);

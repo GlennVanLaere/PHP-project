@@ -1,14 +1,14 @@
 <?php
 
-spl_autoload_register();
 session_start();
+include_once( __DIR__ . '/classes/User.php' );
 
 if (isset($_SESSION["user"])) {
     $email = $_SESSION["user"];
 
     if (!empty($_POST)) {
         try {
-            $newEmail = new classes\User;
+            $newEmail = new User;
             $newEmail-> setOldEmail($_POST["oldE"]);
             $newEmail-> setNewEmail($_POST["newE1"]);
             $newEmail-> setNewEmailCheck($_POST["newE2"]);

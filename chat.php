@@ -1,12 +1,12 @@
 <?php
 
-spl_autoload_register();
 session_start();
+include_once( __DIR__ . '/classes/User.php' );
 
 if (isset($_SESSION['user'])) {
-    $user = new classes\User;
+    $user = new User;
     $user->setUserId();
-    $allMessages = classes\User::getAllMessages($user->getUserId(), $_GET['messageid']);
+    $allMessages = User::getAllMessages($user->getUserId(), $_GET['messageid']);
     $user->userReadMessage();
     $email = $_SESSION['user'];
     $_SESSION['reportid'] = $_GET['messageid'];

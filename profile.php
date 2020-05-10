@@ -1,12 +1,12 @@
 <?php
 
-spl_autoload_register();
 session_start();
+include_once( __DIR__ . '/classes/User.php' );
 
 if ( isset( $_SESSION['user'] ) ) {
     $email = $_SESSION['user'];
 
-    $user = new classes\User();
+    $user = new User();
     $moderator = $user->moderator($email);
     $moderator = $moderator['moderator'];
     if (isset($_POST['undoModerator'])) {
@@ -45,7 +45,7 @@ if ( isset( $_SESSION['user'] ) ) {
     
     try {
         if (isset($_POST['tags'])) {
-            $user = new classes\User;
+            $user = new User;
             $user->setMusic($_POST['music']);
             $user->setMovies($_POST['movies']);
             $user->setGames($_POST['games']);

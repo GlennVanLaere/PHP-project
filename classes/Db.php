@@ -1,8 +1,5 @@
 <?php
 
-namespace classes;
-use PDO;
-
 class Db {
 
     private static $conn;

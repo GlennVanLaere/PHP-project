@@ -1,11 +1,11 @@
 <?php
 
-spl_autoload_register();
+include_once( __DIR__ . '/classes/User.php' );
 $failedAtt = 0; 
  
 if (!empty($_POST)) {
     try {
-        $user = new classes\User();
+        $user = new User();
         $user->setCurrentEmail($_POST["email"]);
         $user->setCurrentPassword($_POST["password"]);
         $canLogin = $user->canLogin();
@@ -49,7 +49,7 @@ if (!empty($_POST)) {
 
 if ( !empty( $_POST ) ) {
     try {
-        $user = new classes\User();
+        $user = new User();
         $user->setCurrentEmail( $_POST['email'] );
         $user->setCurrentPassword( $_POST['password'] );
         $canLogin = $user->canLogin();

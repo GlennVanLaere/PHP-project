@@ -1,11 +1,11 @@
 <?php
 
-spl_autoload_register();
 session_start();
+include_once( __DIR__ . '/classes/User.php' );
 
 if (isset($_SESSION['user']) && isset($_SESSION['reportid'])) {
     $reportId = $_SESSION['reportid'];
-    $user = new classes\User;
+    $user = new User;
     $user->setUserId();
     $email = $_SESSION['user'];
     $user->setCurrentFirstName($reportId);

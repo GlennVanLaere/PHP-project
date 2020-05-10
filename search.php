@@ -1,18 +1,19 @@
 <?php
     
-spl_autoload_register();
-session_start();
+    session_start();
+    include_once(__DIR__ . "/classes/Search.php");
+    include_once(__DIR__ . "/classes/User.php");
     
 if (isset($_SESSION['user'])) {
     $email = $_SESSION['user'];
     if (!empty($_POST)) {
-        $search = new classes\Search;
+        $search = new Search;
         $search->setCurrentEmail($_SESSION['user']);
         $search->setCategory($_POST['category']);
         $search->setSearchTerm($_POST['searchTerm']);
         $result = $search->goSearch();
 
-        $person = new classes\User;
+        $person = new User;
         $info = $person->findCurrentUser($email);
         $person->setUserId();
         $userId = $person->getUserId();

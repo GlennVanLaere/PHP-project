@@ -1,10 +1,11 @@
 <?php
 
-spl_autoload_register();
-    session_start();
+session_start();
+include_once( __DIR__ . '/classes/User.php' );
+include_once( __DIR__ . '/classes/Faq.php' );
    
     if (isset($_SESSION['user'])) {
-        $list = new classes\Faq;
+        $list = new Faq;
 
         if (isset($_POST['pin'])) {
             $id = $_POST['pin'];
@@ -24,7 +25,7 @@ spl_autoload_register();
         $noPin = $list->getAllQuestions(0);
         $pinned = $list->getAllQuestions(1);
 
-        $mod = new classes\User;
+        $mod = new User;
         $email = $_SESSION['user'];
         $moderator = $mod->moderator($email);
         $moderator = $moderator['moderator'];

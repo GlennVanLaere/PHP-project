@@ -1,11 +1,11 @@
 <?php
 
-spl_autoload_register();
+include_once( __DIR__ . '/classes/User.php' );
 session_start();
 
 if (isset($_SESSION['user'])) {
     $email = $_SESSION['user'];
-    $person = new classes\User;
+    $person = new User;
     $info = $person->findCurrentUser($email);
 
     $perfectMatch = $person->findPerfectMatch($info);
