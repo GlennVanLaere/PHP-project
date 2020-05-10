@@ -3,17 +3,21 @@
 session_start();
 include_once( __DIR__ . '/classes/User.php' );
 
-if (isset($_SESSION['user'])) {
-    $user = new User;
-    $user->setUserId();
-    $allMessages = User::getAllMessages($user->getUserId(), $_GET['messageid']);
-    $user->userReadMessage();
-    $email = $_SESSION['user'];
-    $_SESSION['reportid'] = $_GET['messageid'];
-    $info = $user->findCurrentUser($email);
-    $matchType = $user->matchType($info);
-} else {
-    header("Location: logout.php");
+try{
+    if (isset($_SESSION['user'])) {
+        $user = new User;
+        $user->setUserId();
+        $allMessages = User::getAllMessages($user->getUserId(), $_GET['messageid']);
+        $user->userReadMessage();
+        $email = $_SESSION['user'];
+        $_SESSION['reportid'] = $_GET['messageid'];
+        $info = $user->findCurrentUser($email);
+        $matchType = $user->matchType($info);
+    } else {
+        header("Location: logout.php");
+    }
+} catch (\Throwable $th) {
+    $error = $th->getMessage();
 }
 ?>
 <!DOCTYPE html>
@@ -27,6 +31,11 @@ if (isset($_SESSION['user'])) {
 </head>
 <body>
     <?php include("app/frontend/includes/navbar.php") ?>
+    <?php if (isset($error)): ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $error ?>
+        </div>
+    <?php endif; ?>
     <?php $user->setCurrentFirstName($_GET['messageid']) ?>
     <?php $user->setCurrentLastName($_GET['messageid']) ?>
     <h1><?php echo htmlspecialchars( $user->getCurrentFirstName()["firstName"]) .' '. htmlspecialchars($user->getCurrentLastName()["lastName"])?></h1>

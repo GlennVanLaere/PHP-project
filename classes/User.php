@@ -958,6 +958,9 @@ class User {
 
     public function setMessageText( $messageText )
     {
+        if ( empty( $messageText ) ) {
+            throw new Exception( 'Message cannot be empty' );
+        }
         $this->messageText = $messageText;
 
         return $this;
