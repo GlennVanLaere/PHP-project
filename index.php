@@ -84,7 +84,7 @@ include_once( __DIR__ . '/classes/User.php' );
         <div class="container">
             <div class="row">
                 <div class="col text-center">
-                    <a href = 'login.php' class = 'btn btn-primary btn-xs'>Create account</a>
+                    <a href = 'login.php' class = 'btn btn-primary btn-xs'>Login</a>
                 </div>
             </div>
         </div>
