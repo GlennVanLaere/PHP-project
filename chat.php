@@ -1,6 +1,8 @@
 <?php
+
 spl_autoload_register();
 session_start();
+
 if (isset($_SESSION['user'])) {
     $user = new classes\User;
     $user->setUserId();
@@ -8,7 +10,6 @@ if (isset($_SESSION['user'])) {
     $user->userReadMessage();
     $email = $_SESSION['user'];
     $_SESSION['reportid'] = $_GET['messageid'];
-
     $info = $user->findCurrentUser($email);
     $matchType = $user->matchType($info);
 } else {

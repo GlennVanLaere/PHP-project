@@ -3,17 +3,17 @@
 spl_autoload_register();
 session_start();
 
-if( isset( $_SESSION['user'] ) ) {
+if ( isset( $_SESSION['user'] ) ) {
     $email = $_SESSION['user'];
 
     $user = new classes\User();
     $moderator = $user->moderator($email);
     $moderator = $moderator['moderator'];
-    if(isset($_POST['undoModerator'])){
+    if (isset($_POST['undoModerator'])) {
         $user->undoModerator($email);
         header("Location: profile.php");
     }
-    if(isset($_POST['makeModerator'])){
+    if (isset($_POST['makeModerator'])) {
         $user->makeModerator($email);
         header("Location: profile.php");
     }
@@ -25,7 +25,7 @@ if( isset( $_SESSION['user'] ) ) {
         $buddyId = $user->findBuddyId($email);
         $showBuddy = $user->showBuddy($buddyId);
         
-        if(isset($_POST['submitAvatar'])){
+        if (isset($_POST['submitAvatar'])) {
             try {
                 $file = $_FILES["avatar"];
                 $fileName = $_FILES["avatar"]["name"];
@@ -59,7 +59,6 @@ if( isset( $_SESSION['user'] ) ) {
     }
     $user->setTags($user, $email);
     $user = $user->getTags();
-
 } else {
     header("Location: logout.php");
 }

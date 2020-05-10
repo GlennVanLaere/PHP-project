@@ -1,4 +1,5 @@
 <?php
+
    spl_autoload_register();
    session_start();
    
@@ -13,6 +14,7 @@
         if (!empty($_POST['comment'])) {
             $place = $discussion->placeComment($_POST['comment'], $id);
         }
+        
         $comment = $discussion->getComments($id);
     } else {
         header("Location: logout.php");

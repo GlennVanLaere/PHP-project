@@ -2,6 +2,7 @@
 
 spl_autoload_register();
 session_start();
+
 if (isset($_SESSION['user']) && isset($_SESSION['reportid'])) {
     $reportId = $_SESSION['reportid'];
     $user = new classes\User;

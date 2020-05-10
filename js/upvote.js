@@ -1,19 +1,19 @@
-let btns = document.querySelectorAll(".click")
+let btns = document.querySelectorAll(".click");
 
 btns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-        console.log("click upvote")
-        upvote()
-        e.preventDefault()
+        console.log("click upvote");
+        upvote();
+        e.preventDefault();
     })
 
     function upvote() {
 
-        let id = btn.dataset.id
-        console.log(id)
+        let id = btn.dataset.id;
+        console.log(id);
 
-        const formData = new FormData()
-        formData.append("id", id)
+        const formData = new FormData();
+        formData.append("id", id);
 
         fetch('ajax/upvote.php', {
             method: 'POST',
@@ -22,12 +22,11 @@ btns.forEach((btn) => {
             .then((response) => response.json())
             .then((result) => {
                 console.log(result);
-                console.log(result.currentUpvotes)
-                btn.parentNode.innerHTML = result.currentUpvotes + " upvotes"
+                console.log(result.currentUpvotes);
+                btn.parentNode.innerHTML = result.currentUpvotes + " upvotes";
             })
             .catch((error) => {
-                console.error('Error:', error)
+                console.error('Error:', error);
             })
     }
-
 })

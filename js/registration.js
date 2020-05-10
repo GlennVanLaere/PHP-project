@@ -1,6 +1,5 @@
 let registerButton = document.querySelector("#registerSubmit").addEventListener("click", sendEmail());
 
-
 function sendEmail(){
     console.log("clicked");
     let formData = new FormData();
@@ -15,9 +14,7 @@ function sendEmail(){
     })
     .catch((error) => {
         console.error('Error', error);
-
     })
-
 }
 
 

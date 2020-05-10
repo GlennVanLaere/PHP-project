@@ -1,70 +1,64 @@
 <?php
  spl_autoload_register();
-  $failedAtt = 0; 
+  $failedAtt = 0;
  
 
   if (!empty($_POST)) {
-    try {
-      $user = new classes\User();
-      $user->setCurrentEmail($_POST["email"]);
-      $user->setCurrentPassword($_POST["password"]);
-      $canLogin = $user->canLogin();
-      $currentAttempts = $user->currentAttempts();
-      $question = $user->secQuestion();
+      try {
+          $user = new classes\User();
+          $user->setCurrentEmail($_POST["email"]);
+          $user->setCurrentPassword($_POST["password"]);
+          $canLogin = $user->canLogin();
+          $currentAttempts = $user->currentAttempts();
+          $question = $user->secQuestion();
 
-      if($currentAttempts <= 2){
-        if ($canLogin) {
-              $complete = $user->checkComplete();
-              $user->login($complete);
-            } else {
-              $error = "We couldn't log you in";
-              $CEmail = $_POST["email"];
-              $failedAtt = $user->cannotLogin($CEmail);
-            }
+          if ($currentAttempts <= 2) {
+              if ($canLogin) {
+                  $complete = $user->checkComplete();
+                  $user->login($complete);
+              } else {
+                  $error = "We couldn't log you in";
+                  $CEmail = $_POST["email"];
+                  $failedAtt = $user->cannotLogin($CEmail);
+              }
           }
-      if($currentAttempts >= 3){
-        if(!empty($_POST["awnser"])){
-          $awnser = $_POST["awnser"];
-        }
-          else{
-            $awnser = "nothing";
-          }
-            $question = $user->secQuestion();
-            $correctAwnser = $user->awnserCheck($awnser);
+          if ($currentAttempts >= 3) {
+              if (!empty($_POST["awnser"])) {
+                  $awnser = $_POST["awnser"];
+              } else {
+                  $awnser = "nothing";
+              }
+              $question = $user->secQuestion();
+              $correctAwnser = $user->awnserCheck($awnser);
            
             
-        if ($canLogin && $correctAwnser) {
-              $complete = $user->checkComplete();
-              $user->login($complete);
-        } 
-        else {
-              $error = "We couldn't log you in";
-              $CEmail = $_POST["email"];
-              $failedAtt = $user->cannotLogin($CEmail);
-            }
+              if ($canLogin && $correctAwnser) {
+                  $complete = $user->checkComplete();
+                  $user->login($complete);
+              } else {
+                  $error = "We couldn't log you in";
+                  $CEmail = $_POST["email"];
+                  $failedAtt = $user->cannotLogin($CEmail);
+              }
           }
-        }
-        catch (\Throwable $th) {
+      } catch (\Throwable $th) {
           $error = $th->getMessage();
-      
-      
-          }
       }
+  }
 
-if ( !empty( $_POST ) ) {
+if (!empty($_POST)) {
     try {
         $user = new classes\User();
-        $user->setCurrentEmail( $_POST['email'] );
-        $user->setCurrentPassword( $_POST['password'] );
+        $user->setCurrentEmail($_POST['email']);
+        $user->setCurrentPassword($_POST['password']);
         $canLogin = $user->canLogin();
-        if ( $canLogin ) {
+        if ($canLogin) {
             $complete = $user->checkComplete();
-            $user->login( $complete );
+            $user->login($complete);
         } else {
             $error = "We couldn't log you in";
         }
-
-    } catch ( \Throwable $th ) {
+    } catch (\Throwable $th) {
         $error = $th->getMessage();
     }
 }
@@ -82,7 +76,7 @@ if ( !empty( $_POST ) ) {
     <nav>
         <p>👫 Buddy Project</p>
     </nav>
-    <?php if ( isset( $error ) ): ?>
+    <?php if (isset($error)): ?>
     <div class = 'alert alert-danger' role = 'alert'>
         <?php echo $error ?>
     </div>
@@ -97,7 +91,7 @@ if ( !empty( $_POST ) ) {
         <label for="password">Password</label>
         <input type="password" placeholder="Password" name="password" id="password" class="form-control">
       </div>
-      <?php if($failedAtt >2 ): ?>
+      <?php if ($failedAtt >2): ?>
       <h2>To many login attempts pleas fill in the extra security</h2>
       <label for="securityQuestion"> Security Question</label>
       <h2> <?php echo $question ?></h2>

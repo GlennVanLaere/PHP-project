@@ -1,4 +1,5 @@
 <?php
+
     spl_autoload_register();
     
     if (!empty($_POST)) {
@@ -10,7 +11,6 @@
             $user->setPassword($_POST['password']);
             $user->setSecurityQuestion($_POST['question']);
             $user->setSecurityAwnser($_POST['securityAwnser']);
-            
             $user->save();
             $success = "User saved!";
         } catch (\Throwable $th) {

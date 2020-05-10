@@ -1,4 +1,5 @@
 <?php
+
 spl_autoload_register();
 
 $user = new classes\User;
@@ -26,7 +27,6 @@ echo $test;
         <?php 
             //echo $value["firstName"] . $value["lastName"];
             //echo $value["buddyId"];
-        
         ?>
     </li>
     <?php// endforeach;?>

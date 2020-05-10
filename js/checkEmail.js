@@ -27,7 +27,6 @@ function checkEmail() {
             } else {
                 available.innerHTML = "<p>❌Email is not available.</p>";
             }
-
         })
         .catch((error) => {
             console.error('Error:', error);

@@ -1,9 +1,11 @@
 <?php
-    spl_autoload_register();
-    session_start();
-    if ( !isset ( $_SESSION['user'] ) ) {
+
+spl_autoload_register();
+session_start();
+
+if ( !isset ( $_SESSION['user'] ) ) {
         header("Location: logout.php");
-    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

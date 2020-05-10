@@ -2,15 +2,13 @@
 
 spl_autoload_register();
 session_start();
-if( isset($_SESSION['user']) ) {
 
+if( isset($_SESSION['user']) ) {
     $user = New classes\User;
     $id = $_GET["id"];
     $profileData = $user->publicInfo($id);
     $buddyId = $profileData[0]["buddyId"];
-
     $buddyName =$user->getBuddyName($buddyId);
-
 } else {
     header("Location: logout.php");
 }

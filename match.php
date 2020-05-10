@@ -1,8 +1,9 @@
 <?php
 
 spl_autoload_register();
- session_start();
- if (isset($_SESSION['user'])) {
+session_start();
+
+if (isset($_SESSION['user'])) {
     $email = $_SESSION['user'];
     $person = new classes\User;
     $info = $person->findCurrentUser($email);
@@ -31,7 +32,6 @@ spl_autoload_register();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

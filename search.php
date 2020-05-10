@@ -1,7 +1,7 @@
 <?php
     
-    spl_autoload_register();
-    session_start();
+spl_autoload_register();
+session_start();
     
 if (isset($_SESSION['user'])) {
     $email = $_SESSION['user'];
