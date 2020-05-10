@@ -221,6 +221,10 @@ label{
     height: auto;
 }
 
+.list{
+    text-align: center;
+}
+
 @media (min-width: 950px){
     .img-thumbnail{
         width: 250px; 

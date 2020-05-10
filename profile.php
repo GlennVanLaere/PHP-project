@@ -79,7 +79,7 @@ if ( isset( $_SESSION['user'] ) ) {
             <h1>Your profile</h1>
             <h2>Profile picture</h2>
             <h2></h2>
-            <img src="<?php echo $viewAvatar ?>" alt="#">
+            <img src="<?php echo htmlspecialchars($viewAvatar) ?>" alt="#">
             <form action="" method="post" enctype="multipart/form-data">
                 <input type="file" name="avatar" class="btn">
                 <button type="submit" name="submitAvatar" class="btn btn-primary">Upload profile picture</button>
@@ -88,14 +88,14 @@ if ( isset( $_SESSION['user'] ) ) {
             <p> <?php echo htmlspecialchars($showDescription) ?> </p>
             <a href="updateDescription.php">Change description</a>
             <h2>Email adress</h2>
-            <p> <?php echo $showEmail ?> </p>
+            <p> <?php echo htmlspecialchars($showEmail) ?> </p>
             <a href="updateEmail.php">Change email</a>
             <a href="updatePassword.php">Change password</a>
         </div>
         <div class="buddy">
         <h2>Your buddy:</h2>
         <?php if($buddyId != false): ?>
-                <img src="<?php echo $showBuddy['avatar']; ?>" alt="">
+                <img src="<?php echo htmlspecialchars($showBuddy['avatar']); ?>" alt="">
                 <?php echo htmlspecialchars($showBuddy['firstName'])." ".htmlspecialchars($showBuddy['lastName']); ?>
         <?php else: ?>
             <p>You don't have a buddy yet</p>

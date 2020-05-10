@@ -2,7 +2,8 @@
 
 include_once( __DIR__ . '/Db.php' );
 
-class Comment {
+class Comment
+{
     private $id;
     private $comment;
     private $commentId;
@@ -81,8 +82,8 @@ class Comment {
     {
         $conn = Db::getConnection();
         $statement = $conn->prepare("INSERT INTO votes (userId, commentId) VALUES (:userId, :commentId)");
-        $statement->bindValue(":userId", $userId );
-        $statement->bindValue(":commentId", $commentId );
+        $statement->bindValue( ":userId", $userId );
+        $statement->bindValue( ":commentId", $commentId );
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -93,8 +94,8 @@ class Comment {
     {
         $conn = Db::getConnection();
         $statement = $conn->prepare("SELECT commentId FROM votes WHERE userId = :userId AND commentId = :commentId");
-        $statement->bindValue(":userId", $userId);
-        $statement->bindValue(":commentId", $commentId);
+        $statement->bindValue( ":userId", $userId );
+        $statement->bindValue( ":commentId", $commentId );
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
        
@@ -103,6 +104,5 @@ class Comment {
         } else {
             return false;
         }
-    }    
-
+    }
 }
