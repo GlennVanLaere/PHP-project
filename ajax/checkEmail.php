@@ -1,11 +1,11 @@
 <?php
 
-spl_autoload_register();
+include_once( __DIR__ . '/../classes/User.php' );
 
 if ( isset( $_POST['email'] ) ) {
 
     $email = $_POST['email'];
-    $user = new classes\User();
+    $user = new User();
     $user->setEmail( $email );
     $res = $user->checkEmail( $email );
 

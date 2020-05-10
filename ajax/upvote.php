@@ -1,19 +1,20 @@
 <?php
 
-spl_autoload_register();
+include_once( __DIR__ . '/../classes/User.php' );
+include_once( __DIR__ . '/../classes/Comment.php' );
 session_start();
 
 if ( !empty( $_POST ) ) {
 
     $commentId = $_POST['id'];
 
-    $comment = new classes\Comment();
+    $comment = new Comment();
     $comment->setId( $commentId );
     $comment->doUpvote( $commentId );
     $currentUpvotes = $comment->getCurrentUpvotes( $commentId );
 
     $email = $_SESSION['user'];
-    $user = new classes\User();
+    $user = new User();
     $user->setEmail( $email );
     $user->setUserId();
     $userId = $user->getUserId();
