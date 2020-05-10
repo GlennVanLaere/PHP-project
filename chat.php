@@ -39,7 +39,7 @@ try{
     <?php $user->setCurrentFirstName($_GET['messageid']) ?>
     <?php $user->setCurrentLastName($_GET['messageid']) ?>
     <h1><?php echo htmlspecialchars( $user->getCurrentFirstName()["firstName"]) .' '. htmlspecialchars($user->getCurrentLastName()["lastName"])?></h1>
-    <p><?php if(isset($matchType)){echo $matchType;} ?></p>
+    <p><?php if(isset($matchType)){echo htmlspecialchars($matchType);} ?></p>
     <div id="messages">
         <?php foreach ($allMessages as $m): ?>
         <?php $user->setCurrentFirstName($m['sender']); ?>

@@ -44,6 +44,7 @@ include_once( __DIR__ . '/classes/Faq.php' );
 </head>
 <body style="text-align: center">
 <?php include("app/frontend/includes/navbar.php") ?>
+<h1>Ask a question</h1>
     <form action="" method="post">
         <div class="form-group">
             <input type="text" name="question" class="form-control" placeholder="Ask a question">

@@ -33,6 +33,7 @@ if (isset($_SESSION['user'])) {
 </head>
 <body>
     <?php include("app/frontend/includes/navbar.php") ?>
+    <h1>Search</h1>
     <form action="" method="post">
         <div class="dropdown" >
             <select name="category" id="category" required class="btn btnGroup dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -55,22 +56,28 @@ if (isset($_SESSION['user'])) {
             <input type="submit" name="search" value="search" class="btn btnu btn-primary">
         </div>
     </form>
-    <div class="list">
+    <div class="container w-25">
         <?php if ( !empty( $_POST ) ) { ?>
             <?php if ( !empty( $result ) ): ?>
             <?php foreach ( $result as $pm ): ?>
-            <p ><?php echo "<a href='public.php?id=" . htmlspecialchars( $pm['id'] ) . "'>" . htmlspecialchars( $pm['firstName'] ) . " " . htmlspecialchars( $pm['lastName'] ) . "</a>" ; ?></p>
-            <?php $person->setBuddyId( $pm['id'] ); ?>
-            <?php include( "includes/buddyRequestButtons.inc.php" ) ?>
-            <p>Listens to: <?php echo htmlspecialchars( $pm['music'] . " music" ); ?></p>
-            <p>Wachtes: <?php echo htmlspecialchars( $pm['movies'] . " movies" ); ?></p>
-            <p>Plays: <?php echo htmlspecialchars( $pm['games'] . " games" ); ?></p>
-            <p>Reads: <?php echo htmlspecialchars( $pm['books'] . " books" ); ?></p>
-            <p>Watches: <?php echo htmlspecialchars( $pm['tvShows'] . " tvShows" ); ?></p>
-            <p><?php echo htmlspecialchars( $pm['buddy'] ); ?></p>
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                        <p class="text-center"><?php echo "<a href='public.php?id=" . htmlspecialchars( $pm['id'] ) . "'>" . htmlspecialchars( $pm['firstName'] ) . " " . htmlspecialchars( $pm['lastName'] ) . "</a>" ; ?></p>
+                        </h6>
+                        <?php $person->setBuddyId($pm['id']); ?>
+                        <?php include( "includes/buddyRequestButtons.inc.php" ) ?>
+                </div>
+            </div>
+            <p class="text-center">Listens to: <?php echo htmlspecialchars( $pm['music'] . " music" ); ?></p>
+            <p class="text-center">Wachtes: <?php echo htmlspecialchars( $pm['movies'] . " movies" ); ?></p>
+            <p class="text-center">Plays: <?php echo htmlspecialchars( $pm['games'] . " games" ); ?></p>
+            <p class="text-center">Reads: <?php echo htmlspecialchars( $pm['books'] . " books" ); ?></p>
+            <p class="text-center">Watches: <?php echo htmlspecialchars( $pm['tvShows'] . " tvShows" ); ?></p>
+            <p class="text-center"><?php echo htmlspecialchars( $pm['buddy'] ); ?></p>
             <?php endforeach; ?>
             <?php else: ?>
-                <?php echo "<h1 class='blue'>Niets gevonden :( </h1>" ?>
+                <?php echo "<h1 class='blue'>Nothing found :( </h1>" ?>
             <?php endif; ?>
         <?php }; ?>
     </div>
