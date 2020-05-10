@@ -6,6 +6,10 @@ body{
     background-color: #D3ECFD;
 }
 
+.beginLogo{
+    padding: 10px;
+}
+
 a{
     text-decoration: none;
     display: block;

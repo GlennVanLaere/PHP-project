@@ -29,7 +29,7 @@ include_once( __DIR__ . '/classes/User.php' );
 </head>
 <body>
     <nav>
-        <p>👫 Buddy Project</p>
+        <img class="beginLogo" src="app/frontend/includes/buddyLogo3.png" alt="">
     </nav>
     <form action="" method="post">
         <h1>Create an account</h1>

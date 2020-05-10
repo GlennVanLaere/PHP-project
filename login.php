@@ -76,7 +76,7 @@ if ( !empty( $_POST ) ) {
 </head>
 <body>
     <nav>
-        <p>👫 Buddy Project</p>
+    <img class="beginLogo" src="app/frontend/includes/buddyLogo3.png" alt="">
     </nav>
     <?php if ( isset( $error ) ): ?>
     <div class = 'alert alert-danger' role = 'alert'>
