@@ -186,7 +186,7 @@ label{
     color: white;
 }
 
-.profile, .desc, .tag, .changeEmail, .changePass{
+.profile, .desc, .tag, .changeEmail, .changePass, .public{
     text-align: center;
 }
 
@@ -206,7 +206,16 @@ label{
     font-size:14px;
 }
 
+.img-thumbnail{
+    width: 150px; 
+    height: auto;
+}
+
 @media (min-width: 950px){
+    .img-thumbnail{
+        width: 250px; 
+    }
+
     .parent {
         display: grid;
         grid-template-columns: repeat(7, auto);
