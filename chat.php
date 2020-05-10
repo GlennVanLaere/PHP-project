@@ -31,24 +31,21 @@ try{
 </head>
 <body>
     <?php include("app/frontend/includes/navbar.php") ?>
-    <?php if (isset($error)): ?>
-        <div class="alert alert-danger" role="alert">
-            <?php echo $error ?>
-        </div>
-    <?php endif; ?>
     <?php $user->setCurrentFirstName($_GET['messageid']) ?>
     <?php $user->setCurrentLastName($_GET['messageid']) ?>
     <h1><?php echo htmlspecialchars( $user->getCurrentFirstName()["firstName"]) .' '. htmlspecialchars($user->getCurrentLastName()["lastName"])?></h1>
     <p><?php if(isset($matchType)){echo htmlspecialchars($matchType);} ?></p>
-    <div id="messages">
+    <div class="container d-flex flex-column justify-content-center" id="messages">
         <?php foreach ($allMessages as $m): ?>
         <?php $user->setCurrentFirstName($m['sender']); ?>
-        <div><?php echo htmlspecialchars($user->getCurrentFirstName()["firstName"]) . ": " . htmlspecialchars($m['message']); ?></div>
+        <div class=text-center ><?php echo htmlspecialchars($user->getCurrentFirstName()["firstName"]) . ": " . htmlspecialchars($m['message']); ?></div>
         <?php endforeach; ?>
     </div>
+    <div class="d-flex justify-content-center">
     <input type="text" placeholder="type a message" id="inputMessage">
-    <a class="btn btn-primary" href="#" id="btnSendMessage">Send</a>
-    <a class="btn btn-danger" href="report.php" id="btnReport">❗</a>
+    <a class="btn btn-success ml-3" href="#" id="btnSendMessage">Send</a>
+    <a class="btn btn-danger ml-1" href="report.php" id="btnReport">❗</a>
+    </div>
     <script src="js/app.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
