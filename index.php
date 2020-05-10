@@ -75,8 +75,8 @@ include_once( __DIR__ . '/classes/User.php' );
         </select>
         </div>
         <div class="form-group">
-        <label for="security_awnser">your awnser please</label>
-        <input type="text" name="securityAwnser" class="form-control" placeholder="awnser here">
+        <label for="security_awnser">your answer please</label>
+        <input type="text" name="securityAwnser" class="form-control" placeholder="answer here">
         </div>
         <button type="submit" class="btn btn-primary btnu">Submit</button>
         <div>
