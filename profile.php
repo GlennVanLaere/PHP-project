@@ -113,11 +113,11 @@ if ( isset( $_SESSION['user'] ) ) {
             <?php endif; ?>
             </form>
         </div>  
-        <div class="characteristics">
+        <div class="characteristics d-flex justify-content-center">
             <form action="" method="POST">
             <div class="dropdown">
             <label for="buddy">Buddy:</label></br>
-                <select name="buddy" class="btn btn-info btnGroup dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <select name="buddy" class="form-control btnGroup">
                     <option><?php echo htmlspecialchars($user['buddy']); ?></option>
                     <option>I am searching a buddy</option>
                     <option>I want to be a buddy</option>>
@@ -125,7 +125,7 @@ if ( isset( $_SESSION['user'] ) ) {
             </div>
             <div class="dropdown">
             <label for="music">Music:</label></br>
-                <select name="music" class="btn btn-info btnGroup dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <select name="music" class="form-control btnGroup">
                     <option><?php echo htmlspecialchars($user['music']); ?></option>
                     <option>Electro</option>
                     <option>Hiphop</option>
@@ -139,7 +139,7 @@ if ( isset( $_SESSION['user'] ) ) {
             </div>
             <div class="dropdown">
             <label for="movies">Movies:</label></br>
-                <select name="movies" class="btn btn-info btnGroup dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <select name="movies" class="form-control btnGroup">
                     <option><?php echo htmlspecialchars($user['movies']); ?></option>
                     <option>Action</option>
                     <option>Adventure</option>
@@ -157,7 +157,7 @@ if ( isset( $_SESSION['user'] ) ) {
             </div>
             <div class="dropdown">
             <label for="books">Books:</label></br>
-                <select name="books" class="btn btn-info btnGroup dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <select name="books" class="form-control btnGroup">
                     <option><?php echo htmlspecialchars($user['books']); ?></option>
                     <option>Action</option>
                     <option>Comedy</option>
@@ -172,7 +172,7 @@ if ( isset( $_SESSION['user'] ) ) {
             </div>
             <div class="dropdown">
             <label for="games">Games:</label></br>
-                <select name="games" class="btn btn-info btnGroup dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <select name="games" class="form-control btnGroup">
                     <option><?php echo htmlspecialchars($user['games']); ?></option>
                     <option>Action</option>
                     <option>Adventure</option>
@@ -189,7 +189,7 @@ if ( isset( $_SESSION['user'] ) ) {
             </div>
             <div class="dropdown">
                 <label for="tvShows">Tv-Shows:</label></br>
-                    <select name="tvShows" class="btn btn-info btnGroup dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <select name="tvShows" class="form-control btnGroup">
                         <option><?php echo htmlspecialchars($user['tvShows']); ?></option>
                         <option>American series</option>
                         <option>Dutch series</option>

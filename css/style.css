@@ -58,19 +58,8 @@ label{
     font-weight: bold;
 }
 
-.btnGroup{
-    display: block;
+.btnGroup, .btnGroup:focus{
     margin: 5px auto;
-    text-align: center;    
-    background-color: darkblue;
-    color: white;
-    font-weight: bold;
-}
-
-.btnGroup:hover{
-    display: block;
-    margin: 5px auto;
-    text-align: center;    
     background-color: darkblue;
     color: white;
     font-weight: bold;
