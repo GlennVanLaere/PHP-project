@@ -3,7 +3,7 @@
 include_once( __DIR__ . '/../classes/User.php' );
 
 if ( isset( $_POST['email'] ) ) {
-
+    
     $email = $_POST['email'];
     $user = new User();
     $user->setEmail( $email );

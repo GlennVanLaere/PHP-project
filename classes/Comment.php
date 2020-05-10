@@ -4,27 +4,16 @@ namespace classes;
 use PDO;
 include_once( __DIR__ . '/Db.php' );
 
-
 class Comment {
     private $id;
     private $comment;
     private $commentId;
     private $upvotes;
 
-    /**
-    * Get the value of id
-    */
-
     public function getId()
     {
         return $this->id;
     }
-
-    /**
-    * Set the value of id
-    *
-    * @return  self
-    */
 
     public function setId( $id )
     {
@@ -33,20 +22,10 @@ class Comment {
         return $this;
     }
 
-    /**
-    * Get the value of comment
-    */
-
     public function getComment()
     {
         return $this->comment;
     }
-
-    /**
-    * Set the value of comment
-    *
-    * @return  self
-    */
 
     public function setComment( $comment )
     {
@@ -55,20 +34,10 @@ class Comment {
         return $this;
     }
 
-    /**
-    * Get the value of commentId
-    */
-
     public function getCommentId()
     {
         return $this->commentId;
     }
-
-    /**
-    * Set the value of commentId
-    *
-    * @return  self
-    */
 
     public function setCommentId( $commentId )
     {
@@ -77,20 +46,10 @@ class Comment {
         return $this;
     }
 
-    /**
-    * Get the value of upvotes
-    */
-
     public function getUpvotes()
     {
         return $this->upvotes;
     }
-
-    /**
-    * Set the value of upvotes
-    *
-    * @return  self
-    */
 
     public function setUpvotes( $upvotes )
     {
@@ -105,6 +64,7 @@ class Comment {
         $statement = $conn->prepare( 'UPDATE `comments` SET `upvotes` = `upvotes` + 1 WHERE `id` = :id' );
         $statement->bindValue( ':id', $id );
         $result = $statement->execute();
+
         return $result;
     }
 
@@ -115,6 +75,7 @@ class Comment {
         $statement->bindValue( ':id', $id );
         $statement->execute();
         $result = $statement->fetch( PDO::FETCH_ASSOC );
+
         return $result['upvotes'];
     }
 
@@ -126,6 +87,7 @@ class Comment {
         $statement->bindValue(":commentId", $commentId );
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
+
         return $result;
     }
 
@@ -137,7 +99,6 @@ class Comment {
         $statement->bindValue(":commentId", $commentId);
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
-        
        
         if (!empty($result)) {
             return true;
